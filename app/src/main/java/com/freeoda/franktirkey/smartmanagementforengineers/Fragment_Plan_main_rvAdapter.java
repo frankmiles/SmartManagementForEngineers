@@ -44,7 +44,7 @@ public class Fragment_Plan_main_rvAdapter extends RecyclerView.Adapter<Fragment_
     @Override
     public void onBindViewHolder(@NonNull cViewHolder holder, int position) {
 
-        holder.tv_rvHome.setText(list.get(position).getString());
+        holder.tvPlan_rvLayout.setText(list.get(position).getString());
     }
 
     @Override
@@ -55,13 +55,13 @@ public class Fragment_Plan_main_rvAdapter extends RecyclerView.Adapter<Fragment_
 
     class cViewHolder extends RecyclerView.ViewHolder{
 
-        TextView tv_rvHome;
+        TextView tvPlan_rvLayout;
 
 
         public cViewHolder(View itemView) {
             super(itemView);
 
-            tv_rvHome = (TextView) itemView.findViewById(R.id.tv_rvHome);
+            tvPlan_rvLayout = (TextView) itemView.findViewById(R.id.tvPlan_rvLayout);
 
         }
 

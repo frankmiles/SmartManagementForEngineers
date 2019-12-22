@@ -22,7 +22,6 @@ public class Fragment_Home extends Fragment {
 
     Fragment_Home_Main_rvAdapter home_main_adapter;
     RecyclerView rvHome;
-    Context context;
 
     public Fragment_Home() {
         // Required empty public constructor
