@@ -1,6 +1,7 @@
 package com.freeoda.franktirkey.smartmanagementforengineers;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,6 +61,11 @@ public class Fragment_Home_Main_rvAdapter extends RecyclerView.Adapter<Fragment_
         ViewHolder(View itemView) {
             super(itemView);
             myTextView = itemView.findViewById(R.id.tv_rvHome);
+
+//            myTextView.setSelected(true);
+//            myTextView.setEllipsize(TextUtils.TruncateAt.MARQUEE);
+//            myTextView.setSingleLine(true);
+
             itemView.setOnClickListener(this);
         }
 
