@@ -11,14 +11,15 @@
         android:id="@+id/tablayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        app:tabSelectedTextColor="@android:color/white"
-        app:tabTextColor="@android:color/black">
+        android:background="@android:color/black"
+        app:tabSelectedTextColor="@android:color/holo_red_light"
+        app:tabTextColor="@android:color/white">
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tabResent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textAlignment="center"
             android:text="Resent" />
 
         <com.google.android.material.tabs.TabItem

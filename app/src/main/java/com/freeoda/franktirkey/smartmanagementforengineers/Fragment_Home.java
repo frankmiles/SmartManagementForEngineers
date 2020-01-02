@@ -4,14 +4,18 @@ package com.freeoda.franktirkey.smartmanagementforengineers;
 import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -22,6 +26,8 @@ public class Fragment_Home extends Fragment {
 
     Fragment_Home_Main_rvAdapter home_main_adapter;
     RecyclerView rvHome;
+    FrameLayout home_framelayout_main;
+    TextView tv_rvHome;
 
     public Fragment_Home() {
         // Required empty public constructor
@@ -34,11 +40,15 @@ public class Fragment_Home extends Fragment {
         final Context context = this.getActivity();
 
         View view = inflater.inflate(R.layout.fragment_fragment__home, container, false);
+        View viewRv = inflater.inflate(R.layout.fragment_home_main_rv_layout, container, false);
 
-        String[] data = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"};
+        String[] data = {"Syllabus", "Group Dissuasion", "Approach Faculty", "Plannings", "Reach Collage", "Important Dates", "Set Goals", "Setting", "Help", "Report and About?"};
 
         rvHome = view.findViewById(R.id.rvHome);
-        int numberOfColumns = 2;
+        home_framelayout_main = view.findViewById(R.id.home_framelayout_main);
+        tv_rvHome = viewRv.findViewById(R.id.tv_rvHome);
+
+        int numberOfColumns = 1;
         rvHome.setLayoutManager(new GridLayoutManager(context,numberOfColumns));
         home_main_adapter = new Fragment_Home_Main_rvAdapter(context,data);
         home_main_adapter.setClickListener(new Fragment_Home_Main_rvAdapter.ItemClickListener() {
@@ -51,15 +61,19 @@ public class Fragment_Home extends Fragment {
 
         rvHome.setAdapter(home_main_adapter);
 
+        rvHome.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                Log.println(Log.VERBOSE,"rvHome","working New State = "+newState); //TODO Testing Phase
+            }
 
-
-
-
-
-
-
-
-
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                Log.println(Log.VERBOSE,"rvHome","working dx = "+dx+" dy = "+dy); //TODO Testing Phase
+            }
+        });
 
         // Inflate the layout for this fragment
         return view;

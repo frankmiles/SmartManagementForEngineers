@@ -7,9 +7,15 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import com.backendless.Backendless;
+import com.backendless.BackendlessUser;
+import com.backendless.io.BackendlessUserFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +27,7 @@ import java.util.List;
 public class Fragment_Recent extends Fragment {
 
     RecyclerView rvSubject,rvSyllabus,rvLastGroupChat;
+    TextView tvSubject_recent,tvSyllabus_recent,tvLastGroupChat_recent;
 
     public Fragment_Recent() {
         // Required empty public constructor
@@ -37,6 +44,10 @@ public class Fragment_Recent extends Fragment {
         rvSubject = view.findViewById(R.id.rvSubject);
         rvSyllabus = view.findViewById(R.id.rvSyllabus);
         rvLastGroupChat = view.findViewById(R.id.rvchatGroup);
+
+        tvSubject_recent = view.findViewById(R.id.tvSubject_recent);
+        tvSyllabus_recent = view.findViewById(R.id.tvSyllabus_recent);
+        tvLastGroupChat_recent = view.findViewById(R.id.tvChatGroup_recent);
 
         /*rvSubject LIST AND ADAPTER*/
 

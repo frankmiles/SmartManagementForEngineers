@@ -3,7 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragment_Recent">
+    tools:context=".Fragment_Recent"
+    android:background="@drawable/rw"
+    android:padding="15dp">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -14,45 +16,57 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/tvSubject_recent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Subject"
                 android:textSize="24dp"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:textColor="@android:color/white"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvSubject"
                 android:layout_width="match_parent"
                 android:layout_height="195dp"
-                android:layout_marginTop="5dp" />
+                android:layout_marginTop="5dp"
+                android:elevation="20dp"
+                android:outlineAmbientShadowColor="@android:color/black"/>
 
             <TextView
+                android:id="@+id/tvSyllabus_recent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:text="Syllabus"
                 android:textSize="24dp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textColor="@android:color/white"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvSyllabus"
                 android:layout_width="match_parent"
                 android:layout_height="195dp"
-                android:layout_marginTop="5dp" />
+                android:layout_marginTop="5dp"
+                android:elevation="20dp"
+                android:outlineAmbientShadowColor="@android:color/black"/>
 
             <TextView
+                android:id="@+id/tvChatGroup_recent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:text="Last Chat Group"
                 android:textSize="24dp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textColor="@android:color/white"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvchatGroup"
                 android:layout_width="match_parent"
                 android:layout_height="195dp"
-                android:layout_marginTop="5dp" />
+                android:layout_marginTop="5dp"
+                android:elevation="20dp"
+                android:outlineAmbientShadowColor="@android:color/black"/>
 
         </LinearLayout>
     </ScrollView>

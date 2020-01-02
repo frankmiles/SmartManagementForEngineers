@@ -1,11 +1,18 @@
 package com.freeoda.franktirkey.smartmanagementforengineers;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import android.media.Image;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.Toast;
 
+import com.backendless.Backendless;
+import com.backendless.BackendlessUser;
+import com.backendless.async.callback.AsyncCallback;
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 
@@ -30,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(pagerAdapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
-        viewPager.setCurrentItem(2);
+        viewPager.setCurrentItem(1);
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -48,5 +55,8 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        Toast.makeText(MainActivity.this,BackendlessApplication.backendlessUser.getProperty("email").toString(),Toast.LENGTH_LONG).show();
+
     }
 }

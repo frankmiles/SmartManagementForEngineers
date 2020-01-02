@@ -1,6 +1,7 @@
 package com.freeoda.franktirkey.smartmanagementforengineers;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Fragment_Plan_main_rvAdapter extends RecyclerView.Adapter<Fragment_Plan_main_rvAdapter.cViewHolder>{
 
@@ -43,6 +45,10 @@ public class Fragment_Plan_main_rvAdapter extends RecyclerView.Adapter<Fragment_
 
     @Override
     public void onBindViewHolder(@NonNull cViewHolder holder, int position) {
+
+        Random rnd = new Random();
+        int color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
+        holder.tvPlan_rvLayout.setTextColor(color);
 
         holder.tvPlan_rvLayout.setText(list.get(position).getString());
     }

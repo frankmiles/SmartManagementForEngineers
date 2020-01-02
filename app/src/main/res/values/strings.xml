@@ -1,6 +1,26 @@
 <resources>
     <string name="app_name">SmartManagementForEngineers</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string-array name="Sem">
+        <item>1 Semester</item>
+        <item>2 Semester</item>
+        <item>3 Semester</item>
+        <item>4 Semester</item>
+        <item>5 Semester</item>
+        <item>6 Semester</item>
+        <item>7 Semester</item>
+        <item>8 Semester</item>
+    </string-array>
+    <string-array name="Branch">
+        <item>(CSE)COMPUTER SCIENCE AND ENGI.</item>
+        <item>(ECE)ELECTRONICS AND COMMUNICATION ENGI.</item>
+        <item>(EEE)ELECTRICAL AND ELECTRONICS ENGI.</item>
+        <item>(EE)ELECTRICAL ENGI.</item>
+        <item>(CE)CIVIL ENGI.</item>
+        <item>(ME)MECANICAL ENGI.</item>
+    </string-array>
+    <string-array name="Collage">
+        <item>(GITA) GANDHI INSTITUTE FOR TECHNOLOGICAL ADVANCEMENT</item>
+        <item>(GEC) GANDHI ENGINEERING COLLAGE</item>
+    </string-array>
 </resources>

@@ -52,11 +52,18 @@ public class Fragment_Plan extends Fragment {
         context = this.getActivity();
         rvPlan = view.findViewById(R.id.rvPlan);
 
-        list.add(new Fragment_Plan_Main_rvModelClass("tom"));
-        list.add(new Fragment_Plan_Main_rvModelClass("tom"));
-        list.add(new Fragment_Plan_Main_rvModelClass("tom"));
-        list.add(new Fragment_Plan_Main_rvModelClass("tom"));
-        list.add(new Fragment_Plan_Main_rvModelClass("tom"));
+        list.add(new Fragment_Plan_Main_rvModelClass("Make App"));
+        list.add(new Fragment_Plan_Main_rvModelClass("Comb hair"));
+        list.add(new Fragment_Plan_Main_rvModelClass("clean laptop"));
+        list.add(new Fragment_Plan_Main_rvModelClass("check insagram"));
+        list.add(new Fragment_Plan_Main_rvModelClass("make friends"));
+        list.add(new Fragment_Plan_Main_rvModelClass("feel sad"));
+        list.add(new Fragment_Plan_Main_rvModelClass("eat"));
+        list.add(new Fragment_Plan_Main_rvModelClass("reapeat"));
+        list.add(new Fragment_Plan_Main_rvModelClass("take bath"));
+        list.add(new Fragment_Plan_Main_rvModelClass("dance naked"));
+        list.add(new Fragment_Plan_Main_rvModelClass("again dance "));
+        list.add(new Fragment_Plan_Main_rvModelClass("seriously you'r watching this"));
 
         mainAdapter = new Fragment_Plan_main_rvAdapter(context,list);
         rvPlan.setAdapter(mainAdapter);
@@ -81,7 +88,7 @@ public class Fragment_Plan extends Fragment {
                     final Fragment_Plan_Main_rvModelClass deletedModel = list.get(position);
                     final int deletedPosition = position;
                     mainAdapter.removeItem(position);
-                    Snackbar snackbar = Snackbar.make(view, " removed from Recyclerview!", Snackbar.LENGTH_LONG); /* TODO fIX THIS SHEET*/
+                    Snackbar snackbar = Snackbar.make(view, " removed from Recyclerview!", Snackbar.LENGTH_LONG);
                        snackbar.setAction("UNDO", new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
@@ -94,7 +101,7 @@ public class Fragment_Plan extends Fragment {
                     final Fragment_Plan_Main_rvModelClass deletedModel = list.get(position);
                     final int deletedPosition = position;
                     mainAdapter.removeItem(position);
-                    Snackbar snackbar = Snackbar.make(view, " removed from Recyclerview!", Snackbar.LENGTH_LONG);  /* TODO fIX THIS SHEET*/
+                    Snackbar snackbar = Snackbar.make(view, " removed from Recyclerview!", Snackbar.LENGTH_LONG);
                     snackbar.setAction("UNDO", new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
@@ -105,7 +112,7 @@ public class Fragment_Plan extends Fragment {
                 }
             }
 
-            /*TODO THE WORK IMPLEMENT THE MAIN RECTCLEVIEW CHILD */
+
 
             @Override
             public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {

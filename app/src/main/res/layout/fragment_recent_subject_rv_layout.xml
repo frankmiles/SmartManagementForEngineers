@@ -3,7 +3,9 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:gravity="center_horizontal">
+    android:gravity="center"
+    android:padding="15dp">
+
     <TextView
         android:id="@+id/tvSubject"
         android:layout_width="match_parent"
@@ -11,6 +13,9 @@
         android:text="tom"
         android:textSize="24dp"
         android:textStyle="bold"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:background="@android:color/white"
+        android:textColor="@android:color/holo_red_light"
+        android:backgroundTint="@android:color/black"/>
 
 </LinearLayout>

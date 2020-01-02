@@ -13,7 +13,9 @@
     <Spinner
         android:id="@+id/spinner_Register_collage"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:entries="@array/Collage"
+        android:textAlignment="center"/>
 
     <TextView
         android:id="@+id/tv_Name"
@@ -51,7 +53,8 @@
     <Spinner
         android:id="@+id/spinner_Register_branch"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:entries="@array/Branch"/>
 
     <TextView
         android:id="@+id/tv_Sem"
@@ -62,7 +65,8 @@
     <Spinner
         android:id="@+id/spinner_Register_Sem"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:entries="@array/Sem"/>
 
     <TextView
         android:id="@+id/tv_RegNumber"
