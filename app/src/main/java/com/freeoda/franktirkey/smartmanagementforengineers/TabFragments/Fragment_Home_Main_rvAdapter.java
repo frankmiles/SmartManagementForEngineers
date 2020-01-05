@@ -1,7 +1,6 @@
-package com.freeoda.franktirkey.smartmanagementforengineers;
+package com.freeoda.franktirkey.smartmanagementforengineers.TabFragments;
 
 import android.content.Context;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +8,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.freeoda.franktirkey.smartmanagementforengineers.R;
 
 public class Fragment_Home_Main_rvAdapter extends RecyclerView.Adapter<Fragment_Home_Main_rvAdapter.ViewHolder>{
 

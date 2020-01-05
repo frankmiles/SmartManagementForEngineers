@@ -1,4 +1,4 @@
-package com.freeoda.franktirkey.smartmanagementforengineers;
+package com.freeoda.franktirkey.smartmanagementforengineers.TabFragments;
 
 public class Chat_rvModel {
 

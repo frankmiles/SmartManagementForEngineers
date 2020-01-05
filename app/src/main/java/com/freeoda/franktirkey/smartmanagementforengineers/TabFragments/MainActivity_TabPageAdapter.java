@@ -1,4 +1,4 @@
-package com.freeoda.franktirkey.smartmanagementforengineers;
+package com.freeoda.franktirkey.smartmanagementforengineers.TabFragments;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;

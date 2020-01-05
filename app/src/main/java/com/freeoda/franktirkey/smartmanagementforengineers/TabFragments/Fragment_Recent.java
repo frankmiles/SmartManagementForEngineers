@@ -1,4 +1,4 @@
-package com.freeoda.franktirkey.smartmanagementforengineers;
+package com.freeoda.franktirkey.smartmanagementforengineers.TabFragments;
 
 
 import android.os.Bundle;
@@ -7,15 +7,12 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.backendless.Backendless;
-import com.backendless.BackendlessUser;
-import com.backendless.io.BackendlessUserFactory;
+import com.freeoda.franktirkey.smartmanagementforengineers.R;
 
 import java.util.ArrayList;
 import java.util.List;

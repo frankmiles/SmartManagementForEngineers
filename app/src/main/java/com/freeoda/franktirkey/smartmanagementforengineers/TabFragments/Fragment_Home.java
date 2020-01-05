@@ -1,4 +1,4 @@
-package com.freeoda.franktirkey.smartmanagementforengineers;
+package com.freeoda.franktirkey.smartmanagementforengineers.TabFragments;
 
 
 import android.content.Context;
@@ -7,7 +7,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
@@ -18,16 +17,18 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.freeoda.franktirkey.smartmanagementforengineers.R;
+
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class Fragment_Home extends Fragment {
 
-    Fragment_Home_Main_rvAdapter home_main_adapter;
-    RecyclerView rvHome;
-    FrameLayout home_framelayout_main;
-    TextView tv_rvHome;
+    private Fragment_Home_Main_rvAdapter home_main_adapter;
+    private RecyclerView rvHome;
+    private FrameLayout home_framelayout_main;
+    private TextView tv_rvHome;
 
     public Fragment_Home() {
         // Required empty public constructor
@@ -42,7 +43,8 @@ public class Fragment_Home extends Fragment {
         View view = inflater.inflate(R.layout.fragment_fragment__home, container, false);
         View viewRv = inflater.inflate(R.layout.fragment_home_main_rv_layout, container, false);
 
-        String[] data = {"Syllabus", "Group Dissuasion", "Approach Faculty", "Plannings", "Reach Collage", "Important Dates", "Set Goals", "Setting", "Help", "Report and About?"};
+        String[] data = {"Syllabus", "Group Dissuasion", "Attendance", "Approach Faculty", "Plannings", "Reach Collage",
+                "Important Dates", "Set Goals", "Setting", "Need Help Or Report?", "About"};
 
         rvHome = view.findViewById(R.id.rvHome);
         home_framelayout_main = view.findViewById(R.id.home_framelayout_main);

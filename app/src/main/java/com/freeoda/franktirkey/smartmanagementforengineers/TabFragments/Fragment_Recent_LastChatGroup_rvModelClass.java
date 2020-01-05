@@ -1,4 +1,4 @@
-package com.freeoda.franktirkey.smartmanagementforengineers;
+package com.freeoda.franktirkey.smartmanagementforengineers.TabFragments;
 
 public class Fragment_Recent_LastChatGroup_rvModelClass {
 

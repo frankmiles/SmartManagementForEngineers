@@ -38,7 +38,7 @@ public class Register extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        //Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         spinner_Register_collage = findViewById(R.id.spinner_Register_collage);
         spinner_Register_branch = findViewById(R.id.spinner_Register_branch);

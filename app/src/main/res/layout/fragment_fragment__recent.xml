@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragment_Recent"
+    tools:context=".TabFragments.Fragment_Recent"
     android:background="@drawable/rw"
     android:padding="15dp">
 
