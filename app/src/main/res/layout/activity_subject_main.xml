@@ -5,11 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Routine.RoutineMain">
+    tools:context=".Subject.SubjectMain">
 
     <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="routine.." />
+        android:text="SubjectMain" />
+
+    <TextView
+        android:id="@+id/SubjectMain_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="SubjectMain" />
 </LinearLayout>

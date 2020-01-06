@@ -7,18 +7,16 @@ import android.widget.TextView;
 
 import com.freeoda.franktirkey.smartmanagementforengineers.R;
 
-public class SyllabusMain extends AppCompatActivity {
+public class SubjectMain extends AppCompatActivity {
 
     TextView syllabusMain_tv;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_syllabus_main);
+        setContentView(R.layout.activity_subject_main);
 
-        syllabusMain_tv = findViewById(R.id.syllabusMain_tv);
+        syllabusMain_tv = findViewById(R.id.SubjectMain_tv);
 
         syllabusMain_tv.setText(getIntent().getStringExtra("data"));
-
     }
 }

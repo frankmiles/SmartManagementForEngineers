@@ -15,6 +15,7 @@ import java.util.List;
 public class Fragment_Recent_Syllabus_rvAdapter extends RecyclerView.Adapter<Fragment_Recent_Syllabus_rvAdapter.cViewHolder>{
 
     List<Fragment_Recent_Syllabus_rvModelClass> list;
+    private ItemClickListner mClickListener;
 
     public Fragment_Recent_Syllabus_rvAdapter(List<Fragment_Recent_Syllabus_rvModelClass> list) {
         this.list = list;
@@ -42,17 +43,32 @@ public class Fragment_Recent_Syllabus_rvAdapter extends RecyclerView.Adapter<Fra
         return list.size();
     }
 
-    class cViewHolder extends RecyclerView.ViewHolder{
+    void setClickListner(ItemClickListner itemClickListener){
+        this.mClickListener = itemClickListener;
+    }
+
+    public interface ItemClickListner{
+        void onItemClick(View view,int position);
+    }
+
+    class cViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView textView;
 
         public cViewHolder(@NonNull View itemView) {
             super(itemView);
             textView = itemView.findViewById(R.id.tvSyllabus);
+
+            itemView.setOnClickListener(this);
         }
 
         private void setData(String string){
             textView.setText(string);
+        }
+
+        @Override
+        public void onClick(View view) {
+            if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());
         }
     }
 }

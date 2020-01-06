@@ -2,6 +2,7 @@ package com.freeoda.franktirkey.smartmanagementforengineers.TabFragments;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -17,7 +18,15 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.freeoda.franktirkey.smartmanagementforengineers.AppConfig.AppAbout;
+import com.freeoda.franktirkey.smartmanagementforengineers.AppConfig.AppSetting;
+import com.freeoda.franktirkey.smartmanagementforengineers.AppConfig.HelpAndReport;
+import com.freeoda.franktirkey.smartmanagementforengineers.Attendance.AttendanceMain;
+import com.freeoda.franktirkey.smartmanagementforengineers.Chat.ChatMain;
+import com.freeoda.franktirkey.smartmanagementforengineers.Collage.CollageFaculty;
 import com.freeoda.franktirkey.smartmanagementforengineers.R;
+import com.freeoda.franktirkey.smartmanagementforengineers.Subject.SyllabusMain;
+import com.freeoda.franktirkey.smartmanagementforengineers.ToDos.ToDoMain;
 
 
 /**
@@ -58,6 +67,30 @@ public class Fragment_Home extends Fragment {
             public void onItemClick(View view, int position) {
 
                 Toast.makeText(context,home_main_adapter.getItem(position),Toast.LENGTH_SHORT).show();
+                switch (position){
+                    case 0: startActivity(new Intent(context,SyllabusMain.class));
+                    break;
+                    case 1: startActivity(new Intent(context, ChatMain.class));
+                        break;
+                    case 2: startActivity(new Intent(context, AttendanceMain.class));
+                        break;
+                    case 3: startActivity(new Intent(context,CollageFaculty.class));
+                        break;
+                    case 4: startActivity(new Intent(context, ToDoMain.class));
+                        break;
+                    case 5: startActivity(new Intent(context,CollageFaculty.class));
+                        break;
+                    case 6: startActivity(new Intent(context,ToDoMain.class));
+                        break;
+                    case 7: startActivity(new Intent(context,ToDoMain.class));
+                        break;
+                    case 8: startActivity(new Intent(context, AppSetting.class));
+                        break;
+                    case 9: startActivity(new Intent(context, HelpAndReport.class));
+                        break;
+                    case 10: startActivity(new Intent(context, AppAbout.class));
+                        break;
+                }
             }
         });
 
@@ -80,5 +113,4 @@ public class Fragment_Home extends Fragment {
         // Inflate the layout for this fragment
         return view;
     }
-
 }

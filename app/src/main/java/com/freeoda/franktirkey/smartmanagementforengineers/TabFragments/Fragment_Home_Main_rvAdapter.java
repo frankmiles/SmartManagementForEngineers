@@ -21,7 +21,6 @@ public class Fragment_Home_Main_rvAdapter extends RecyclerView.Adapter<Fragment_
         this.mData = data;
         this.mInflater = LayoutInflater.from(context);
     }
-
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

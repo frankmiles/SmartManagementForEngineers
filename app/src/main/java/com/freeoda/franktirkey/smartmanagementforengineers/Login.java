@@ -1,5 +1,6 @@
 package com.freeoda.franktirkey.smartmanagementforengineers;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -16,6 +17,7 @@ import com.backendless.BackendlessUser;
 import com.backendless.async.callback.AsyncCallback;
 import com.backendless.exceptions.BackendlessFault;
 import com.backendless.persistence.local.UserIdStorageFactory;
+import com.freeoda.franktirkey.smartmanagementforengineers.dbTestingBk.BackendlessTest;
 
 public class Login extends AppCompatActivity {
 
@@ -54,8 +56,8 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                String user = etUsername.getText().toString();
-                String pass = etPass.getText().toString();
+                String user = etUsername.getText().toString()+"";
+                String pass = etPass.getText().toString()+"";
                 btnSignin.setClickable(false);
 
                 Backendless.UserService.login(user, pass, new AsyncCallback<BackendlessUser>() {
@@ -63,14 +65,16 @@ public class Login extends AppCompatActivity {
                     public void handleResponse(BackendlessUser response) {
                         Toast.makeText(Login.this,"LogedIn",Toast.LENGTH_SHORT).show();
                         BackendlessApplication.backendlessUser = response;
-                        startActivity(new Intent(Login.this,MainActivity.class));
+
+//                        startActivity(new Intent(Login.this,MainActivity.class));
+                        startActivity(new Intent(Login.this, BackendlessTest.class));
                         finish();
                     }
 
                     @Override
                     public void handleFault(BackendlessFault fault) {
                         Toast.makeText(Login.this,"toast No: 21"+fault.getDetail(),Toast.LENGTH_LONG).show();
-                        Log.println(Log.ASSERT,"Backendless_error",fault.getDetail());
+                        Log.println(Log.ASSERT,"Backendless_error",fault.getDetail()+"");
                         btnSignin.setClickable(true);
                     }
                 },true);
@@ -87,7 +91,9 @@ public class Login extends AppCompatActivity {
                         public void handleResponse(BackendlessUser response) {
                             Toast.makeText(Login.this,"LogedIn",Toast.LENGTH_SHORT).show();
                             BackendlessApplication.backendlessUser = response;
-                            startActivity(new Intent(Login.this,MainActivity.class));
+
+//                            startActivity(new Intent(Login.this,MainActivity.class));
+                            startActivity(new Intent(Login.this,BackendlessTest.class));
                             finish();
                         }
 

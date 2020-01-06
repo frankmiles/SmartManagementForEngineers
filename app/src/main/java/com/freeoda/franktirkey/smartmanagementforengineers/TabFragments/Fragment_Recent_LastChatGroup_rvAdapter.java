@@ -15,6 +15,7 @@ import java.util.List;
 public class Fragment_Recent_LastChatGroup_rvAdapter extends RecyclerView.Adapter<Fragment_Recent_LastChatGroup_rvAdapter.cViewHolder> {
 
     private List<Fragment_Recent_LastChatGroup_rvModelClass> list;
+    private ItemClickListener mClickListener;
 
     public Fragment_Recent_LastChatGroup_rvAdapter(List<Fragment_Recent_LastChatGroup_rvModelClass> list) {
         this.list = list;
@@ -41,16 +42,31 @@ public class Fragment_Recent_LastChatGroup_rvAdapter extends RecyclerView.Adapte
         return list.size();
     }
 
-    class cViewHolder extends RecyclerView.ViewHolder {
+    void setClickListener(ItemClickListener itemClickListener) {
+        this.mClickListener = itemClickListener;
+    }
 
-        TextView tvLastChatGroup;
-        public cViewHolder(@NonNull View itemView) {
+    public interface ItemClickListener {
+        void onItemClick(View view, int position);
+    }
+
+    class cViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
+        private TextView tvLastChatGroup;
+        private cViewHolder(@NonNull View itemView) {
             super(itemView);
             tvLastChatGroup = itemView.findViewById(R.id.tvLastgroupchat);
+
+            itemView.setOnClickListener(this);
         }
 
         private void setData(String string){
             tvLastChatGroup.setText(string);
+        }
+
+        @Override
+        public void onClick(View view) {
+            if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());
         }
     }
 }
