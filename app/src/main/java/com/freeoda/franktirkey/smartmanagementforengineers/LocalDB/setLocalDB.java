@@ -7,8 +7,6 @@ import android.widget.Toast;
 
 import com.freeoda.franktirkey.smartmanagementforengineers.BackendlessApplication;
 
-import static com.freeoda.franktirkey.smartmanagementforengineers.LocalDB.LocalDb.db;
-
 public class setLocalDB extends AsyncTask<Void,Void,Void> {
 
     Context context;
@@ -17,8 +15,8 @@ public class setLocalDB extends AsyncTask<Void,Void,Void> {
     }
     @Override
     protected Void doInBackground(Void... voids) {
-        db.userDao().insertAll(BackendlessApplication.getUser());
-        Log.println(Log.VERBOSE,"user",BackendlessApplication.getUser().getName().toString());
+        BackendlessApplication.getDb().userDao().insertAll(BackendlessApplication.getUser());
+        Log.println(Log.VERBOSE,"user",BackendlessApplication.getUser().getName().toString());//TODO for testing Purpose only
         return null;
     }
 

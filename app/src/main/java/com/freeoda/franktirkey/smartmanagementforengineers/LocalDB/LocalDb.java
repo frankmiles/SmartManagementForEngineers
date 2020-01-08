@@ -59,7 +59,10 @@ public class LocalDb extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                     new getLocalDB(LocalDb.this).execute();
-                    dis.setText(getLocalDB.getName()+" "+ getLocalDB.getEmail()+" "+ getLocalDB.getBranch()+" "+ getLocalDB.getSem()+" "+ getLocalDB.getCollage()+" "+ getLocalDB.getRegNo());
+                    String message = getLocalDB.getName()+" "+ getLocalDB.getEmail()+" "
+                            + getLocalDB.getBranch()+" "+ getLocalDB.getSem()+" "
+                            + getLocalDB.getCollage()+" "+ getLocalDB.getRegNo();
+                    dis.setText(message);
 
             }
         });

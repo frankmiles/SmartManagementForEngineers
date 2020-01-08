@@ -64,9 +64,7 @@ public class Login extends AppCompatActivity {
                         Toast.makeText(Login.this,"LogedIn",Toast.LENGTH_SHORT).show();
                         BackendlessApplication.backendlessUser = response;
 
-//                        startActivity(new Intent(Login.this,MainActivity.class));
-//                        startActivity(new Intent(Login.this, BackendlessTable.class));
-                        //startActivity(new Intent(Login.this, BackendlessTable.class));
+                        startActivity(new Intent(Login.this,MainActivity.class));
                         finish();
                     }
 
@@ -91,10 +89,8 @@ public class Login extends AppCompatActivity {
                             Toast.makeText(Login.this,"LogedIn",Toast.LENGTH_SHORT).show();
                             BackendlessApplication.backendlessUser = response;
 
-//                            startActivity(new Intent(Login.this,MainActivity.class));
-//                            startActivity(new Intent(Login.this,BackendlessTable.class));
-                            //startActivity(new Intent(Login.this, BackendlessTable.class));
-                            //finish();
+                            startActivity(new Intent(Login.this,MainActivity.class));
+                            finish();
                         }
 
                         @Override

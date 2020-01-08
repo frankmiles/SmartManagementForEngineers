@@ -13,7 +13,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".LocalDB.LocalDb"></activity>
-        <activity android:name=".dbBk.BackendlessTable" />
         <activity android:name=".Subject.SubjectMain" />
         <activity android:name=".Collage.CollageFaculty" />
         <activity android:name=".Attendance.AttendanceMain" />

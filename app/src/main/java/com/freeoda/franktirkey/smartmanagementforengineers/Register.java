@@ -15,10 +15,11 @@ import android.widget.Toast;
 
 import com.backendless.Backendless;
 import com.backendless.BackendlessUser;
+import com.backendless.async.callback.AsyncCallback;
 import com.backendless.async.callback.BackendlessCallback;
 import com.backendless.exceptions.BackendlessFault;
+import com.freeoda.franktirkey.smartmanagementforengineers.LocalDB.User;
 import com.freeoda.franktirkey.smartmanagementforengineers.LocalDB.setLocalDB;
-import com.freeoda.franktirkey.smartmanagementforengineers.dbBk.BackendlessTable;
 
 public class Register extends AppCompatActivity {
 
@@ -82,7 +83,11 @@ public class Register extends AppCompatActivity {
                 BackendlessApplication.getUser().setEmail(et_email.getText().toString());
                 BackendlessApplication.getUser().setBranch(spinner_Register_branch.getSelectedItem().toString());
                 new setLocalDB(Register.this).execute();
-                startActivity(new Intent(Register.this, BackendlessTable.class));
+
+                uploadToBKs();
+
+                startActivity(new Intent(Register.this,Login.class));
+                finish();
             }
 
             @Override
@@ -103,5 +108,21 @@ public class Register extends AppCompatActivity {
         startActivityForResult(myIntent, 0);
         finish();
         return true;
+    }
+
+    public void uploadToBKs(){
+        User savingUser = BackendlessApplication.getUser();
+        Backendless.Persistence.save(savingUser, new AsyncCallback<User>() {
+            @Override
+            public void handleResponse(User response) {
+                Toast.makeText(Register.this,"Data Uploaded",Toast.LENGTH_LONG);
+            }
+
+            @Override
+            public void handleFault(BackendlessFault fault) {
+
+                Toast.makeText(Register.this,"Server Busy!",Toast.LENGTH_LONG);
+            }
+        });
     }
 }

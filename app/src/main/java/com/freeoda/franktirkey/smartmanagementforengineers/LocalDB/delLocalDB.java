@@ -4,7 +4,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
-import static com.freeoda.franktirkey.smartmanagementforengineers.LocalDB.LocalDb.db;
+import com.freeoda.franktirkey.smartmanagementforengineers.BackendlessApplication;
 
 public class delLocalDB extends AsyncTask<Void,Void,Void> {
     Context context;
@@ -13,7 +13,7 @@ public class delLocalDB extends AsyncTask<Void,Void,Void> {
     }
     @Override
     protected Void doInBackground(Void... voids) {
-        db.userDao().deleteAll();
+        BackendlessApplication.getDb().userDao().deleteAll();
         return null;
     }
     @Override

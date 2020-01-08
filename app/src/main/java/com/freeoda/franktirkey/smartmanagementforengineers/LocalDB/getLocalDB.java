@@ -4,8 +4,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
-import static com.freeoda.franktirkey.smartmanagementforengineers.LocalDB.LocalDb.db;
-import static com.freeoda.franktirkey.smartmanagementforengineers.LocalDB.LocalDb.userFromDB;
+import com.freeoda.franktirkey.smartmanagementforengineers.BackendlessApplication;
 
 public class getLocalDB extends AsyncTask<Void,Void,Void> {
 
@@ -18,8 +17,8 @@ public class getLocalDB extends AsyncTask<Void,Void,Void> {
 
     @Override
     protected Void doInBackground(Void... voids) {
-        userFromDB = db.userDao().getAll();
-        if(userFromDB.isEmpty()){
+        BackendlessApplication.setUserFromDB(BackendlessApplication.getDb().userDao().getAll());
+        if(BackendlessApplication.getUserFromDB().isEmpty()){
             name = "null";
             email = "null";
             branch = "null";
@@ -29,12 +28,12 @@ public class getLocalDB extends AsyncTask<Void,Void,Void> {
             return null;
         }
 
-        name = userFromDB.get(0).getName();
-        email = userFromDB.get(0).getEmail();
-        branch = userFromDB.get(0).getBranch();
-        sem = userFromDB.get(0).getSemester();
-        regNo = userFromDB.get(0).getRegNo();
-        collage = userFromDB.get(0).getCollage();
+        name = BackendlessApplication.getUserFromDB().get(0).getName();
+        email = BackendlessApplication.getUserFromDB().get(0).getEmail();
+        branch = BackendlessApplication.getUserFromDB().get(0).getBranch();
+        sem = BackendlessApplication.getUserFromDB().get(0).getSemester();
+        regNo = BackendlessApplication.getUserFromDB().get(0).getRegNo();
+        collage = BackendlessApplication.getUserFromDB().get(0).getCollage();
 
         return null;
     }

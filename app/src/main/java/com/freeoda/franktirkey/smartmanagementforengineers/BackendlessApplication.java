@@ -2,20 +2,32 @@ package com.freeoda.franktirkey.smartmanagementforengineers;
 
 import android.app.Application;
 
+import androidx.room.Room;
+
 import com.backendless.Backendless;
 import com.backendless.BackendlessUser;
+import com.freeoda.franktirkey.smartmanagementforengineers.LocalDB.AppDatabase;
+import com.freeoda.franktirkey.smartmanagementforengineers.LocalDB.LocalDb;
 import com.freeoda.franktirkey.smartmanagementforengineers.LocalDB.User;
+
+import java.util.List;
 
 public class BackendlessApplication extends Application {
 
     static BackendlessUser backendlessUser;
     static User user = new User();
+    static AppDatabase db;
+    static List<User> userFromDB;
 
     @Override
     public void onCreate() {
         super.onCreate();
 
         Backendless.initApp( this,"A32C8534-709A-4E2C-829B-0614A16E5DF3", "D5A68302-4647-45AC-82F2-33906138BFB0");
+        db = Room.databaseBuilder(BackendlessApplication.this,
+                AppDatabase.class,"User")
+                .fallbackToDestructiveMigration()
+                .build();
     }
 
     public static User getUser() {
@@ -24,5 +36,21 @@ public class BackendlessApplication extends Application {
 
     public static void setUser(User user) {
         BackendlessApplication.user = user;
+    }
+
+    public static AppDatabase getDb() {
+        return db;
+    }
+
+    public static void setDb(AppDatabase db) {
+        BackendlessApplication.db = db;
+    }
+
+    public static List<User> getUserFromDB() {
+        return userFromDB;
+    }
+
+    public static void setUserFromDB(List<User> userFromDB) {
+        BackendlessApplication.userFromDB = userFromDB;
     }
 }
