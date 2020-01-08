@@ -1,17 +1,12 @@
 package com.freeoda.franktirkey.smartmanagementforengineers;
 
-import androidx.annotation.MainThread;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.BoringLayout;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -22,15 +17,15 @@ import com.backendless.Backendless;
 import com.backendless.BackendlessUser;
 import com.backendless.async.callback.BackendlessCallback;
 import com.backendless.exceptions.BackendlessFault;
-
-import java.util.Objects;
+import com.freeoda.franktirkey.smartmanagementforengineers.LocalDB.setLocalDB;
+import com.freeoda.franktirkey.smartmanagementforengineers.dbBk.BackendlessTable;
 
 public class Register extends AppCompatActivity {
 
     Spinner spinner_Register_collage,spinner_Register_branch,spinner_Register_Sem;
 
     TextView tv_Name,tv_email,tv_branch,tv_Sem,tv_RegNumber;
-    EditText et_Name,et_email,et_RegNumber;
+    EditText et_Name,et_email,et_RegNumber,et_pass;
     Button btnRegister_Submit;
 
     @Override
@@ -53,6 +48,7 @@ public class Register extends AppCompatActivity {
         et_Name = findViewById(R.id.et_Name);
         et_email = findViewById(R.id.et_email);
         et_RegNumber = findViewById(R.id.et_RegNumber);
+        et_pass = findViewById(R.id.et_pass);
 
         btnRegister_Submit = findViewById(R.id.btnRegister_Submit);
 
@@ -60,7 +56,8 @@ public class Register extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //startActivity(new Intent(Register.this,Login.class));
-                setNewUserBackendless("xyz@gmail.com","abc","toom");
+
+                setNewUserBackendless(et_email.getText().toString(),et_pass.getText().toString(),et_Name.getText().toString());
 
                 //finish();
             }
@@ -77,6 +74,15 @@ public class Register extends AppCompatActivity {
             public void handleResponse(BackendlessUser response) {
 
                 Toast.makeText(Register.this,"responce:-true ",Toast.LENGTH_SHORT).show();
+
+                BackendlessApplication.getUser().setName(et_Name.getText().toString());
+                BackendlessApplication.getUser().setRegNo(et_RegNumber.getText().toString());
+                BackendlessApplication.getUser().setSemester(spinner_Register_Sem.getSelectedItem().toString());
+                BackendlessApplication.getUser().setCollage(spinner_Register_collage.getSelectedItem().toString());
+                BackendlessApplication.getUser().setEmail(et_email.getText().toString());
+                BackendlessApplication.getUser().setBranch(spinner_Register_branch.getSelectedItem().toString());
+                new setLocalDB(Register.this).execute();
+                startActivity(new Intent(Register.this, BackendlessTable.class));
             }
 
             @Override

@@ -1,20 +1,21 @@
-package com.freeoda.franktirkey.smartmanagementforengineers.dbTestingBk;
+package com.freeoda.franktirkey.smartmanagementforengineers.dbBk;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.backendless.Backendless;
-import com.backendless.BackendlessUser;
 import com.backendless.async.callback.AsyncCallback;
 import com.backendless.exceptions.BackendlessFault;
 import com.freeoda.franktirkey.smartmanagementforengineers.BackendlessApplication;
+import com.freeoda.franktirkey.smartmanagementforengineers.LocalDB.LocalDb;
+import com.freeoda.franktirkey.smartmanagementforengineers.LocalDB.User;
 import com.freeoda.franktirkey.smartmanagementforengineers.R;
 
-public class BackendlessTest extends AppCompatActivity {
+public class BackendlessTable extends AppCompatActivity {
 
     TextView testBk;
     String displayData;
@@ -34,20 +35,15 @@ public class BackendlessTest extends AppCompatActivity {
 
     public void saveData(){
 
-        final PersonInfo personInfo = new PersonInfo();
-        personInfo.setName("toom");
-        personInfo.setSemester("3 Sem");
-        personInfo.setBranch("CSE");
-        personInfo.setCollage("GITA");
-        personInfo.setRegNo("172149");
+        User savingUser = BackendlessApplication.getUser();
 
-//        PersonInfo savedPersonInfo = Backendless.Persistence.save(personInfo);
-
-        Backendless.Persistence.save(personInfo, new AsyncCallback<PersonInfo>() {
+        Backendless.Persistence.save(savingUser, new AsyncCallback<User>() {
             @Override
-            public void handleResponse(PersonInfo response) {
+            public void handleResponse(User response) {
+
 
                 testBk.setText("Successfull");
+                startActivity(new Intent(BackendlessTable.this, LocalDb.class));
 
             }
 

@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="et_Name" />
+        android:text="et_Name"/>
 
     <TextView
         android:id="@+id/tv_email"
@@ -42,7 +42,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="textEmailAddress" />
+        android:inputType="textEmailAddress"
+        android:text="pojo@gmail.com"/>
 
     <TextView
         android:id="@+id/tv_branch"
@@ -79,7 +80,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="number" />
+        android:inputType="number"
+        android:text="154235"/>
+
+    <TextView
+        android:id="@+id/tv_Pass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="tv_pass" />
+
+    <EditText
+        android:id="@+id/et_pass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:text="1234"/>
 
     <Button
         android:id="@+id/btnRegister_Submit"

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".dbTestingBk.BackendlessTest">
+    tools:context=".dbBk.BackendlessTable">
 
     <TextView
         android:id="@+id/testBk"

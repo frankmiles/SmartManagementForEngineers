@@ -1,6 +1,5 @@
 package com.freeoda.franktirkey.smartmanagementforengineers;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -17,7 +16,6 @@ import com.backendless.BackendlessUser;
 import com.backendless.async.callback.AsyncCallback;
 import com.backendless.exceptions.BackendlessFault;
 import com.backendless.persistence.local.UserIdStorageFactory;
-import com.freeoda.franktirkey.smartmanagementforengineers.dbTestingBk.BackendlessTest;
 
 public class Login extends AppCompatActivity {
 
@@ -67,7 +65,8 @@ public class Login extends AppCompatActivity {
                         BackendlessApplication.backendlessUser = response;
 
 //                        startActivity(new Intent(Login.this,MainActivity.class));
-                        startActivity(new Intent(Login.this, BackendlessTest.class));
+//                        startActivity(new Intent(Login.this, BackendlessTable.class));
+                        //startActivity(new Intent(Login.this, BackendlessTable.class));
                         finish();
                     }
 
@@ -93,8 +92,9 @@ public class Login extends AppCompatActivity {
                             BackendlessApplication.backendlessUser = response;
 
 //                            startActivity(new Intent(Login.this,MainActivity.class));
-                            startActivity(new Intent(Login.this,BackendlessTest.class));
-                            finish();
+//                            startActivity(new Intent(Login.this,BackendlessTable.class));
+                            //startActivity(new Intent(Login.this, BackendlessTable.class));
+                            //finish();
                         }
 
                         @Override
