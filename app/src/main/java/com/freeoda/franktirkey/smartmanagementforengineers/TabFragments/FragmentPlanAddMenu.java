@@ -10,13 +10,12 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.freeoda.franktirkey.smartmanagementforengineers.BackendlessApplication;
+import com.freeoda.franktirkey.smartmanagementforengineers.LocalDB.localDbForPlan.setLocalDbPlan;
 import com.freeoda.franktirkey.smartmanagementforengineers.R;
-
-import static androidx.core.content.ContextCompat.getSystemService;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,6 +24,7 @@ public class FragmentPlanAddMenu extends Fragment {
 
     View view;
     static EditText et_Plan_addTask;
+    String msg;
     Button btn_AddTask;
 
     public FragmentPlanAddMenu() {
@@ -50,9 +50,17 @@ public class FragmentPlanAddMenu extends Fragment {
         btn_AddTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Fragment_Plan.list.add(new Fragment_Plan_Main_rvModelClass(et_Plan_addTask.getText().
-                        toString().trim()));
-                Fragment_Plan.mainAdapter.notifyDataSetChanged();
+                msg = et_Plan_addTask.getText().toString();
+                BackendlessApplication.getPlan().setTask(msg);
+                Fragment_Plan.list.add(BackendlessApplication.getPlan());
+                BackendlessApplication.setPlan(Fragment_Plan.list.get(Fragment_Plan.list.size()-1));
+                new setLocalDbPlan().execute();
+                try {
+                    Fragment_Plan.mainAdapter.notifyDataSetChanged();
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
             }
         });
 

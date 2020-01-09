@@ -3,7 +3,7 @@
     android:orientation="vertical"
     android:padding="15dp"
     android:layout_width="match_parent"
-    android:layout_height="100dp"
+    android:layout_height="240dp"
     android:elevation="@dimen/cardview_default_elevation">
 
     <TextView

@@ -2,20 +2,27 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:gravity="center"
-    android:padding="15dp">
+    android:layout_height="match_parent"
+    android:gravity="center">
 
-    <TextView
-        android:id="@+id/tvSubject"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="tom"
-        android:textSize="24dp"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:background="@android:color/white"
-        android:textColor="@android:color/holo_red_light"
-        android:backgroundTint="@android:color/black"/>
+    <LinearLayout
+        android:layout_width="350dp"
+        android:layout_height="190dp"
+        android:orientation="vertical"
+        android:paddingRight="5dp"
+        android:paddingLeft="5dp"
+        android:background="@android:color/black"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/tvSubject"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="tom"
+            android:textColor="@android:color/holo_red_light"
+            android:textSize="24dp"
+            android:textStyle="bold" />
+    </LinearLayout>
 
 </LinearLayout>

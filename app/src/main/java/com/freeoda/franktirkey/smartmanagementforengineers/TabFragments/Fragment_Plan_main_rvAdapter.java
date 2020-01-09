@@ -10,17 +10,20 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.freeoda.franktirkey.smartmanagementforengineers.BackendlessApplication;
+import com.freeoda.franktirkey.smartmanagementforengineers.LocalDB.localDbForPlan.delLocalDbPlan;
 import com.freeoda.franktirkey.smartmanagementforengineers.R;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class Fragment_Plan_main_rvAdapter extends RecyclerView.Adapter<Fragment_Plan_main_rvAdapter.cViewHolder>{
 
     private LayoutInflater layoutInflater;
-    private ArrayList<Fragment_Plan_Main_rvModelClass> list;
+    private List<planModel> list;
 
-    public Fragment_Plan_main_rvAdapter(Context context, ArrayList<Fragment_Plan_Main_rvModelClass> list){
+    public Fragment_Plan_main_rvAdapter(Context context, List<planModel> list){
         layoutInflater = LayoutInflater.from(context);
         this.list = list;
     }
@@ -29,9 +32,16 @@ public class Fragment_Plan_main_rvAdapter extends RecyclerView.Adapter<Fragment_
         list.remove(position);
         notifyItemRemoved(position);
         notifyItemRangeChanged(position,list.size());
+        try{
+            new delLocalDbPlan(list.get(position)).execute(); //TODO fix the DB Intigration with TODO
+            Fragment_Plan.list = BackendlessApplication.getPlanFromDBList();
+            Fragment_Plan.mainAdapter.notifyDataSetChanged();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
-    public void restoreItem(Fragment_Plan_Main_rvModelClass model, int position) {
+    public void restoreItem(planModel model, int position) {
         list.add(position,model);
         // notify item added by position
         notifyItemInserted(position);
@@ -52,7 +62,7 @@ public class Fragment_Plan_main_rvAdapter extends RecyclerView.Adapter<Fragment_
         int color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
         holder.tvPlan_rvLayout.setTextColor(color);
 
-        holder.tvPlan_rvLayout.setText(list.get(position).getString());
+        holder.tvPlan_rvLayout.setText(list.get(position).getTask());
     }
 
     @Override
