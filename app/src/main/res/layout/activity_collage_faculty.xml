@@ -12,4 +12,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="CollageFaculty..." />
+
+    <TextView
+        android:id="@+id/tv_collage_faculty_data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="No data" />
 </LinearLayout>

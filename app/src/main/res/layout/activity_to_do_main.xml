@@ -10,6 +10,12 @@
     <TextView
         android:id="@+id/te"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:text="toDO"/>
+    <TextView
+        android:id="@+id/tv_todo_main_data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="NoData"/>
+
 </LinearLayout>

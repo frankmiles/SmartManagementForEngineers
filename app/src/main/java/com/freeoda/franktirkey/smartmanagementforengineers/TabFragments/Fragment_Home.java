@@ -25,6 +25,7 @@ import com.freeoda.franktirkey.smartmanagementforengineers.Attendance.Attendance
 import com.freeoda.franktirkey.smartmanagementforengineers.Chat.ChatMain;
 import com.freeoda.franktirkey.smartmanagementforengineers.Collage.CollageFaculty;
 import com.freeoda.franktirkey.smartmanagementforengineers.R;
+import com.freeoda.franktirkey.smartmanagementforengineers.Subject.SubjectMain;
 import com.freeoda.franktirkey.smartmanagementforengineers.Subject.SyllabusMain;
 import com.freeoda.franktirkey.smartmanagementforengineers.ToDos.ToDoMain;
 
@@ -52,8 +53,18 @@ public class Fragment_Home extends Fragment {
         View view = inflater.inflate(R.layout.fragment_fragment__home, container, false);
         View viewRv = inflater.inflate(R.layout.fragment_home_main_rv_layout, container, false);
 
-        String[] data = {"Syllabus", "Group Dissuasion", "Attendance", "Approach Faculty", "Plannings", "Reach Collage",
-                "Important Dates", "Set Goals", "Setting", "Need Help Or Report?", "About"};
+        String[] data = {"Subject",
+                "Syllabus",
+                "Group Dissuasion",
+                "Attendance",
+                "Approach Faculty",
+                "Plannings",
+                "Reach Collage",
+                "Important Dates",
+                "Set Goals",
+                "Setting",
+                "Need Help Or Report?",
+                "About"};
 
         rvHome = view.findViewById(R.id.rvHome);
         home_framelayout_main = view.findViewById(R.id.home_framelayout_main);
@@ -68,27 +79,29 @@ public class Fragment_Home extends Fragment {
 
                 Toast.makeText(context,home_main_adapter.getItem(position),Toast.LENGTH_SHORT).show();
                 switch (position){
-                    case 0: startActivity(new Intent(context,SyllabusMain.class));
+                    case 0: startActivity(new Intent(context, SubjectMain.class));
+                        break;
+                    case 1: startActivity(new Intent(context,SyllabusMain.class));
                     break;
-                    case 1: startActivity(new Intent(context, ChatMain.class));
+                    case 2: startActivity(new Intent(context, ChatMain.class));
                         break;
-                    case 2: startActivity(new Intent(context, AttendanceMain.class));
+                    case 3: startActivity(new Intent(context, AttendanceMain.class));
                         break;
-                    case 3: startActivity(new Intent(context,CollageFaculty.class));
+                    case 4: startActivity(new Intent(context,CollageFaculty.class).putExtra("data","Faculty"));
                         break;
-                    case 4: startActivity(new Intent(context, ToDoMain.class));
+                    case 5: startActivity(new Intent(context, ToDoMain.class).putExtra("data","planning"));
                         break;
-                    case 5: startActivity(new Intent(context,CollageFaculty.class));
+                    case 6: startActivity(new Intent(context,CollageFaculty.class).putExtra("data","reachCollage"));
                         break;
-                    case 6: startActivity(new Intent(context,ToDoMain.class));
+                    case 7: startActivity(new Intent(context,ToDoMain.class).putExtra("data","impDate"));
                         break;
-                    case 7: startActivity(new Intent(context,ToDoMain.class));
+                    case 8: startActivity(new Intent(context,ToDoMain.class).putExtra("data","Set Goal"));
                         break;
-                    case 8: startActivity(new Intent(context, AppSetting.class));
+                    case 9: startActivity(new Intent(context, AppSetting.class));
                         break;
-                    case 9: startActivity(new Intent(context, HelpAndReport.class));
+                    case 10: startActivity(new Intent(context, HelpAndReport.class));
                         break;
-                    case 10: startActivity(new Intent(context, AppAbout.class));
+                    case 11: startActivity(new Intent(context, AppAbout.class));
                         break;
                 }
             }
