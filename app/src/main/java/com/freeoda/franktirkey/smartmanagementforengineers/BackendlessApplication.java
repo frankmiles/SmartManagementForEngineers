@@ -6,13 +6,11 @@ import androidx.room.Room;
 
 import com.backendless.Backendless;
 import com.backendless.BackendlessUser;
-import com.freeoda.franktirkey.smartmanagementforengineers.LocalDB.AppDatabase;
-import com.freeoda.franktirkey.smartmanagementforengineers.LocalDB.User;
-import com.freeoda.franktirkey.smartmanagementforengineers.LocalDB.localDbForPlan.getLocalDbPlan;
-import com.freeoda.franktirkey.smartmanagementforengineers.LocalDB.localDbForPlan.planModelDatabase;
-import com.freeoda.franktirkey.smartmanagementforengineers.LocalDB.localDbForPlan.setLocalDbPlan;
-import com.freeoda.franktirkey.smartmanagementforengineers.TabFragments.planModel;
+import com.freeoda.franktirkey.smartmanagementforengineers.LocalDBForBKs.AppDatabase;
+import com.freeoda.franktirkey.smartmanagementforengineers.LocalDBForBKs.User;
+import com.freeoda.franktirkey.smartmanagementforengineers.TabFragments.Fragment_Plan;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BackendlessApplication extends Application {
@@ -22,10 +20,7 @@ public class BackendlessApplication extends Application {
     static AppDatabase db;
     static List<User> userFromDB;
 
-    //static planModel plan = new planModel("tom");
-    static planModel plan = new planModel();
-    static planModelDatabase planDB;
-    static List<planModel> planFromDBList;
+    static List<String> plan = new ArrayList<String>();
 
     @Override
     public void onCreate() {
@@ -36,12 +31,6 @@ public class BackendlessApplication extends Application {
                 AppDatabase.class,"User")
                 .fallbackToDestructiveMigration()
                 .build();
-
-        planDB =Room.databaseBuilder(this,planModelDatabase.class,"plan")
-        .fallbackToDestructiveMigration()
-        .build();
-        //new setLocalDbPlan().execute();
-        new getLocalDbPlan().execute();
     }
 
     public static User getUser() {
@@ -69,28 +58,11 @@ public class BackendlessApplication extends Application {
     }
 
 
-    public static planModel getPlan() {
+    public static List<String> getPlan() {
         return plan;
     }
 
-
-    public static void setPlan(planModel plan) {
+    public static void setPlan(List<String> plan) {
         BackendlessApplication.plan = plan;
-    }
-
-    public static planModelDatabase getPlanDB() {
-        return planDB;
-    }
-
-    public static void setPlanDB(planModelDatabase planDB) {
-        BackendlessApplication.planDB = planDB;
-    }
-
-    public static List<planModel> getPlanFromDBList() {
-        return planFromDBList;
-    }
-
-    public static void setPlanFromDBList(List<planModel> planFromDBList) {
-        BackendlessApplication.planFromDBList = planFromDBList;
     }
 }

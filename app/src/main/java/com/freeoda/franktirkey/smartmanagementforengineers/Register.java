@@ -18,8 +18,8 @@ import com.backendless.BackendlessUser;
 import com.backendless.async.callback.AsyncCallback;
 import com.backendless.async.callback.BackendlessCallback;
 import com.backendless.exceptions.BackendlessFault;
-import com.freeoda.franktirkey.smartmanagementforengineers.LocalDB.User;
-import com.freeoda.franktirkey.smartmanagementforengineers.LocalDB.setLocalDB;
+import com.freeoda.franktirkey.smartmanagementforengineers.LocalDBForBKs.User;
+import com.freeoda.franktirkey.smartmanagementforengineers.LocalDBForBKs.setLocalDB;
 
 public class Register extends AppCompatActivity {
 

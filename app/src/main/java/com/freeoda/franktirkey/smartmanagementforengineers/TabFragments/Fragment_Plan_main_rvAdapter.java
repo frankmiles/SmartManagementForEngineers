@@ -10,38 +10,32 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.freeoda.franktirkey.smartmanagementforengineers.BackendlessApplication;
-import com.freeoda.franktirkey.smartmanagementforengineers.LocalDB.localDbForPlan.delLocalDbPlan;
 import com.freeoda.franktirkey.smartmanagementforengineers.R;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 public class Fragment_Plan_main_rvAdapter extends RecyclerView.Adapter<Fragment_Plan_main_rvAdapter.cViewHolder>{
 
     private LayoutInflater layoutInflater;
-    private List<planModel> list;
+    private List<String> list;
 
-    public Fragment_Plan_main_rvAdapter(Context context, List<planModel> list){
+    public Fragment_Plan_main_rvAdapter(Context context,@NonNull List<String> list){
         layoutInflater = LayoutInflater.from(context);
-        this.list = list;
-    }
+        if(list == null){
 
-    public void removeItem(int position){
-        list.remove(position);
-        notifyItemRemoved(position);
-        notifyItemRangeChanged(position,list.size());
-        try{
-            new delLocalDbPlan(list.get(position)).execute(); //TODO fix the DB Intigration with TODO
-            Fragment_Plan.list = BackendlessApplication.getPlanFromDBList();
-            Fragment_Plan.mainAdapter.notifyDataSetChanged();
-        }catch (Exception e){
-            e.printStackTrace();
+        }
+        else{
+            this.list = list;
         }
     }
 
-    public void restoreItem(planModel model, int position) {
+    public void removeItem(final int position){
+        list.remove(position);
+        notifyItemRemoved(position);
+    }
+
+    public void restoreItem(String model, int position) {
         list.add(position,model);
         // notify item added by position
         notifyItemInserted(position);
@@ -62,12 +56,12 @@ public class Fragment_Plan_main_rvAdapter extends RecyclerView.Adapter<Fragment_
         int color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
         holder.tvPlan_rvLayout.setTextColor(color);
 
-        holder.tvPlan_rvLayout.setText(list.get(position).getTask());
+        holder.tvPlan_rvLayout.setText(list.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return list.size();
+        return list==null?0:list.size();
     }
 
 

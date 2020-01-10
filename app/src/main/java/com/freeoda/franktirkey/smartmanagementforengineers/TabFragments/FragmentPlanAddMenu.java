@@ -13,9 +13,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.freeoda.franktirkey.smartmanagementforengineers.BackendlessApplication;
-import com.freeoda.franktirkey.smartmanagementforengineers.LocalDB.localDbForPlan.setLocalDbPlan;
 import com.freeoda.franktirkey.smartmanagementforengineers.R;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -24,7 +24,7 @@ public class FragmentPlanAddMenu extends Fragment {
 
     View view;
     static EditText et_Plan_addTask;
-    String msg;
+    java.lang.String msg;
     Button btn_AddTask;
 
     public FragmentPlanAddMenu() {
@@ -50,17 +50,9 @@ public class FragmentPlanAddMenu extends Fragment {
         btn_AddTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                msg = et_Plan_addTask.getText().toString();
-                BackendlessApplication.getPlan().setTask(msg);
-                Fragment_Plan.list.add(BackendlessApplication.getPlan());
-                BackendlessApplication.setPlan(Fragment_Plan.list.get(Fragment_Plan.list.size()-1));
-                new setLocalDbPlan().execute();
-                try {
-                    Fragment_Plan.mainAdapter.notifyDataSetChanged();
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
-
+                msg = et_Plan_addTask.getText().toString();;
+                Fragment_Plan.list.add(msg);
+                Fragment_Plan.mainAdapter.notifyDataSetChanged();
             }
         });
 

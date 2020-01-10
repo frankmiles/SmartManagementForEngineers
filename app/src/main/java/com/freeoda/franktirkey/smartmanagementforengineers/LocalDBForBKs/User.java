@@ -1,4 +1,4 @@
-package com.freeoda.franktirkey.smartmanagementforengineers.LocalDB;
+package com.freeoda.franktirkey.smartmanagementforengineers.LocalDBForBKs;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
