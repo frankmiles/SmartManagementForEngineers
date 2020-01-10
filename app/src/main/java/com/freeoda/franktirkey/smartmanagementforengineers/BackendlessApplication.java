@@ -8,9 +8,6 @@ import com.backendless.Backendless;
 import com.backendless.BackendlessUser;
 import com.freeoda.franktirkey.smartmanagementforengineers.LocalDBForBKs.AppDatabase;
 import com.freeoda.franktirkey.smartmanagementforengineers.LocalDBForBKs.User;
-import com.freeoda.franktirkey.smartmanagementforengineers.TabFragments.Fragment_Plan;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class BackendlessApplication extends Application {
@@ -19,8 +16,6 @@ public class BackendlessApplication extends Application {
     static User user = new User();
     static AppDatabase db;
     static List<User> userFromDB;
-
-    static List<String> plan = new ArrayList<String>();
 
     @Override
     public void onCreate() {
@@ -55,14 +50,5 @@ public class BackendlessApplication extends Application {
 
     public static void setUserFromDB(List<User> userFromDB) {
         BackendlessApplication.userFromDB = userFromDB;
-    }
-
-
-    public static List<String> getPlan() {
-        return plan;
-    }
-
-    public static void setPlan(List<String> plan) {
-        BackendlessApplication.plan = plan;
     }
 }

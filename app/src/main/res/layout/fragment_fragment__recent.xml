@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".TabFragments.Fragment_Recent"
-    android:background="@drawable/rw"
     android:padding="15dp">
 
     <ScrollView
@@ -22,7 +21,7 @@
                 android:text="Subject"
                 android:textSize="24dp"
                 android:textStyle="bold"
-                android:textColor="@android:color/white"/>
+                android:textColor="@android:color/black"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvSubject"
@@ -40,7 +39,7 @@
                 android:text="Syllabus"
                 android:textSize="24dp"
                 android:textStyle="bold"
-                android:textColor="@android:color/white"/>
+                android:textColor="@android:color/black"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvSyllabus"
@@ -58,7 +57,7 @@
                 android:text="Last Chat Group"
                 android:textSize="24dp"
                 android:textStyle="bold"
-                android:textColor="@android:color/white"/>
+                android:textColor="@android:color/black"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvchatGroup"
