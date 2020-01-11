@@ -16,6 +16,7 @@ import com.backendless.BackendlessUser;
 import com.backendless.async.callback.AsyncCallback;
 import com.backendless.exceptions.BackendlessFault;
 import com.backendless.persistence.local.UserIdStorageFactory;
+import com.freeoda.franktirkey.smartmanagementforengineers.Subject.SyllabusMain;
 
 public class Login extends AppCompatActivity {
 
@@ -64,7 +65,7 @@ public class Login extends AppCompatActivity {
                         Toast.makeText(Login.this,"LogedIn",Toast.LENGTH_SHORT).show();
                         BackendlessApplication.backendlessUser = response;
 
-                        startActivity(new Intent(Login.this,MainActivity.class));
+                        startActivity(new Intent(Login.this, SyllabusMain.class));
                         finish();
                     }
 
@@ -89,7 +90,7 @@ public class Login extends AppCompatActivity {
                             Toast.makeText(Login.this,"LogedIn",Toast.LENGTH_SHORT).show();
                             BackendlessApplication.backendlessUser = response;
 
-                            startActivity(new Intent(Login.this,MainActivity.class));
+                            startActivity(new Intent(Login.this,SyllabusMain.class));
                             finish();
                         }
 

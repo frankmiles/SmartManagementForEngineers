@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,14 +7,131 @@
     android:orientation="vertical"
     tools:context=".Subject.SubjectMain">
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="200dp"
+        android:layout_marginTop="0dp"
+        android:scaleType="fitXY"
+        tools:srcCompat="@drawable/act_bg" />
+
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="SubjectMain" />
+        android:layout_height="38dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="65dp"
+        android:text="Subjects"
+        android:textSize="32sp"
+        android:textColor="@android:color/white"
+        android:gravity="center"
+        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/SubjectMain_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="SubjectMain" />
-</LinearLayout>
+        android:layout_alignBottom="@+id/imageView"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginBottom="0dp"
+        android:text="SubjectMain"
+        android:textColor="@android:color/white"
+        android:textSize="24sp" />
+
+    <LinearLayout
+        android:id="@+id/ll_Subject_sp"
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:layout_below="@+id/SubjectMain_tv"
+        android:layout_marginTop="0dp"
+        android:layout_marginStart="0dp"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textAlignment="center"
+            android:entries="@array/Sem"/>
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textAlignment="center"
+            android:entries="@array/Branch"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/ll_Subject_sp"
+        android:layout_marginTop="0dp"
+        android:layout_marginStart="0dp"
+        android:padding="5dp"
+        android:orientation="vertical">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:outlineSpotShadowColor="@color/cardview_dark_background"
+            android:outlineAmbientShadowColor="@color/colorPrimary"
+            app:cardUseCompatPadding="true"
+            app:cardElevation="5dp"
+            android:outlineProvider="bounds">
+
+            <ImageView
+                android:id="@+id/iv_test"
+                android:layout_width="wrap_content"
+                android:layout_height="200dp"
+                android:layout_marginTop="0dp"
+                android:scaleType="fitXY"
+                tools:srcCompat="@drawable/act_card" />
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:layout_gravity="center_horizontal"
+                android:textSize="32sp"
+                android:textStyle="bold"
+                android:text="DBMS"
+                android:textColor="@android:color/holo_red_light"/>
+
+        </com.google.android.material.card.MaterialCardView>
+
+<!--        TODO Copy from above for testing purpose only-->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:outlineSpotShadowColor="@color/cardview_dark_background"
+            android:outlineAmbientShadowColor="@color/colorPrimary"
+            app:cardUseCompatPadding="true"
+            app:cardElevation="5dp"
+            android:outlineProvider="bounds">
+
+            <ImageView
+                android:id="@+id/iv_test2"
+                android:layout_width="wrap_content"
+                android:layout_height="200dp"
+                android:layout_marginTop="0dp"
+                android:scaleType="fitXY"
+                tools:srcCompat="@drawable/act_card2" />
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:layout_gravity="center_horizontal"
+                android:textSize="32sp"
+                android:text="MATH 3"
+                android:textStyle="bold"
+                android:textColor="@android:color/holo_red_light"/>
+
+        </com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
+
+
+</RelativeLayout>

@@ -2,14 +2,14 @@
     <string name="app_name">SmartManagementForEngineers</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string-array name="Sem">
-        <item>1 Semester</item>
-        <item>2 Semester</item>
-        <item>3 Semester</item>
-        <item>4 Semester</item>
-        <item>5 Semester</item>
-        <item>6 Semester</item>
-        <item>7 Semester</item>
-        <item>8 Semester</item>
+        <item>1 Sem</item>
+        <item>2 Sem</item>
+        <item>3 Sem</item>
+        <item>4 Sem</item>
+        <item>5 Sem</item>
+        <item>6 Sem</item>
+        <item>7 Sem</item>
+        <item>8 Sem</item>
     </string-array>
     <string-array name="Branch">
         <item>(CSE)COMPUTER SCIENCE AND ENGI.</item>
@@ -23,4 +23,20 @@
         <item>(GITA) GANDHI INSTITUTE FOR TECHNOLOGICAL ADVANCEMENT</item>
         <item>(GEC) GANDHI ENGINEERING COLLAGE</item>
     </string-array>
+
+    <string name="para_test">
+        The Lexington-Concord Sesquicentennial half dollar is a fifty-cent piece struck by the
+        United States Bureau of the Mint in 1925 as a commemorative coin in honor of the 150th
+        anniversary of the Battles of Lexington and Concord.
+        It was designed by Chester Beach.
+        Members of the Massachusetts congressional delegation introduced legislation in 1924 to
+        authorize a commemorative half dollar for the anniversary.
+        The bill passed both houses of Congress and was signed by President Calvin Coolidge.
+        Beach had to satisfy committees from both Lexington and Concord, and the Commission of
+        Fine Arts passed the design only reluctantly, feeling he had been given poor materials to
+        work with. The coins were sold for $1, and were vended at the anniversary celebrations in
+        Lexington and in Concord; they were sold at banks across New England. Although just over
+        half of the authorized mintage of 300,000 was struck, almost all the coins that were minted
+        were sold. Depending on condition, they are catalogued in the hundreds of dollars.
+    </string>
 </resources>
