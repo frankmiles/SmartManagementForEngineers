@@ -12,11 +12,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".AbsTestingBKs.AbsTestingBks"></activity>
         <activity android:name=".Subject.SubjectMain" />
         <activity android:name=".Collage.CollageFaculty" />
         <activity android:name=".Attendance.AttendanceMain" />
         <activity android:name=".Routine.RoutineMain" />
-        <activity android:name=".Subject.SyllabusMain" />
+        <activity android:name=".Subject.Syllabus.SyllabusMain" />
         <activity android:name=".AppConfig.AppAbout" />
         <activity android:name=".AppConfig.HelpAndReport" />
         <activity android:name=".AppConfig.AppSetting" />

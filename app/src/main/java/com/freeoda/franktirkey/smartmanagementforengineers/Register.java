@@ -18,7 +18,10 @@ import com.backendless.BackendlessUser;
 import com.backendless.async.callback.AsyncCallback;
 import com.backendless.async.callback.BackendlessCallback;
 import com.backendless.exceptions.BackendlessFault;
+import com.freeoda.franktirkey.smartmanagementforengineers.AbsTestingBKs.AbsTestingBks;
 import com.freeoda.franktirkey.smartmanagementforengineers.LocalDBForBKs.User;
+import com.freeoda.franktirkey.smartmanagementforengineers.LocalDBForBKs.delLocalDB;
+import com.freeoda.franktirkey.smartmanagementforengineers.LocalDBForBKs.getLocalDB;
 import com.freeoda.franktirkey.smartmanagementforengineers.LocalDBForBKs.setLocalDB;
 
 public class Register extends AppCompatActivity {
@@ -76,17 +79,35 @@ public class Register extends AppCompatActivity {
 
                 Toast.makeText(Register.this,"responce:-true ",Toast.LENGTH_SHORT).show();
 
-                BackendlessApplication.getUser().setName(et_Name.getText().toString());
-                BackendlessApplication.getUser().setRegNo(et_RegNumber.getText().toString());
-                BackendlessApplication.getUser().setSemester(spinner_Register_Sem.getSelectedItem().toString());
-                BackendlessApplication.getUser().setCollage(spinner_Register_collage.getSelectedItem().toString());
-                BackendlessApplication.getUser().setEmail(et_email.getText().toString());
-                BackendlessApplication.getUser().setBranch(spinner_Register_branch.getSelectedItem().toString());
-                new setLocalDB(Register.this).execute();
+                BackendlessApplication.getUser()
+                        .setOwnerId(response.getProperty("ownerId").toString());
+                BackendlessApplication.getUser()
+                        .setName(response.getProperty("name").toString());
+                BackendlessApplication.getUser()
+                        .setRegNo(et_RegNumber.getText().toString());
+                BackendlessApplication.getUser()
+                        .setSemester(spinner_Register_Sem.getSelectedItem().toString());
+                BackendlessApplication.getUser()
+                        .setCollage(spinner_Register_collage.getSelectedItem().toString());
+                BackendlessApplication.getUser()
+                        .setEmail(response.getEmail());
+                BackendlessApplication.getUser()
+                        .setBranch(spinner_Register_branch.getSelectedItem().toString());
+
+                BackendlessApplication
+                        .db
+                        .userDao()   //TODO this is for testing only Running on Main.Thread
+                        .deleteAll();
+
+                BackendlessApplication
+                        .db
+                        .userDao()  //TODO this is for testing only Running on Main.Thread
+                        .insertAll(BackendlessApplication.getUser());
 
                 uploadToBKs();
 
-                startActivity(new Intent(Register.this,Login.class));
+                new getLocalDB(Register.this).execute();
+                startActivity(new Intent(Register.this, MainActivity.class));
                 finish();
             }
 

@@ -1,4 +1,4 @@
-package com.freeoda.franktirkey.smartmanagementforengineers.Subject;
+package com.freeoda.franktirkey.smartmanagementforengineers.Subject.Syllabus;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;

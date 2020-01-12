@@ -1,4 +1,4 @@
-package com.freeoda.franktirkey.smartmanagementforengineers.Subject;
+package com.freeoda.franktirkey.smartmanagementforengineers.Subject.Syllabus;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.freeoda.franktirkey.smartmanagementforengineers.R;
-import com.freeoda.franktirkey.smartmanagementforengineers.TabFragments.Fragment_Home_Main_rvAdapter;
 
 import java.util.List;
 

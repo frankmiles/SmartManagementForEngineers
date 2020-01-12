@@ -26,7 +26,7 @@ import com.freeoda.franktirkey.smartmanagementforengineers.Chat.ChatMain;
 import com.freeoda.franktirkey.smartmanagementforengineers.Collage.CollageFaculty;
 import com.freeoda.franktirkey.smartmanagementforengineers.R;
 import com.freeoda.franktirkey.smartmanagementforengineers.Subject.SubjectMain;
-import com.freeoda.franktirkey.smartmanagementforengineers.Subject.SyllabusMain;
+import com.freeoda.franktirkey.smartmanagementforengineers.Subject.Syllabus.SyllabusMain;
 import com.freeoda.franktirkey.smartmanagementforengineers.ToDos.ToDoMain;
 
 

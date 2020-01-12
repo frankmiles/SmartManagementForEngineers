@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:outlineSpotShadowColor="@color/cardview_dark_background"
+        android:outlineAmbientShadowColor="@color/colorPrimary"
+        app:cardUseCompatPadding="true"
+        app:cardElevation="5dp"
+        android:outlineProvider="bounds">
+
+        <ImageView
+            android:id="@+id/iv_subject_main_rv_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="200dp"
+            android:layout_marginTop="0dp"
+            android:scaleType="fitXY"
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:fadingEdge="horizontal"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:scrollHorizontally="true"
+            app:srcCompat="@drawable/act_card" />
+
+        <TextView
+            android:id="@+id/tv_subject_main_rv_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:layout_gravity="center_horizontal"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:text="Loading"
+            android:textColor="@android:color/holo_red_light"/>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</LinearLayout>

@@ -7,7 +7,7 @@ import androidx.room.Query;
 import java.util.List;
 
 @Dao
-public interface UserDao {
+public interface UserDao{
 
     @Query("Select * FROM userDetails")
     List<User> getAll();

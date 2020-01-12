@@ -10,6 +10,9 @@ public class User {
     @PrimaryKey(autoGenerate = true)
     private int uid;
 
+    @ColumnInfo(name = "ownerId")
+    private String ownerId;
+
     @ColumnInfo(name = "name")
     public String name;
 
@@ -27,6 +30,14 @@ public class User {
 
     @ColumnInfo(name = "regNo")
     private String regNo;
+
+    public String getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(String ownerId) {
+        this.ownerId = ownerId;
+    }
 
     public String getName() {
         return name;

@@ -14,7 +14,7 @@ public class BackendlessApplication extends Application {
 
     static BackendlessUser backendlessUser;
     static User user = new User();
-    static AppDatabase db;
+    public static AppDatabase db;
     static List<User> userFromDB;
 
     @Override
@@ -25,6 +25,7 @@ public class BackendlessApplication extends Application {
         db = Room.databaseBuilder(BackendlessApplication.this,
                 AppDatabase.class,"User")
                 .fallbackToDestructiveMigration()
+                .allowMainThreadQueries() //TODO tESTING PURPOSE ONLY
                 .build();
     }
 

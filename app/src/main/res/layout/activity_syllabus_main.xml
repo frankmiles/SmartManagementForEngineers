@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:animateLayoutChanges="true"
-    tools:context=".Subject.SyllabusMain">
+    tools:context=".Subject.Syllabus.SyllabusMain">
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fb_Syllabus_main"
@@ -20,7 +20,7 @@
             android:animateLayoutChanges="true"
             android:background="@color/colorPrimary"
             android:src="@drawable/back"
-            android:visibility="visible" />
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/tv_test"
