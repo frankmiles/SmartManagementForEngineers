@@ -42,6 +42,8 @@ public class AbsTestingBks extends AppCompatActivity {
 //            }
 //        });
 
+
+
         tv_AbsTestingBKs.setText(BackendlessApplication.db.userDao().getAll().get(0).getOwnerId()+" ");
     }
 }

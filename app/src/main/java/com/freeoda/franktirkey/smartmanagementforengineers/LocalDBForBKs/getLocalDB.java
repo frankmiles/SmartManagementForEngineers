@@ -3,7 +3,6 @@ package com.freeoda.franktirkey.smartmanagementforengineers.LocalDBForBKs;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.freeoda.franktirkey.smartmanagementforengineers.BackendlessApplication;
 
@@ -35,7 +34,7 @@ public class getLocalDB extends AsyncTask<Void,Void,Void> {
         branch = BackendlessApplication.getUserFromDB().get(0).getBranch();
         sem = BackendlessApplication.getUserFromDB().get(0).getSemester();
         regNo = BackendlessApplication.getUserFromDB().get(0).getRegNo();
-        collage = BackendlessApplication.getUserFromDB().get(0).getCollage();
+        collage = BackendlessApplication.getUserFromDB().get(0).getCollageId();
         ownerId = BackendlessApplication.getUserFromDB().get(0).getOwnerId();
 
         return null;

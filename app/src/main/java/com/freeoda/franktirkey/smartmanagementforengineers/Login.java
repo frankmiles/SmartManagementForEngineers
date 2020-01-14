@@ -31,6 +31,10 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+//        String m = "(CSE)COMPUTER SCIENCE AND ENGI"; ToDO this is the string Parser;
+//        String x = m.substring(1,3);
+//        System.out.println(x);
+
         tvUsername = findViewById(R.id.tvUsername);
         tvPass = findViewById(R.id.tvPass);
         getTvUsername_feedback = findViewById(R.id.tvUsername_feedback);

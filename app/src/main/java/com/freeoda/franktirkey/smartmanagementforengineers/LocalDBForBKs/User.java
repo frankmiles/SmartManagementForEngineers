@@ -22,8 +22,8 @@ public class User {
     @ColumnInfo(name = "semester")
     private String semester;
 
-    @ColumnInfo(name = "collage")
-    private String collage;
+    @ColumnInfo(name = "collageId")
+    private String collageId;
 
     @ColumnInfo(name = "branch")
     private String branch;
@@ -71,12 +71,12 @@ public class User {
         this.semester = semester;
     }
 
-    public String getCollage() {
-        return collage;
+    public String getCollageId() {
+        return collageId;
     }
 
-    public void setCollage(String collage) {
-        this.collage = collage;
+    public void setCollageId(String collageId) {
+        this.collageId = collageId;
     }
 
     public String getBranch() {
@@ -94,4 +94,5 @@ public class User {
     public void setRegNo(String regNo) {
         this.regNo = regNo;
     }
+
 }
