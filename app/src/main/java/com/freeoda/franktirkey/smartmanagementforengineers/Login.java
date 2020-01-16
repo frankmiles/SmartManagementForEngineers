@@ -15,8 +15,13 @@ import com.backendless.Backendless;
 import com.backendless.BackendlessUser;
 import com.backendless.async.callback.AsyncCallback;
 import com.backendless.exceptions.BackendlessFault;
+import com.backendless.persistence.DataQueryBuilder;
 import com.backendless.persistence.local.UserIdStorageFactory;
 import com.freeoda.franktirkey.smartmanagementforengineers.AbsTestingBKs.AbsTestingBks;
+import com.freeoda.franktirkey.smartmanagementforengineers.LocalDBForBKs.User;
+
+import java.util.List;
+import java.util.Map;
 
 public class Login extends AppCompatActivity {
 
@@ -69,8 +74,7 @@ public class Login extends AppCompatActivity {
                         Toast.makeText(Login.this,"LogedIn",Toast.LENGTH_SHORT).show();
                         BackendlessApplication.backendlessUser = response;
 
-                        startActivity(new Intent(Login.this, MainActivity.class));
-                        finish();
+                        getSubject();
                     }
 
                     @Override
@@ -94,8 +98,7 @@ public class Login extends AppCompatActivity {
                             Toast.makeText(Login.this,"LogedIn",Toast.LENGTH_SHORT).show();
                             BackendlessApplication.backendlessUser = response;
 
-                            startActivity(new Intent(Login.this, MainActivity.class));
-                            finish();
+                            getSubject();
                         }
 
                         @Override
@@ -112,6 +115,42 @@ public class Login extends AppCompatActivity {
             public void handleFault(BackendlessFault fault) {
 
                 Toast.makeText(Login.this,fault.getCode(),Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    private void getSubject(){
+        final String whereClause = "email = '"+BackendlessApplication.backendlessUser.getEmail()+"'";
+
+        final DataQueryBuilder dqb = DataQueryBuilder.create();
+        dqb.setWhereClause(whereClause);
+
+        Backendless.Data.of("User").find(dqb, new AsyncCallback<List<Map>>() {
+            @Override
+            public void handleResponse(List<Map> response) {
+                if (response != null){
+                    Log.d("msg",response.toString()); //tODO FOR TESTING PURPOSE
+
+                    User signedInUser = new User();
+                    signedInUser.setUid(Integer.parseInt(response.get(0).get("uid").toString()));
+                    signedInUser.setOwnerId(response.get(0).get("ownerId").toString());
+                    signedInUser.setName(response.get(0).get("name").toString());
+                    signedInUser.setEmail(response.get(0).get("email").toString());
+                    signedInUser.setSemester(response.get(0).get("semester").toString());
+                    signedInUser.setCollageId(response.get(0).get("collageId").toString());
+                    signedInUser.setBranch(response.get(0).get("branch").toString());
+                    signedInUser.setRegNo(response.get(0).get("regNo").toString());
+
+                    BackendlessApplication.setUser(signedInUser);
+                    startActivity(new Intent(Login.this, MainActivity.class));
+                    finish();
+                }
+            }
+
+            @Override
+            public void handleFault(BackendlessFault fault) {
+
+                Log.d("msg","error: "+fault.getMessage()); //tODO FOR TESTING PURPOSE
             }
         });
     }

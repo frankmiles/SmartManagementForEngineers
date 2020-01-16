@@ -42,10 +42,9 @@ public class Register extends AppCompatActivity {
 
 
     String getSelectedCollageObjId;
-    String getUserObjId;
     List<Collage> collageFromBKs = new ArrayList<>();
     List<String> collageNameList = new ArrayList<>();
-    int SelectedCollageposition=0;
+    int SelectedCollagePosition=0;
     ArrayAdapter<String> dataAdapter;
 
     BackendlessUser registerBackendless = new BackendlessUser();
@@ -76,16 +75,12 @@ public class Register extends AppCompatActivity {
 
         btnRegister_Submit = findViewById(R.id.btnRegister_Submit);
 
-        spinnerData(); //setting spinner collage
+        CollageData(); //setting spinner collage
 
         btnRegister_Submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //startActivity(new Intent(Register.this,Login.class));
-
                 setNewUserBackendless(et_email.getText().toString(),et_pass.getText().toString(),et_Name.getText().toString());
-
-                //finish();
             }
         });
 
@@ -94,7 +89,7 @@ public class Register extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
                 getSelectedCollageObjId = collageFromBKs.get(i).getObjectId();
-                SelectedCollageposition = i;
+                SelectedCollagePosition = i;
             }
 
             @Override
@@ -115,13 +110,38 @@ public class Register extends AppCompatActivity {
 
                 Toast.makeText(Register.this,"responce:-true ",Toast.LENGTH_SHORT).show();
 
-                BackendlessApplication.getUser().setOwnerId(response.getProperty("ownerId").toString());
-                BackendlessApplication.getUser().setName(response.getProperty("name").toString());
-                BackendlessApplication.getUser().setRegNo(et_RegNumber.getText().toString());
-                BackendlessApplication.getUser().setSemester(spinner_Register_Sem.getSelectedItem().toString());
-                BackendlessApplication.getUser().setCollageId(getSelectedCollageObjId);
-                BackendlessApplication.getUser().setEmail(response.getEmail());
-                BackendlessApplication.getUser().setBranch(spinner_Register_branch.getSelectedItem().toString());
+                BackendlessApplication
+                        .getUser()
+                        .setOwnerId(response
+                                .getProperty("ownerId")
+                                .toString());
+                BackendlessApplication
+                        .getUser()
+                        .setName(response
+                                .getProperty("name")
+                                .toString());
+                BackendlessApplication
+                        .getUser()
+                        .setRegNo(et_RegNumber
+                                .getText()
+                                .toString());
+                BackendlessApplication
+                        .getUser()
+                        .setSemester(spinner_Register_Sem
+                                .getSelectedItem()
+                                .toString());
+                BackendlessApplication
+                        .getUser()
+                        .setCollageId(getSelectedCollageObjId);
+                BackendlessApplication
+                        .getUser()
+                        .setEmail(response
+                                .getEmail());
+                BackendlessApplication
+                        .getUser()
+                        .setBranch(spinner_Register_branch
+                                .getSelectedItem()
+                                .toString());
 
                 BackendlessApplication
                         .db
@@ -159,21 +179,43 @@ public class Register extends AppCompatActivity {
 
     public void uploadToBKs(){
         User savingUser = new User();
-        savingUser.setEmail(BackendlessApplication.getUser().getEmail());
-        savingUser.setOwnerId(BackendlessApplication.getUser().getOwnerId());
-        savingUser.setUid(BackendlessApplication.getUser().getUid());
-        savingUser.setCollageId(getSelectedCollageObjId);
-        savingUser.setName(BackendlessApplication.getUser().name);
-        savingUser.setRegNo(BackendlessApplication.getUser().getRegNo());
-        savingUser.setBranch(BackendlessApplication.getUser().getBranch());
-        savingUser.setSemester(BackendlessApplication.getUser().getSemester());
+
+        savingUser
+                .setEmail(BackendlessApplication
+                        .getUser()
+                        .getEmail());
+        savingUser
+                .setOwnerId(BackendlessApplication
+                        .getUser()
+                        .getOwnerId());
+        savingUser
+                .setUid(BackendlessApplication
+                        .getUser()
+                        .getUid());
+        savingUser
+                .setCollageId(getSelectedCollageObjId);
+        savingUser
+                .setName(BackendlessApplication
+                        .getUser()
+                        .name);
+        savingUser
+                .setRegNo(BackendlessApplication
+                        .getUser()
+                        .getRegNo());
+        savingUser
+                .setBranch(BackendlessApplication
+                        .getUser()
+                        .getBranch());
+        savingUser
+                .setSemester(BackendlessApplication
+                        .getUser()
+                        .getSemester());
 
         Backendless.Persistence.save(savingUser, new AsyncCallback<User>() {
             @Override
             public void handleResponse(User response) {
                 Toast.makeText(Register.this,"Data Uploaded",Toast.LENGTH_LONG).show();
                 Log.d("msgBks","user table added");
-//                Relation();
                 BksUserTable();
             }
 
@@ -186,7 +228,7 @@ public class Register extends AppCompatActivity {
         });
     }
 
-    void spinnerData(){
+    void CollageData(){
 
         Backendless.Data.of(Collage.class).find(new AsyncCallback<List<Collage>>() {
             @Override
@@ -205,37 +247,9 @@ public class Register extends AppCompatActivity {
             @Override
             public void handleFault(BackendlessFault fault) {
 
+                Log.d("msg","error: "+fault.getMessage());
             }
         });
-    }
-
-    public void Relation(){
-        BksUserTable();
-        HashMap<String, Object> UserObject = new HashMap<String, Object>();
-        UserObject.put( "objectId", getUserObjId);
-
-        HashMap<String, Object> collageObject = new HashMap<String, Object>();
-        collageObject.put( "objectId", "30B7748C-5F12-574B-FF93-96983DA73F00");
-//        collageObject.put( "objectId", collageFromBKs.get(slected_collageFromBKs).getObjectId());
-
-        ArrayList<Map> children = new ArrayList<Map>();
-        children.add( collageObject );
-
-        Backendless.Data.of( "User" ).setRelation( UserObject, "collageId", children,
-                new AsyncCallback<Integer>()
-                {
-                    @Override
-                    public void handleResponse( Integer response )
-                    {
-                        Log.d( "msg", "relation has been set" );
-                    }
-
-                    @Override
-                    public void handleFault( BackendlessFault fault )
-                    {
-                        Log.d( "msg", "server reported an error - " + fault.getMessage() );
-                    }
-                } );
     }
 
     public void BksUserTable(){
@@ -257,7 +271,7 @@ public class Register extends AppCompatActivity {
 
                                 final HashMap<String, Object> collageObject = new HashMap<String, Object>();
 //                                collageObject.put( "objectId", "30B7748C-5F12-574B-FF93-96983DA73F00");
-                                collageObject.put( "objectId",collageFromBKs.get(SelectedCollageposition).getObjectId());
+                                collageObject.put( "objectId",collageFromBKs.get(SelectedCollagePosition).getObjectId());
 
                                 ArrayList<Map> children = new ArrayList<Map>();
                                 children.add( collageObject );
@@ -271,6 +285,7 @@ public class Register extends AppCompatActivity {
                                             {
                                                 Log.d( "msg", "relation has been set from "+UserObject+" to "+collageObject );
                                                 new getLocalDB(Register.this).execute();
+
                                                 startActivity(new Intent(Register.this, Login.class));
                                                 finish();
                                             }
@@ -288,6 +303,7 @@ public class Register extends AppCompatActivity {
                     public void handleFault( BackendlessFault fault )
                     {
 
+                        Log.d("msgQuery",fault.getMessage());
                     }
                 });
     }
@@ -296,6 +312,5 @@ public class Register extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
 
-        registerBackendless = null;
     }
 }

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Application;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -38,9 +39,17 @@ public class AppSetting extends AppCompatActivity {
                     @Override
                     public void handleResponse(Void response) {
                         startActivity(new Intent(AppSetting.this, Login.class));
-                        BackendlessApplication.setUserFromDB(null);
-                        BackendlessApplication.setUser(null);
-                        BackendlessApplication.setDb(null);
+//                        BackendlessApplication.setUserFromDB(null);
+//                        BackendlessApplication.setUser(null);
+//                        BackendlessApplication.setDb(null);
+                        new AsyncTask<Void,Void,Void>(){
+
+                            @Override
+                            protected Void doInBackground(Void... voids) {
+                                BackendlessApplication.getDb().userDao().deleteAll();
+                                return null;
+                            }
+                        };
                         finish();
                     }
 

@@ -6,8 +6,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
+import com.backendless.Backendless;
+import com.backendless.async.callback.AsyncCallback;
+import com.backendless.exceptions.BackendlessFault;
+import com.freeoda.franktirkey.smartmanagementforengineers.BackendlessApplication;
+import com.freeoda.franktirkey.smartmanagementforengineers.Collage.Collage;
+import com.freeoda.franktirkey.smartmanagementforengineers.LocalDBForBKs.User;
 import com.freeoda.franktirkey.smartmanagementforengineers.R;
 
 import java.util.ArrayList;
@@ -31,6 +38,7 @@ public class SubjectMain extends AppCompatActivity {
 
         int imgRes = getResources().getIdentifier("act_bg", "drawable", getPackageName());
         int imgRes2 = getResources().getIdentifier("act_card2", "drawable", getPackageName());
+
         list.add(new SubjectMainModel(001,"FBMS",imgRes));
         list.add(new SubjectMainModel(002,"FBMS",imgRes2));
 
@@ -38,6 +46,12 @@ public class SubjectMain extends AppCompatActivity {
         SubjectMainAdapter adapter = new SubjectMainAdapter(list);
         rv_subject_main.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+
+        extractSubj();
+    }
+
+    public void extractSubj(){
+
 
     }
 }

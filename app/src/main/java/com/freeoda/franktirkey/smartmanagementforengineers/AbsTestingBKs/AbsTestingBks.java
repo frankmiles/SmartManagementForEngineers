@@ -29,21 +29,24 @@ public class AbsTestingBks extends AppCompatActivity {
 
         tv_AbsTestingBKs = findViewById(R.id.tv_AbsTestingBKs);
 
-//        Backendless.Data.of("User").find(new AsyncCallback<List<Map>>() {
-//            @Override
-//            public void handleResponse(List<Map> response) {
-//                tv_AbsTestingBKs.setText(response.get(0).toString());
-//            }
-//
-//            @Override
-//            public void handleFault(BackendlessFault fault) {
-//
-//                tv_AbsTestingBKs.setText("Failed");
-//            }
-//        });
+        Backendless.Data.of("User").find(new AsyncCallback<List<Map>>() {
+            @Override
+            public void handleResponse(List<Map> response) {
+//                tv_AbsTestingBKs.setText(response.toString());
+                String collageId = response.get(0).get("collageId").toString();
+                String sem = response.get(0).get("semester").toString();
+                String branch = response.get(0).get("branch").toString();
+            }
+
+            @Override
+            public void handleFault(BackendlessFault fault) {
+
+                tv_AbsTestingBKs.setText("Failed");
+            }
+        });
 
 
 
-        tv_AbsTestingBKs.setText(BackendlessApplication.db.userDao().getAll().get(0).getOwnerId()+" ");
+
     }
 }

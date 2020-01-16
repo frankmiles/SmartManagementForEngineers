@@ -31,6 +31,21 @@ public class User {
     @ColumnInfo(name = "regNo")
     private String regNo;
 
+    public User() {}
+
+    public User(int uid, String ownerId, String name, String email,
+                String semester, String collageId, String branch,
+                String regNo) {
+        this.uid = uid;
+        this.ownerId = ownerId;
+        this.name = name;
+        this.email = email;
+        this.semester = semester;
+        this.collageId = collageId;
+        this.branch = branch;
+        this.regNo = regNo;
+    }
+
     public String getOwnerId() {
         return ownerId;
     }

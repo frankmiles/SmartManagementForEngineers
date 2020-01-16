@@ -1,25 +1,23 @@
 package com.freeoda.franktirkey.smartmanagementforengineers.Subject;
 
-import android.graphics.drawable.Drawable;
-
 public class SubjectMainModel {
 
     String subjName;
-    int subjRes,subjID;
+    int subjRes, subjectObjId;
 
 
-    public SubjectMainModel(int subjID, String subjName, int subjRes) {
-        this.subjID = subjID;
+    public SubjectMainModel(int subjectObjId, String subjName, int subjRes) {
+        this.subjectObjId = subjectObjId;
         this.subjName = subjName;
         this.subjRes = subjRes;
     }
 
-    public int getSubjID() {
-        return subjID;
+    public int getSubjectObjId() {
+        return subjectObjId;
     }
 
-    public void setSubjID(int subjID) {
-        this.subjID = subjID;
+    public void setSubjectObjId(int subjectObjId) {
+        this.subjectObjId = subjectObjId;
     }
 
     public String getSubjName() {

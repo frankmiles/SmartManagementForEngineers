@@ -1,11 +1,13 @@
 package com.freeoda.franktirkey.smartmanagementforengineers;
 
 import android.app.Application;
+import android.provider.ContactsContract;
 
 import androidx.room.Room;
 
 import com.backendless.Backendless;
 import com.backendless.BackendlessUser;
+import com.backendless.persistence.DataQueryBuilder;
 import com.freeoda.franktirkey.smartmanagementforengineers.LocalDBForBKs.AppDatabase;
 import com.freeoda.franktirkey.smartmanagementforengineers.LocalDBForBKs.User;
 import java.util.List;
@@ -27,6 +29,7 @@ public class BackendlessApplication extends Application {
                 .fallbackToDestructiveMigration()
                 .allowMainThreadQueries() //TODO tESTING PURPOSE ONLY
                 .build();
+
     }
 
     public static User getUser() {
@@ -51,5 +54,13 @@ public class BackendlessApplication extends Application {
 
     public static void setUserFromDB(List<User> userFromDB) {
         BackendlessApplication.userFromDB = userFromDB;
+    }
+
+    public static BackendlessUser getBackendlessUser() {
+        return backendlessUser;
+    }
+
+    public static void setBackendlessUser(BackendlessUser backendlessUser) {
+        BackendlessApplication.backendlessUser = backendlessUser;
     }
 }
