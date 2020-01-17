@@ -19,6 +19,15 @@
         <item>(CE)CIVIL ENGI.</item>
         <item>(ME)MECANICAL ENGI.</item>
     </string-array>
+
+    <string-array name="BranchAbbr">
+        <item>CSE</item>
+        <item>ECE</item>
+        <item>EEE</item>
+        <item>EE</item>
+        <item>CE</item>
+        <item>ME</item>
+    </string-array>
 <!--    <string-array name="Collage">-->
 <!--        <item>(GITA) GANDHI INSTITUTE FOR TECHNOLOGICAL ADVANCEMENT</item>-->
 <!--        <item>(GEC) GANDHI ENGINEERING COLLAGE</item>-->
