@@ -143,6 +143,7 @@ public class Login extends AppCompatActivity {
 
                     BackendlessApplication.setUser(signedInUser);
                     startActivity(new Intent(Login.this, MainActivity.class));
+                    BackendlessApplication.setUser(signedInUser);
                     finish();
                 }
             }

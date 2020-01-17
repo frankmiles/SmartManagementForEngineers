@@ -4,18 +4,26 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.ContactsContract;
+import android.text.GetChars;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.backendless.Backendless;
 import com.backendless.async.callback.AsyncCallback;
 import com.backendless.exceptions.BackendlessFault;
+import com.backendless.persistence.DataQueryBuilder;
 import com.freeoda.franktirkey.smartmanagementforengineers.BackendlessApplication;
+import com.freeoda.franktirkey.smartmanagementforengineers.Collage.Collage;
 import com.freeoda.franktirkey.smartmanagementforengineers.LocalDBForBKs.User;
 import com.freeoda.franktirkey.smartmanagementforengineers.LocalDBForBKs.getLocalDB;
+import com.freeoda.franktirkey.smartmanagementforengineers.MainActivity;
 import com.freeoda.franktirkey.smartmanagementforengineers.R;
 import com.freeoda.franktirkey.smartmanagementforengineers.Register;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 
@@ -29,23 +37,26 @@ public class AbsTestingBks extends AppCompatActivity {
 
         tv_AbsTestingBKs = findViewById(R.id.tv_AbsTestingBKs);
 
-        Backendless.Data.of("User").find(new AsyncCallback<List<Map>>() {
+        String query = "collageId = '10001' AND semester = '1'";
+        DataQueryBuilder dataQueryBuilder = DataQueryBuilder.create();
+        dataQueryBuilder.setWhereClause(query);
+        Backendless.Data.of("Semester").find(dataQueryBuilder, new AsyncCallback<List<Map>>() {
             @Override
             public void handleResponse(List<Map> response) {
-//                tv_AbsTestingBKs.setText(response.toString());
-                String collageId = response.get(0).get("collageId").toString();
-                String sem = response.get(0).get("semester").toString();
-                String branch = response.get(0).get("branch").toString();
+
+                HashMap[] hm = (HashMap[]) response.get(0).get("subject");
+
+                for(HashMap l:hm){
+                    Log.d("msgAbs",l.get("objectId").toString());
+                }
             }
 
             @Override
             public void handleFault(BackendlessFault fault) {
 
-                tv_AbsTestingBKs.setText("Failed");
+                Log.d("msg",fault.getMessage());
             }
         });
-
-
 
 
     }
