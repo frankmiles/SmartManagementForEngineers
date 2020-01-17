@@ -16,7 +16,7 @@ import android.widget.TextView;
 import com.freeoda.franktirkey.smartmanagementforengineers.Chat.ChatMain;
 import com.freeoda.franktirkey.smartmanagementforengineers.R;
 import com.freeoda.franktirkey.smartmanagementforengineers.Subject.SubjectMain;
-import com.freeoda.franktirkey.smartmanagementforengineers.Subject.Syllabus.SyllabusMain;
+import com.freeoda.franktirkey.smartmanagementforengineers.Syllabus.SyllabusMain;
 
 import java.util.ArrayList;
 import java.util.List;

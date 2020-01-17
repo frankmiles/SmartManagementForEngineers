@@ -17,7 +17,7 @@
         <activity android:name=".Collage.CollageFaculty" />
         <activity android:name=".Attendance.AttendanceMain" />
         <activity android:name=".Routine.RoutineMain" />
-        <activity android:name=".Subject.Syllabus.SyllabusMain" />
+        <activity android:name=".Syllabus.SyllabusMain" />
         <activity android:name=".AppConfig.AppAbout" />
         <activity android:name=".AppConfig.HelpAndReport" />
         <activity android:name=".AppConfig.AppSetting" />

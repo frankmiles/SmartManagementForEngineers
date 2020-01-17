@@ -1,10 +1,11 @@
-package com.freeoda.franktirkey.smartmanagementforengineers.Subject.Syllabus;
+package com.freeoda.franktirkey.smartmanagementforengineers.Syllabus;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -19,7 +20,7 @@ import java.util.List;
 
 public class SyllabusMain extends AppCompatActivity {
 
-    TextView syllabusMain_tv,tv_cv_Syllabus_Main;
+    TextView syllabusMain_tv,tv_cv_Syllabus_Main,tv_SubjectName_SyllabusMain;
     RecyclerView rv_syllabus_main_subjectSelect;
     FloatingActionButton fb_Syllabus_main;
     CardView cv_Syllabus_main;
@@ -33,13 +34,17 @@ public class SyllabusMain extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_syllabus_main);
 
+        tv_SubjectName_SyllabusMain = findViewById(R.id.tv_SubjectName_SyllabusMain);
         syllabusMain_tv = findViewById(R.id.syllabusMain_tv);
+        syllabusMain_tv.setText(getIntent().getStringExtra("url"));
 
-        syllabusMain_tv.setText(getIntent().getStringExtra("data"));
         rv_syllabus_main_subjectSelect = findViewById(R.id.rv_syllabus_main_subjectSelect);
         fb_Syllabus_main = findViewById(R.id.fb_Syllabus_main);
         cv_Syllabus_main = findViewById(R.id.cv_Syllabus_main);
         tv_cv_Syllabus_Main = findViewById(R.id.tv_cv_Syllabus_Main);
+
+        tv_cv_Syllabus_Main.setText(getIntent().getExtras().getString("name"));
+
 
 
         container = findViewById(R.id.shimmer_view_container);
@@ -53,6 +58,7 @@ public class SyllabusMain extends AppCompatActivity {
 
 
         fb_Syllabus_main.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("RestrictedApi")
             @Override
             public void onClick(View view) {
                 rv_syllabus_main_subjectSelect.setVisibility(View.VISIBLE);
@@ -62,13 +68,13 @@ public class SyllabusMain extends AppCompatActivity {
         });
 
         interface_RecyclerViewClickListner_Syllabus onClickView = new interface_RecyclerViewClickListner_Syllabus() {
+            @SuppressLint("RestrictedApi")
             @Override
             public void onClick(View view, int position) {
                 Toast.makeText(getApplicationContext(),"clicked",Toast.LENGTH_SHORT).show();
                 rv_syllabus_main_subjectSelect.setVisibility(View.GONE);
                 cv_Syllabus_main.setVisibility(View.VISIBLE);
                 fb_Syllabus_main.setVisibility(View.VISIBLE);
-                tv_cv_Syllabus_Main.setText(list.get(position).subjName);
             }
         };
 
@@ -76,7 +82,5 @@ public class SyllabusMain extends AppCompatActivity {
         SyllabusMainAdaper adaper = new SyllabusMainAdaper(list,onClickView);
         rv_syllabus_main_subjectSelect.setAdapter(adaper);
         adaper.notifyDataSetChanged();
-
-
     }
 }

@@ -1,4 +1,4 @@
-package com.freeoda.franktirkey.smartmanagementforengineers.Subject.Syllabus;
+package com.freeoda.franktirkey.smartmanagementforengineers.Syllabus;
 
 public class SyllabusMainModel {
 

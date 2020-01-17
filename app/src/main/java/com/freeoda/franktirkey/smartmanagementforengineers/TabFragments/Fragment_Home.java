@@ -26,7 +26,7 @@ import com.freeoda.franktirkey.smartmanagementforengineers.Chat.ChatMain;
 import com.freeoda.franktirkey.smartmanagementforengineers.Collage.CollageFaculty;
 import com.freeoda.franktirkey.smartmanagementforengineers.R;
 import com.freeoda.franktirkey.smartmanagementforengineers.Subject.SubjectMain;
-import com.freeoda.franktirkey.smartmanagementforengineers.Subject.Syllabus.SyllabusMain;
+import com.freeoda.franktirkey.smartmanagementforengineers.Syllabus.SyllabusMain;
 import com.freeoda.franktirkey.smartmanagementforengineers.ToDos.ToDoMain;
 
 
@@ -81,27 +81,25 @@ public class Fragment_Home extends Fragment {
                 switch (position){
                     case 0: startActivity(new Intent(context, SubjectMain.class));
                         break;
-                    case 1: startActivity(new Intent(context,SyllabusMain.class));
-                    break;
-                    case 2: startActivity(new Intent(context, ChatMain.class));
+                    case 1: startActivity(new Intent(context, ChatMain.class));
                         break;
-                    case 3: startActivity(new Intent(context, AttendanceMain.class));
+                    case 2: startActivity(new Intent(context, AttendanceMain.class));
                         break;
-                    case 4: startActivity(new Intent(context,CollageFaculty.class).putExtra("data","Faculty"));
+                    case 3: startActivity(new Intent(context,CollageFaculty.class).putExtra("data","Faculty"));
                         break;
-                    case 5: startActivity(new Intent(context, ToDoMain.class).putExtra("data","planning"));
+                    case 4: startActivity(new Intent(context, ToDoMain.class).putExtra("data","planning"));
                         break;
-                    case 6: startActivity(new Intent(context,CollageFaculty.class).putExtra("data","reachCollage"));
+                    case 5: startActivity(new Intent(context,CollageFaculty.class).putExtra("data","reachCollage"));
                         break;
-                    case 7: startActivity(new Intent(context,ToDoMain.class).putExtra("data","impDate"));
+                    case 6: startActivity(new Intent(context,ToDoMain.class).putExtra("data","impDate"));
                         break;
-                    case 8: startActivity(new Intent(context,ToDoMain.class).putExtra("data","Set Goal"));
+                    case 7: startActivity(new Intent(context,ToDoMain.class).putExtra("data","Set Goal"));
                         break;
-                    case 9: startActivity(new Intent(context, AppSetting.class));
+                    case 8: startActivity(new Intent(context, AppSetting.class));
                         break;
-                    case 10: startActivity(new Intent(context, HelpAndReport.class));
+                    case 9: startActivity(new Intent(context, HelpAndReport.class));
                         break;
-                    case 11: startActivity(new Intent(context, AppAbout.class));
+                    case 10: startActivity(new Intent(context, AppAbout.class));
                         break;
                 }
             }

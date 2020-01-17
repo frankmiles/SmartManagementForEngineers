@@ -54,13 +54,15 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:textAlignment="center"
-            android:entries="@array/Sem"/>
+            android:entries="@array/Sem"
+            android:visibility="invisible"/>
         <androidx.appcompat.widget.AppCompatSpinner
             android:id="@+id/spinner_subject_main_branch"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:textAlignment="center"
-            android:entries="@array/BranchAbbr"/>
+            android:entries="@array/BranchAbbr"
+            android:visibility="invisible"/>
 
     </LinearLayout>
 
