@@ -67,6 +67,8 @@ public class xmlParser extends AsyncTask<Void,Void,Void> {
 
             StringBuilder text = new StringBuilder();
 
+            SyllabusMain.getList().clear();
+
             for(SyllabusXml sXml:syllabusXmlArrayList){ text
                         .append("id: ")
                         .append(sXml.getModule())
@@ -85,25 +87,20 @@ public class xmlParser extends AsyncTask<Void,Void,Void> {
 
                         .append("\n");
 
-                list.add(new SyllabusMainModel(1,sXml.getTopic()));
+                SyllabusMain.getList().add(new SyllabusMainModel(1,sXml.getTopic().trim()));
             }
-
-            SyllabusMain.setList(list);
-
-            new Runnable(){
-
+            activity.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    SyllabusMain.getAdapter().notifyDataSetChanged();
+                    SyllabusMain.UpdateAdapter();
                 }
-            }.run();
-            Log.d("msgData", text.toString());
+            });
 
+            Log.d("msgData", text.toString());
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-
 
         return null;
     }
@@ -147,7 +144,6 @@ public class xmlParser extends AsyncTask<Void,Void,Void> {
         }
         return syllabusXmlArrayList;
     }
-
 
     private void moveFile(String inputPath, String inputFile, String outputPath) {
 

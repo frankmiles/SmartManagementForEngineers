@@ -47,7 +47,7 @@ public class XMLDownloader extends AsyncTask<Void,Void,Void> {
         DownloadManager.Request request = new DownloadManager.Request(uri);
         request.setTitle(fileName);
         request.setDescription("Downloading");
-        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE);
+        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_HIDDEN);
         request.setDestinationInExternalPublicDir(file.getPath(),fileName+".xml");
         request.setAllowedOverMetered(true);
         request.setAllowedOverRoaming(true);

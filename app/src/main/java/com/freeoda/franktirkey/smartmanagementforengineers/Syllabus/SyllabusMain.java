@@ -76,7 +76,7 @@ public class SyllabusMain extends AppCompatActivity {
         container = findViewById(R.id.shimmer_view_container);
         container.setVisibility(View.GONE);
 
-//        list.add(new SyllabusMainModel(001,"Loading Content..."));
+        list.add(new SyllabusMainModel(001,"Loading Content..."));
 //        list.add(new SyllabusMainModel(002,"Check your internet!"));
 //        list.add(new SyllabusMainModel(003,"'Even a Talent can be"));
 //        list.add(new SyllabusMainModel(004,"bitten by plan!'"));
@@ -106,7 +106,7 @@ public class SyllabusMain extends AppCompatActivity {
         rv_syllabus_main_subjectSelect.setLayoutManager(new LinearLayoutManager(this));
         adapter = new SyllabusMainAdaper(list,onClickView);
         rv_syllabus_main_subjectSelect.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+//        adapter.notifyDataSetChanged();
 
         registerReceiver(onDownloadComplete,new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
         getSyllabusXML();
@@ -116,21 +116,21 @@ public class SyllabusMain extends AppCompatActivity {
         new XMLDownloader(SyllabusMain.this, getApplicationContext(),
                 "https://backendlessappcontent.com/A32C8534-709A-4E2C-829B-0614A16E5DF3/" +
                         "D2C8202D-06C9-4427-AFF2-8D444BBA8A77/files/syllabusXML/sample.xml",
-                "sample").execute();
+                getIntent().getStringExtra("name")).execute();
 
         Log.d("msg", "XMLDownloader Started");
     }
 
     private void callParser(){
-        new xmlParser(this,getApplicationContext(),"sample").execute();
+        new xmlParser(this,getApplicationContext(),getIntent().getStringExtra("name")).execute();
         Log.d("msg","xmlParser Executed");
     }
 
-    public static void setList(List<SyllabusMainModel> list) {
-        SyllabusMain.list = list;
+    public static List<SyllabusMainModel> getList() {
+        return list;
     }
 
-    public static SyllabusMainAdaper getAdapter() {
-        return adapter;
+    public static void UpdateAdapter() {
+        adapter.notifyDataSetChanged();
     }
 }

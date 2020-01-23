@@ -2,6 +2,8 @@ package com.freeoda.franktirkey.smartmanagementforengineers.LocalDBForBKs;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.Insert;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "userDetails")
@@ -33,6 +35,7 @@ public class User {
 
     public User() {}
 
+    @Ignore
     public User(int uid, String ownerId, String name, String email,
                 String semester, String collageId, String branch,
                 String regNo) {
