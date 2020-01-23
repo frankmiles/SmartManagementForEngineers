@@ -17,7 +17,7 @@ public class SyllabusMainAdaper extends RecyclerView.Adapter<SyllabusMainAdaper.
     List<SyllabusMainModel> list;
     interface_RecyclerViewClickListner_Syllabus irvcl;
 
-    public SyllabusMainAdaper(List<SyllabusMainModel> list,interface_RecyclerViewClickListner_Syllabus irvcl) {
+    public SyllabusMainAdaper(List<SyllabusMainModel> list, interface_RecyclerViewClickListner_Syllabus irvcl) {
         this.list = list;
         this.irvcl = irvcl;
     }
@@ -32,7 +32,15 @@ public class SyllabusMainAdaper extends RecyclerView.Adapter<SyllabusMainAdaper.
     @Override
     public void onBindViewHolder(@NonNull cViewHolder holder, int position) {
 
-        holder.setData(list.get(position).subjName);
+        String str = list.get(position).getModule()
+                .concat(list.get(position).getTopic())
+                .concat("\n")
+                .concat(list.get(position).getDetail())
+                .concat("\n")
+                .concat(list.get(position).getUrl())
+                .concat("\n")
+                .concat(list.get(position).getYoutube());
+        holder.setData(str);
     }
 
     @Override

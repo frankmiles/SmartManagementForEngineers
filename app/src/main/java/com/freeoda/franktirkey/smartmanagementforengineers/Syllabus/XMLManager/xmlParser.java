@@ -63,13 +63,13 @@ public class xmlParser extends AsyncTask<Void,Void,Void> {
             parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES,false);
             parser.setInput(in_s,null);
 
-            ArrayList<SyllabusXml> syllabusXmlArrayList = parserXML(parser);
+            ArrayList<SyllabusMainModel> syllabusXmlArrayList = parserXML(parser);
 
             StringBuilder text = new StringBuilder();
 
             SyllabusMain.getList().clear();
 
-            for(SyllabusXml sXml:syllabusXmlArrayList){ text
+            for(SyllabusMainModel sXml:syllabusXmlArrayList){ text
                         .append("id: ")
                         .append(sXml.getModule())
 
@@ -87,7 +87,14 @@ public class xmlParser extends AsyncTask<Void,Void,Void> {
 
                         .append("\n");
 
-                SyllabusMain.getList().add(new SyllabusMainModel(1,sXml.getTopic().trim()));
+                SyllabusMain.getList().add(new SyllabusMainModel(
+                        sXml.getModule(),
+                        sXml.getTopic(),
+                        sXml.getDetail(),
+                        sXml.getUrl(),
+                        sXml.getUrl()
+                        )
+                );
             }
             activity.runOnUiThread(new Runnable() {
                 @Override
@@ -105,11 +112,11 @@ public class xmlParser extends AsyncTask<Void,Void,Void> {
         return null;
     }
 
-    private ArrayList<SyllabusXml> parserXML(XmlPullParser parser)throws
+    private ArrayList<SyllabusMainModel> parserXML(XmlPullParser parser)throws
             Exception {
-        ArrayList<SyllabusXml> syllabusXmlArrayList = null;
+        ArrayList<SyllabusMainModel> syllabusXmlArrayList = null;
         int eventType = parser.getEventType();
-        SyllabusXml syllabusXml = null;
+        SyllabusMainModel syllabusXml = null;
 
         while (eventType != XmlPullParser.END_DOCUMENT){
             String name;
@@ -120,17 +127,22 @@ public class xmlParser extends AsyncTask<Void,Void,Void> {
                 case XmlPullParser.START_TAG:
                     name = parser.getName();
                     if(name.equals("Module")){
-                        syllabusXml = new SyllabusXml();
-                        syllabusXml.module = parser.getAttributeValue(null,"id");
+                        syllabusXml = new SyllabusMainModel();
+                        syllabusXml.setModule(parser.getAttributeValue(null,"id"));
                     }else if (syllabusXml != null){
-                        if(name.equals("Topic")){
-                            syllabusXml.topic = parser.nextText();
-                        }else if (name.equals("Detail")){
-                            syllabusXml.detail = parser.nextText();
-                        }else if (name.equals("url")){
-                            syllabusXml.url = parser.nextText();
-                        }else if (name.equals("youtube")){
-                            syllabusXml.youtube = parser.nextText();
+                        switch (name) {
+                            case "Topic":
+                                syllabusXml.setTopic(parser.nextText());
+                                break;
+                            case "Detail":
+                                syllabusXml.setDetail(parser.nextText());
+                                break;
+                            case "url":
+                                syllabusXml.setUrl(parser.nextText());
+                                break;
+                            case "youtube":
+                                syllabusXml.setYoutube(parser.nextText());
+                                break;
                         }
                     }
                     break;

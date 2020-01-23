@@ -2,27 +2,20 @@ package com.freeoda.franktirkey.smartmanagementforengineers.Syllabus;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
-import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.DownloadManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.freeoda.franktirkey.smartmanagementforengineers.R;
 import com.freeoda.franktirkey.smartmanagementforengineers.Syllabus.XMLManager.XMLDownloader;
@@ -41,7 +34,7 @@ public class SyllabusMain extends AppCompatActivity {
 
     ShimmerFrameLayout container;
 
-    static List<SyllabusMainModel> list = new ArrayList<>();
+    static List<SyllabusMainModel> list = new ArrayList<SyllabusMainModel>();
 
     static SyllabusMainAdaper adapter;
 
@@ -76,7 +69,7 @@ public class SyllabusMain extends AppCompatActivity {
         container = findViewById(R.id.shimmer_view_container);
         container.setVisibility(View.GONE);
 
-        list.add(new SyllabusMainModel(001,"Loading Content..."));
+        list.add(new SyllabusMainModel("module","topic", "detail", "url", "youtube"));
 //        list.add(new SyllabusMainModel(002,"Check your internet!"));
 //        list.add(new SyllabusMainModel(003,"'Even a Talent can be"));
 //        list.add(new SyllabusMainModel(004,"bitten by plan!'"));
