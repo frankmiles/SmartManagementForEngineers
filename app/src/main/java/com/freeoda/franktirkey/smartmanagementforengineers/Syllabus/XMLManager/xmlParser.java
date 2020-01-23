@@ -12,6 +12,9 @@ import android.widget.TextView;
 
 import androidx.core.app.ActivityCompat;
 
+import com.freeoda.franktirkey.smartmanagementforengineers.Syllabus.SyllabusMain;
+import com.freeoda.franktirkey.smartmanagementforengineers.Syllabus.SyllabusMainModel;
+
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
@@ -22,12 +25,17 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.List;
 
 public class xmlParser extends AsyncTask<Void,Void,Void> {
 
     Activity activity;
     Context context;
     String name;
+
+    static int flag = 0;
+
+    List<SyllabusMainModel> list = new ArrayList<>();
 
     XmlPullParserFactory pullParserFactory;
 
@@ -76,8 +84,21 @@ public class xmlParser extends AsyncTask<Void,Void,Void> {
                         .append(sXml.getYoutube())
 
                         .append("\n");
+
+                list.add(new SyllabusMainModel(1,sXml.getTopic()));
             }
+
+            SyllabusMain.setList(list);
+
+            new Runnable(){
+
+                @Override
+                public void run() {
+                    SyllabusMain.getAdapter().notifyDataSetChanged();
+                }
+            }.run();
             Log.d("msgData", text.toString());
+
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -144,7 +165,6 @@ public class xmlParser extends AsyncTask<Void,Void,Void> {
                 dir.mkdirs();
             }
 
-
             in = new FileInputStream(inputPath +inputFile);
             out = new FileOutputStream(outputPath+ inputFile);
 
@@ -164,17 +184,23 @@ public class xmlParser extends AsyncTask<Void,Void,Void> {
             // delete the original file
             new File(inputPath + inputFile).delete();
 
-
         }
 
         catch (FileNotFoundException fnfe1) {
             Log.e("tag", fnfe1.getMessage());
+            if(flag <= 0){
+                flag = 1;
+                moveFile( inputPath, inputFile, outputPath);
+            }
         }
         catch (Exception e) {
             Log.e("tag", e.getMessage());
         }
-
     }
 
-
+    @Override
+    protected void finalize() throws Throwable {
+        super.finalize();
+        flag = 0;
+    }
 }

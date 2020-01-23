@@ -2,11 +2,22 @@ package com.freeoda.franktirkey.smartmanagementforengineers.Syllabus;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.DownloadManager;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -30,7 +41,22 @@ public class SyllabusMain extends AppCompatActivity {
 
     ShimmerFrameLayout container;
 
-    List<SyllabusMainModel> list = new ArrayList<>();
+    static List<SyllabusMainModel> list = new ArrayList<>();
+
+    static SyllabusMainAdaper adapter;
+
+    BroadcastReceiver onDownloadComplete = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
+            long id = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID,-1);
+
+            if(XMLDownloader.getDownloadID() == id){
+                callParser();
+                Log.d("msg","Downloaded!");
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +65,6 @@ public class SyllabusMain extends AppCompatActivity {
 
         tv_SubjectName_SyllabusMain = findViewById(R.id.tv_SubjectName_SyllabusMain);
         syllabusMain_tv = findViewById(R.id.syllabusMain_tv);
-        //syllabusMain_tv.setText(getIntent().getStringExtra("url"));
 
         rv_syllabus_main_subjectSelect = findViewById(R.id.rv_syllabus_main_subjectSelect);
         fb_Syllabus_main = findViewById(R.id.fb_Syllabus_main);
@@ -48,16 +73,13 @@ public class SyllabusMain extends AppCompatActivity {
 
         tv_cv_Syllabus_Main.setText(getIntent().getExtras().getString("name"));
 
-
-
         container = findViewById(R.id.shimmer_view_container);
         container.setVisibility(View.GONE);
 
-
-        list.add(new SyllabusMainModel(001,"Loading Content..."));
-        list.add(new SyllabusMainModel(002,"Check your internet!"));
-        list.add(new SyllabusMainModel(003,"'Even a Talent can be"));
-        list.add(new SyllabusMainModel(004,"bitten by plan!'"));
+//        list.add(new SyllabusMainModel(001,"Loading Content..."));
+//        list.add(new SyllabusMainModel(002,"Check your internet!"));
+//        list.add(new SyllabusMainModel(003,"'Even a Talent can be"));
+//        list.add(new SyllabusMainModel(004,"bitten by plan!'"));
 
 
         fb_Syllabus_main.setOnClickListener(new View.OnClickListener() {
@@ -82,23 +104,33 @@ public class SyllabusMain extends AppCompatActivity {
         };
 
         rv_syllabus_main_subjectSelect.setLayoutManager(new LinearLayoutManager(this));
-        SyllabusMainAdaper adaper = new SyllabusMainAdaper(list,onClickView);
-        rv_syllabus_main_subjectSelect.setAdapter(adaper);
-        adaper.notifyDataSetChanged();
+        adapter = new SyllabusMainAdaper(list,onClickView);
+        rv_syllabus_main_subjectSelect.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
 
+        registerReceiver(onDownloadComplete,new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
         getSyllabusXML();
     }
 
-    private void getSyllabusXML(){
-
-
-
+    private void getSyllabusXML() {
         new XMLDownloader(SyllabusMain.this, getApplicationContext(),
-                "https://backendlessappcontent.com/A32C8534-709A-4E2C-829B-0614A16E5DF3/D2C8202D-06C9-4427-AFF2-8D444BBA8A77/files/syllabusXML/sample.xml",
+                "https://backendlessappcontent.com/A32C8534-709A-4E2C-829B-0614A16E5DF3/" +
+                        "D2C8202D-06C9-4427-AFF2-8D444BBA8A77/files/syllabusXML/sample.xml",
                 "sample").execute();
 
-        Log.d("msg","XMLDownloader Started");
+        Log.d("msg", "XMLDownloader Started");
+    }
 
+    private void callParser(){
+        new xmlParser(this,getApplicationContext(),"sample").execute();
+        Log.d("msg","xmlParser Executed");
+    }
 
+    public static void setList(List<SyllabusMainModel> list) {
+        SyllabusMain.list = list;
+    }
+
+    public static SyllabusMainAdaper getAdapter() {
+        return adapter;
     }
 }
