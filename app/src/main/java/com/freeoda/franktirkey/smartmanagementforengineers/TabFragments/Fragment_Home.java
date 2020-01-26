@@ -53,9 +53,9 @@ public class Fragment_Home extends Fragment {
         View view = inflater.inflate(R.layout.fragment_fragment__home, container, false);
         View viewRv = inflater.inflate(R.layout.fragment_home_main_rv_layout, container, false);
 
-        String[] data = {"Subject",
-                "Syllabus",
-                "Group Dissuasion",
+        String[] data = {
+                "Subject",
+                "Group Discussion",
                 "Attendance",
                 "Approach Faculty",
                 "Plannings",

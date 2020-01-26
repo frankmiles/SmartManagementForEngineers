@@ -126,4 +126,10 @@ public class SyllabusMain extends AppCompatActivity {
     public static void UpdateAdapter() {
         adapter.notifyDataSetChanged();
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(onDownloadComplete);
+    }
 }

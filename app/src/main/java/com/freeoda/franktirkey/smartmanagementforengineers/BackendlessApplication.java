@@ -14,6 +14,10 @@ import java.util.List;
 
 public class BackendlessApplication extends Application {
 
+    public static String APPLICATION_ID = "A32C8534-709A-4E2C-829B-0614A16E5DF3";
+    public static String API_KEY = "D5A68302-4647-45AC-82F2-33906138BFB0";
+    public static final String SERVER_URL = "https://api.backendless.com";
+
     static BackendlessUser backendlessUser;
     static User user = new User();
     public static AppDatabase db;
@@ -23,7 +27,8 @@ public class BackendlessApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-        Backendless.initApp( this,"A32C8534-709A-4E2C-829B-0614A16E5DF3", "D5A68302-4647-45AC-82F2-33906138BFB0");
+        Backendless.setUrl(SERVER_URL);
+        Backendless.initApp( this,APPLICATION_ID, API_KEY);
         db = Room.databaseBuilder(BackendlessApplication.this,
                 AppDatabase.class,"User")
                 .fallbackToDestructiveMigration()

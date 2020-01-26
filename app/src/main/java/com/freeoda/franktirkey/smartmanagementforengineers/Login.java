@@ -96,6 +96,7 @@ public class Login extends AppCompatActivity {
                         @Override
                         public void handleResponse(BackendlessUser response) {
                             Toast.makeText(Login.this,"LogedIn",Toast.LENGTH_SHORT).show();
+                            Log.d("msg","LogedIn");
                             BackendlessApplication.backendlessUser = response;
 
                             getSubject();
@@ -103,7 +104,7 @@ public class Login extends AppCompatActivity {
 
                         @Override
                         public void handleFault(BackendlessFault fault) {
-
+                            Log.d("msg","Failed to logedin");
                             Toast.makeText(Login.this,fault.getCode(),Toast.LENGTH_LONG).show();
                         }
                     });
@@ -113,7 +114,7 @@ public class Login extends AppCompatActivity {
 
             @Override
             public void handleFault(BackendlessFault fault) {
-
+                Log.d("msg","Log in failed");
                 Toast.makeText(Login.this,fault.getCode(),Toast.LENGTH_LONG).show();
             }
         });
@@ -150,7 +151,6 @@ public class Login extends AppCompatActivity {
 
             @Override
             public void handleFault(BackendlessFault fault) {
-
                 Log.d("msg","error: "+fault.getMessage()); //tODO FOR TESTING PURPOSE
             }
         });
