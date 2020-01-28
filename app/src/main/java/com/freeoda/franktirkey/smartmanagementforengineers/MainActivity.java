@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import com.freeoda.franktirkey.smartmanagementforengineers.TabFragments.Fragment_Recent;
 import com.freeoda.franktirkey.smartmanagementforengineers.TabFragments.MainActivity_TabPageAdapter;
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
@@ -50,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tabLayout.getSelectedTabPosition());
+
             }
 
             @Override
@@ -59,6 +61,18 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
+                switch (tab.getPosition()){
+                    case 0:
+
+                        break;
+                    case 1:
+                        break;
+                    case 2:
+                        break;
+                        default:
+                            finish();
+                            break;
+                }
 
             }
         });

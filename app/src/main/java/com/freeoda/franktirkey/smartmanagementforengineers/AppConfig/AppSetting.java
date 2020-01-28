@@ -42,14 +42,10 @@ public class AppSetting extends AppCompatActivity {
 //                        BackendlessApplication.setUserFromDB(null);
 //                        BackendlessApplication.setUser(null);
 //                        BackendlessApplication.setDb(null);
-                        new AsyncTask<Void,Void,Void>(){
 
-                            @Override
-                            protected Void doInBackground(Void... voids) {
-                                BackendlessApplication.getDb().userDao().deleteAll();
-                                return null;
-                            }
-                        };
+                        BackendlessApplication.getDb().userDao().deleteAll();
+                        BackendlessApplication.getSubject_db().subjectDao().deleteAll();
+
                         finish();
                     }
 
@@ -60,7 +56,6 @@ public class AppSetting extends AppCompatActivity {
                         Toast.makeText(AppSetting.this,"Error ",Toast.LENGTH_LONG).show();
                     }
                 });
-
             }
         });
     }

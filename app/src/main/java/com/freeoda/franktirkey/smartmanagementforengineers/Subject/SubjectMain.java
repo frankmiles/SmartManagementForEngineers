@@ -19,11 +19,13 @@ import com.backendless.async.callback.AsyncCallback;
 import com.backendless.exceptions.BackendlessFault;
 import com.backendless.persistence.DataQueryBuilder;
 import com.freeoda.franktirkey.smartmanagementforengineers.BackendlessApplication;
+import com.freeoda.franktirkey.smartmanagementforengineers.MainActivity;
 import com.freeoda.franktirkey.smartmanagementforengineers.R;
 import com.freeoda.franktirkey.smartmanagementforengineers.Subject.subjectRoomForRecentTab.Subject;
 import com.freeoda.franktirkey.smartmanagementforengineers.Subject.subjectRoomForRecentTab.getSubjectFromDB;
 import com.freeoda.franktirkey.smartmanagementforengineers.Subject.subjectRoomForRecentTab.setSubjectFromDB;
 import com.freeoda.franktirkey.smartmanagementforengineers.Syllabus.SyllabusMain;
+import com.freeoda.franktirkey.smartmanagementforengineers.TabFragments.Fragment_Recent;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -53,7 +55,7 @@ public class SubjectMain extends AppCompatActivity {
 
         getSubject.execute();//TODO PUT Loading till it featched the result;
 
-        subjectListForRecent = getSubjectFromDB.getList();
+        getSubjectFromDB(); //TODO fetiching the database before-hand
 
         syllabusMain_tv = findViewById(R.id.SubjectMain_tv);
         rv_subject_main = findViewById(R.id.rv_subject_main);
@@ -198,7 +200,7 @@ public class SubjectMain extends AppCompatActivity {
         else if(subjectListForRecent.size()>=5){
 
             subjectListForRecent.remove(0);
-            Log.d("msgDB","Arranged subjectListForRecent = ");
+            Log.d("msgDB","Arranged subjectListForRecent = "+subjectListForRecent);
 
             subjectListForRecent.add(new Subject(sem,branch));
             Log.d("msgDB","Added to subjectListForRecent = "+sem+branch);
@@ -219,14 +221,7 @@ public class SubjectMain extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
         new setSubjectFromDB(subjectListForRecent).execute();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-
-        new setSubjectFromDB(subjectListForRecent).execute();
+        Fragment_Recent.dataSetChanged();
     }
 }

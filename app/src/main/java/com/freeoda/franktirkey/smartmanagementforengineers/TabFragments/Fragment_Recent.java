@@ -2,23 +2,30 @@ package com.freeoda.franktirkey.smartmanagementforengineers.TabFragments;
 
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Lifecycle;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.freeoda.franktirkey.smartmanagementforengineers.BackendlessApplication;
 import com.freeoda.franktirkey.smartmanagementforengineers.Chat.ChatMain;
 import com.freeoda.franktirkey.smartmanagementforengineers.R;
 import com.freeoda.franktirkey.smartmanagementforengineers.Subject.SubjectMain;
+import com.freeoda.franktirkey.smartmanagementforengineers.Subject.subjectRoomForRecentTab.Subject;
 import com.freeoda.franktirkey.smartmanagementforengineers.Syllabus.SyllabusMain;
+import com.freeoda.franktirkey.smartmanagementforengineers.Subject.subjectRoomForRecentTab.getSubjectFromDB;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -27,8 +34,15 @@ import java.util.List;
  */
 public class Fragment_Recent extends Fragment {
 
-    private RecyclerView rvSubject,rvSyllabus,rvLastGroupChat;
-    private TextView tvSubject_recent,tvSyllabus_recent,tvLastGroupChat_recent;
+    private RecyclerView rvSubject, rvSyllabus, rvLastGroupChat;
+    private TextView tvSubject_recent, tvSyllabus_recent, tvLastGroupChat_recent;
+
+    static List<Subject> DBSubjectList = new ArrayList<>();
+    //getSubjectFromDB DBSubject = new getSubjectFromDB();
+
+    String[] branch, sem;
+
+    static Fragment_Recent_Subject_rvAdapter adapter_subject;
 
     public Fragment_Recent() {
         // Required empty public constructor
@@ -41,6 +55,12 @@ public class Fragment_Recent extends Fragment {
         // Inflate the layout for this fragment
 
         View view = inflater.inflate(R.layout.fragment_fragment__recent, container, false);
+
+        DBSubjectList = BackendlessApplication.getSubject_db().subjectDao().getAll();
+
+        //DBSubject.execute();
+        branch = getResources().getStringArray(R.array.Branch);
+        sem = getResources().getStringArray(R.array.Sem);
 
         rvSubject = view.findViewById(R.id.rvSubject);
         rvSyllabus = view.findViewById(R.id.rvSyllabus);
@@ -57,14 +77,20 @@ public class Fragment_Recent extends Fragment {
 
         rvSubject.setLayoutManager(layoutManager_Subject);
 
-        final List<Fragment_Recent_Subject_rvModelClass> list_Subject = new ArrayList<>();
-        list_Subject.add(new Fragment_Recent_Subject_rvModelClass("tom"));
-        list_Subject.add(new Fragment_Recent_Subject_rvModelClass("cat"));
-        list_Subject.add(new Fragment_Recent_Subject_rvModelClass("dog"));
-        list_Subject.add(new Fragment_Recent_Subject_rvModelClass("meow"));
-        list_Subject.add(new Fragment_Recent_Subject_rvModelClass("bark"));
+        //DBSubjectList = getSubjectFromDB.getList();
 
-        Fragment_Recent_Subject_rvAdapter adapter_subject = new Fragment_Recent_Subject_rvAdapter(list_Subject);
+        final List<Fragment_Recent_Subject_rvModelClass> list_Subject = new ArrayList<>();
+
+        for(Subject s:DBSubjectList){
+
+            String parsedBranch = branch[s.getSelectedBranch()];
+            String parsedSem = sem[s.getSelectedSem()];
+            list_Subject.add(new Fragment_Recent_Subject_rvModelClass(parsedSem+"\n"+parsedBranch));
+            Log.d("msgDB","Enserted data on recent - Subjects");
+
+        }
+
+        adapter_subject = new Fragment_Recent_Subject_rvAdapter(list_Subject);
         rvSubject.setAdapter(adapter_subject);
         adapter_subject.notifyDataSetChanged();
         adapter_subject.setClickListener(new Fragment_Recent_Subject_rvAdapter.ItemClickListener() {
@@ -72,7 +98,7 @@ public class Fragment_Recent extends Fragment {
             public void onItemClick(View view, int position) {
                 String data = list_Subject.get(position).getText();
                 Intent intent = new Intent(getContext(), SubjectMain.class);
-                intent.putExtra("data",data);
+                intent.putExtra("data", data);
                 startActivity(intent);
 
             }
@@ -102,7 +128,7 @@ public class Fragment_Recent extends Fragment {
             public void onItemClick(View view, int position) {
                 String data = list_Syllabus.get(position).getString();
                 Intent intent = new Intent(getContext(), SyllabusMain.class);
-                intent.putExtra("data",data);
+                intent.putExtra("data", data);
                 startActivity(intent);
             }
         });
@@ -131,7 +157,7 @@ public class Fragment_Recent extends Fragment {
             public void onItemClick(View view, int position) {
                 String data = list_LastChatGroup.get(position).getString();
                 Intent intent = new Intent(getContext(), ChatMain.class);
-                intent.putExtra("data",data);
+                intent.putExtra("data", data);
                 startActivity(intent);
             }
         });
@@ -140,4 +166,8 @@ public class Fragment_Recent extends Fragment {
         return view;
     }
 
+    public static void dataSetChanged() {
+        DBSubjectList = BackendlessApplication.getSubject_db().subjectDao().getAll();
+        adapter_subject.notifyDataSetChanged();
+    }
 }
