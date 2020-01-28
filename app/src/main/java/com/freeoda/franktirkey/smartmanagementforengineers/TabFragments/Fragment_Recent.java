@@ -5,11 +5,13 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Lifecycle;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +28,7 @@ import com.freeoda.franktirkey.smartmanagementforengineers.Subject.subjectRoomFo
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -37,12 +40,14 @@ public class Fragment_Recent extends Fragment {
     private RecyclerView rvSubject, rvSyllabus, rvLastGroupChat;
     private TextView tvSubject_recent, tvSyllabus_recent, tvLastGroupChat_recent;
 
-    static List<Subject> DBSubjectList = new ArrayList<>();
+    public static List<Subject> DBSubjectList = new ArrayList<>();
     //getSubjectFromDB DBSubject = new getSubjectFromDB();
 
     String[] branch, sem;
 
-    static Fragment_Recent_Subject_rvAdapter adapter_subject;
+    Fragment_Recent_Subject_rvAdapter adapter_subject;
+
+    final List<Fragment_Recent_Subject_rvModelClass> list_Subject = new ArrayList<>();
 
     public Fragment_Recent() {
         // Required empty public constructor
@@ -56,12 +61,6 @@ public class Fragment_Recent extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_fragment__recent, container, false);
 
-        DBSubjectList = BackendlessApplication.getSubject_db().subjectDao().getAll();
-
-        //DBSubject.execute();
-        branch = getResources().getStringArray(R.array.Branch);
-        sem = getResources().getStringArray(R.array.Sem);
-
         rvSubject = view.findViewById(R.id.rvSubject);
         rvSyllabus = view.findViewById(R.id.rvSyllabus);
         rvLastGroupChat = view.findViewById(R.id.rvchatGroup);
@@ -71,28 +70,7 @@ public class Fragment_Recent extends Fragment {
         tvLastGroupChat_recent = view.findViewById(R.id.tvChatGroup_recent);
 
         /*rvSubject LIST AND ADAPTER*/
-
-        LinearLayoutManager layoutManager_Subject = new LinearLayoutManager(this.getActivity());
-        layoutManager_Subject.setOrientation(LinearLayoutManager.HORIZONTAL);
-
-        rvSubject.setLayoutManager(layoutManager_Subject);
-
-        //DBSubjectList = getSubjectFromDB.getList();
-
-        final List<Fragment_Recent_Subject_rvModelClass> list_Subject = new ArrayList<>();
-
-        for(Subject s:DBSubjectList){
-
-            String parsedBranch = branch[s.getSelectedBranch()];
-            String parsedSem = sem[s.getSelectedSem()];
-            list_Subject.add(new Fragment_Recent_Subject_rvModelClass(parsedSem+"\n"+parsedBranch));
-            Log.d("msgDB","Enserted data on recent - Subjects");
-
-        }
-
-        adapter_subject = new Fragment_Recent_Subject_rvAdapter(list_Subject);
-        rvSubject.setAdapter(adapter_subject);
-        adapter_subject.notifyDataSetChanged();
+        recentSubjectFetch();
         adapter_subject.setClickListener(new Fragment_Recent_Subject_rvAdapter.ItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
@@ -100,7 +78,6 @@ public class Fragment_Recent extends Fragment {
                 Intent intent = new Intent(getContext(), SubjectMain.class);
                 intent.putExtra("data", data);
                 startActivity(intent);
-
             }
         });
         /*END RV LIST AND ADAPTER*/
@@ -163,11 +140,52 @@ public class Fragment_Recent extends Fragment {
         });
         /*END RVLastChatGroup LIST AND ADAPTER*/
 
+
         return view;
     }
 
-    public static void dataSetChanged() {
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.d("msgDB","Fragment paused");  //TODO for testing phase Only
+    }
+
+    private void recentSubjectFetch(){
+
+        LinearLayoutManager layoutManager_Subject = new LinearLayoutManager(this.getActivity());
+        layoutManager_Subject.setOrientation(LinearLayoutManager.HORIZONTAL);
+
+        rvSubject.setLayoutManager(layoutManager_Subject);
+
         DBSubjectList = BackendlessApplication.getSubject_db().subjectDao().getAll();
+        branch = getResources().getStringArray(R.array.Branch);
+        sem = getResources().getStringArray(R.array.Sem);
+        list_Subject.clear();
+        for(Subject s:DBSubjectList){
+
+            String parsedBranch = branch[s.getSelectedBranch()];
+            String parsedSem = sem[s.getSelectedSem()];
+            list_Subject.add(new Fragment_Recent_Subject_rvModelClass(parsedSem+"\n"+parsedBranch));
+            Log.d("msgDB","Inserted data on recent - Subjects");
+
+        }
+
+        adapter_subject = new Fragment_Recent_Subject_rvAdapter(list_Subject);
+        rvSubject.setAdapter(adapter_subject);
         adapter_subject.notifyDataSetChanged();
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        final Handler handler = new Handler(); //To prevent Conflicts b/w dataBase I/O
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                recentSubjectFetch();
+            }
+        },5000);
+    }
+
 }

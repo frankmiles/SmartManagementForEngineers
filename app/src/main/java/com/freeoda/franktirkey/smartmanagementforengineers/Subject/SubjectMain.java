@@ -71,8 +71,7 @@ public class SubjectMain extends AppCompatActivity {
                 intent.putExtra("url",clickedUrl);
                 intent.putExtra("name",list.get(position).subjName);
 
-                getSubjectFromDB();
-
+                getSubjectFromDB();//For Fetching the Room Subject to update
                 arrangeList(spinner_subject_main_sem.getSelectedItemPosition(),
                         spinner_subject_main_branch.getSelectedItemPosition());
 
@@ -222,6 +221,6 @@ public class SubjectMain extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         new setSubjectFromDB(subjectListForRecent).execute();
-        Fragment_Recent.dataSetChanged();
     }
+
 }
