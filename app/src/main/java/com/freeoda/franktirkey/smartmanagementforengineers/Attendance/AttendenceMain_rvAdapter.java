@@ -33,7 +33,11 @@ public class AttendenceMain_rvAdapter extends RecyclerView.Adapter<AttendenceMai
     @Override
     public void onBindViewHolder(@NonNull cViewHolder holder, int position) {
 
-        holder.setData(list.get(position).getPercentage(),list.get(position).getSubject(),list.get(position).getTeacher());
+        holder.setData(
+                list.get(position).getPercentage(),
+                list.get(position).getSubject(),
+                list.get(position).getTeacher()
+        );
     }
 
     @Override

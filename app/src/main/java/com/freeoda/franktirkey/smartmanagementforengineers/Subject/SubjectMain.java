@@ -1,12 +1,7 @@
 package com.freeoda.franktirkey.smartmanagementforengineers.Subject;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,16 +10,22 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.backendless.Backendless;
 import com.backendless.async.callback.AsyncCallback;
 import com.backendless.exceptions.BackendlessFault;
 import com.backendless.persistence.DataQueryBuilder;
 import com.freeoda.franktirkey.smartmanagementforengineers.BackendlessApplication;
-import com.freeoda.franktirkey.smartmanagementforengineers.Collage.Collage;
-import com.freeoda.franktirkey.smartmanagementforengineers.LocalDBForBKs.User;
 import com.freeoda.franktirkey.smartmanagementforengineers.R;
+import com.freeoda.franktirkey.smartmanagementforengineers.Subject.subjectRoomForRecentTab.Subject;
+import com.freeoda.franktirkey.smartmanagementforengineers.Subject.subjectRoomForRecentTab.getSubjectFromDB;
+import com.freeoda.franktirkey.smartmanagementforengineers.Subject.subjectRoomForRecentTab.setSubjectFromDB;
 import com.freeoda.franktirkey.smartmanagementforengineers.Syllabus.SyllabusMain;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -42,10 +43,17 @@ public class SubjectMain extends AppCompatActivity {
     List<String> urlList = new ArrayList<>();
     String clickedUrl;
 
+    getSubjectFromDB getSubject =new getSubjectFromDB();
+    static List<Subject> subjectListForRecent = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_subject_main);
+
+        getSubject.execute();//TODO PUT Loading till it featched the result;
+
+        subjectListForRecent = getSubjectFromDB.getList();
 
         syllabusMain_tv = findViewById(R.id.SubjectMain_tv);
         rv_subject_main = findViewById(R.id.rv_subject_main);
@@ -60,6 +68,12 @@ public class SubjectMain extends AppCompatActivity {
                 Intent intent = new Intent(SubjectMain.this, SyllabusMain.class);
                 intent.putExtra("url",clickedUrl);
                 intent.putExtra("name",list.get(position).subjName);
+
+                getSubjectFromDB();
+
+                arrangeList(spinner_subject_main_sem.getSelectedItemPosition(),
+                        spinner_subject_main_branch.getSelectedItemPosition());
+
                 startActivity(intent);
             }
         };
@@ -153,7 +167,7 @@ public class SubjectMain extends AppCompatActivity {
                 }else {
                     list.clear();
                     urlList.clear();
-                    Log.d("msg","no subect found for:"+collage+
+                    Log.d("msg","no subject found for:"+collage+
                             " "+branch+" "+sem);
                 }
                 adapter.notifyDataSetChanged();
@@ -165,5 +179,54 @@ public class SubjectMain extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void arrangeList(int sem,int branch) {
+
+        if(subjectListForRecent == null){
+            Log.d("msgDB","subjectListForRecent = null || 0");
+
+            subjectListForRecent = new ArrayList<>();
+
+            Log.d("msgDB","subjectListForRecent = created & added");
+        }
+        else if(subjectListForRecent.size() >= 0 && subjectListForRecent.size() < 5){
+            subjectListForRecent.add(new Subject(sem,branch));
+
+            Log.d("msgDB","Added to subjectListForRecent = "+sem+branch);
+        }
+        else if(subjectListForRecent.size()>=5){
+
+            subjectListForRecent.remove(0);
+            Log.d("msgDB","Arranged subjectListForRecent = ");
+
+            subjectListForRecent.add(new Subject(sem,branch));
+            Log.d("msgDB","Added to subjectListForRecent = "+sem+branch);
+        }
+        else{
+            Log.d("msgDB","Error Can't Insert the set = "+sem+branch);
+        }
+    }
+
+    private void getSubjectFromDB(){
+
+        if(getSubject.getStatus().equals(AsyncTask.Status.FINISHED)){
+            subjectListForRecent = getSubject.getList();
+            Log.d("msgDB","Subject fetched from DB = "+subjectListForRecent.size());
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        new setSubjectFromDB(subjectListForRecent).execute();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        new setSubjectFromDB(subjectListForRecent).execute();
     }
 }

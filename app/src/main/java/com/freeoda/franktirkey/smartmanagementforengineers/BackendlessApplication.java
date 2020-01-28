@@ -10,6 +10,8 @@ import com.backendless.BackendlessUser;
 import com.backendless.persistence.DataQueryBuilder;
 import com.freeoda.franktirkey.smartmanagementforengineers.LocalDBForBKs.AppDatabase;
 import com.freeoda.franktirkey.smartmanagementforengineers.LocalDBForBKs.User;
+import com.freeoda.franktirkey.smartmanagementforengineers.Subject.subjectRoomForRecentTab.SubjectAppDatabase;
+
 import java.util.List;
 
 public class BackendlessApplication extends Application {
@@ -23,6 +25,8 @@ public class BackendlessApplication extends Application {
     public static AppDatabase db;
     static List<User> userFromDB;
 
+    public static SubjectAppDatabase subject_db;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -35,6 +39,11 @@ public class BackendlessApplication extends Application {
                 .allowMainThreadQueries() //TODO tESTING PURPOSE ONLY
                 .build();
 
+        subject_db = Room.databaseBuilder(BackendlessApplication.this,
+                SubjectAppDatabase.class,"Subject")
+                .fallbackToDestructiveMigration()
+                .allowMainThreadQueries() //TODO tESTING PURPOSE ONLY
+                .build();
     }
 
     public static User getUser() {
@@ -67,5 +76,15 @@ public class BackendlessApplication extends Application {
 
     public static void setBackendlessUser(BackendlessUser backendlessUser) {
         BackendlessApplication.backendlessUser = backendlessUser;
+    }
+
+    /*Subject DataBase Getter AND Setters*/
+
+    public static SubjectAppDatabase getSubject_db() {
+        return subject_db;
+    }
+
+    public static void setSubject_db(SubjectAppDatabase subject_db) {
+        BackendlessApplication.subject_db = subject_db;
     }
 }
