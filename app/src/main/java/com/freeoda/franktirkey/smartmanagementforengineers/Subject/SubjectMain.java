@@ -51,6 +51,9 @@ public class SubjectMain extends AppCompatActivity {
     static List<Subject> subjectListForRecent = new ArrayList<>();
     static List<Syllabus> syllabusListForRecent = new ArrayList<>();
 
+    boolean flagSubject = false;
+    boolean flagSyllabus = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,6 +86,9 @@ public class SubjectMain extends AppCompatActivity {
                 getSyllabusFromDB();
                 arrangeSyllabusList(list.get(position).subjName,clickedUrl);
 
+                new setSubjectFromDB(subjectListForRecent).execute();
+                new setSyllabusFromDB(syllabusListForRecent).execute();
+
                 startActivity(intent);
             }
         };
@@ -91,7 +97,7 @@ public class SubjectMain extends AppCompatActivity {
         adapter = new SubjectMainAdapter(list,onClickView);
         rv_subject_main.setAdapter(adapter);
 
-        List<String> list;
+        final List<String> list;
         list = Arrays.asList(getResources().getStringArray(R.array.BranchAbbr)); //Todo add Branch here
         ArrayAdapter<String> dataAdapter;
         dataAdapter = new ArrayAdapter<String>(SubjectMain.this,android.R.layout.simple_spinner_item,list);
@@ -157,6 +163,7 @@ public class SubjectMain extends AppCompatActivity {
         String query = "collageId = '"+collage+"' AND branchId = '"+branch+"' AND semester = '"+sem+"'";
 //        String query = "collageId = '"+collage+"' AND branchId = '"+branch+"' AND semester = '"+sem+"'";
 
+        list.clear();
         DataQueryBuilder dataQueryBuilder = DataQueryBuilder.create();
         dataQueryBuilder.setWhereClause(query);
         Backendless.Data.of("Semester").find(dataQueryBuilder, new AsyncCallback<List<Map>>() {
@@ -214,6 +221,8 @@ public class SubjectMain extends AppCompatActivity {
         else{
             Log.d("msgDB","Error Can't Insert the set = "+sem+branch);
         }
+
+        flagSubject = true;
     }
 
     private void arrangeSyllabusList(String name,String url){
@@ -240,6 +249,8 @@ public class SubjectMain extends AppCompatActivity {
         else{
             Log.d("msgDB","Error Can't Insert the set = "+name+url);
         }
+
+        flagSyllabus = true;
     }
 
     private void getSubjectFromDB(){
@@ -258,12 +269,4 @@ public class SubjectMain extends AppCompatActivity {
             Log.d("msgDB","Syllabus fetched from DB = "+subjectListForRecent.size());
         }
     }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        new setSubjectFromDB(subjectListForRecent).execute();
-        new setSyllabusFromDB(syllabusListForRecent).execute();
-    }
-
 }

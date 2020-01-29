@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.core.util.Pools;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Lifecycle;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -27,10 +28,12 @@ import com.freeoda.franktirkey.smartmanagementforengineers.Syllabus.SyllabusMain
 import com.freeoda.franktirkey.smartmanagementforengineers.Subject.subjectRoomForRecentTab.getSubjectFromDB;
 import com.freeoda.franktirkey.smartmanagementforengineers.Syllabus.syllabusRoomForRecentTab.Syllabus;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.SynchronousQueue;
 
 
 /**
@@ -74,7 +77,15 @@ public class Fragment_Recent extends Fragment {
         tvLastGroupChat_recent = view.findViewById(R.id.tvChatGroup_recent);
 
         /*rvSubject LIST AND ADAPTER*/
+
+        list_Subject.clear();
+        LinearLayoutManager layoutManager_Subject = new LinearLayoutManager(this.getActivity());
+        layoutManager_Subject.setOrientation(LinearLayoutManager.HORIZONTAL);
+        rvSubject.setLayoutManager(layoutManager_Subject);
         recentSubjectFetch();
+        adapter_subject = new Fragment_Recent_Subject_rvAdapter(list_Subject);
+        rvSubject.setAdapter(adapter_subject);
+
         adapter_subject.setClickListener(new Fragment_Recent_Subject_rvAdapter.ItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
@@ -88,13 +99,22 @@ public class Fragment_Recent extends Fragment {
 
         /*RVSyllabus LIST AND ADAPTER*/
 
+        list_Syllabus.clear();
+        LinearLayoutManager layoutManager_Syllabus = new LinearLayoutManager(this.getActivity());
+        layoutManager_Syllabus.setOrientation(LinearLayoutManager.HORIZONTAL);
+        rvSyllabus.setLayoutManager(layoutManager_Syllabus);
         recentSyllabusFetch();
+        adapter_syllabus = new Fragment_Recent_Syllabus_rvAdapter(list_Syllabus);
+        rvSyllabus.setAdapter(adapter_syllabus);
+
         adapter_syllabus.setClickListner(new Fragment_Recent_Syllabus_rvAdapter.ItemClickListner() {
             @Override
             public void onItemClick(View view, int position) {
-                String data = list_Syllabus.get(position).getString();
+                String url = list_Syllabus.get(position).getUrl();
+                String name = list_Syllabus.get(position).getString();
                 Intent intent = new Intent(getContext(), SyllabusMain.class);
-                intent.putExtra("data", data);
+                intent.putExtra("url", url);
+                intent.putExtra("name", name);
                 startActivity(intent);
             }
         });
@@ -133,20 +153,15 @@ public class Fragment_Recent extends Fragment {
         return view;
     }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        Log.d("msgDB","Fragment paused");  //TODO for testing phase Only
-    }
-
     private void recentSubjectFetch(){
 
-        LinearLayoutManager layoutManager_Subject = new LinearLayoutManager(this.getActivity());
-        layoutManager_Subject.setOrientation(LinearLayoutManager.HORIZONTAL);
-
-        rvSubject.setLayoutManager(layoutManager_Subject);
+//        LinearLayoutManager layoutManager_Subject = new LinearLayoutManager(this.getActivity());
+//        layoutManager_Subject.setOrientation(LinearLayoutManager.HORIZONTAL);
+//
+//        rvSubject.setLayoutManager(layoutManager_Subject);
 
         DBSubjectList = BackendlessApplication.getSubject_db().subjectDao().getAll();
+        Log.d("msg","Fetched Subject From DB");
         branch = getResources().getStringArray(R.array.Branch);
         sem = getResources().getStringArray(R.array.Sem);
         list_Subject.clear();
@@ -159,32 +174,34 @@ public class Fragment_Recent extends Fragment {
 
         }
 
-        adapter_subject = new Fragment_Recent_Subject_rvAdapter(list_Subject);
-        rvSubject.setAdapter(adapter_subject);
-        adapter_subject.notifyDataSetChanged();
+//        adapter_subject = new Fragment_Recent_Subject_rvAdapter(list_Subject);
+//        rvSubject.setAdapter(adapter_subject);
+//        adapter_subject.notifyDataSetChanged();
     }
 
     private void recentSyllabusFetch(){
 
-        LinearLayoutManager layoutManager_Syllabus = new LinearLayoutManager(this.getActivity());
-        layoutManager_Syllabus.setOrientation(LinearLayoutManager.HORIZONTAL);
+//        LinearLayoutManager layoutManager_Syllabus = new LinearLayoutManager(this.getActivity());
+//        layoutManager_Syllabus.setOrientation(LinearLayoutManager.HORIZONTAL);
+//
+//        rvSyllabus.setLayoutManager(layoutManager_Syllabus);
 
-        rvSyllabus.setLayoutManager(layoutManager_Syllabus);
         DBSyllabusList = BackendlessApplication.getSyllabus_db().syllabusDao().getAll();
+        Log.d("msg","Fetched Syllabus From DB");
 
         list_Syllabus.clear();
         for(Syllabus s:DBSyllabusList){
 
             String parsedName = s.getName();
             String parsedUrl = s.getUrl();
-            list_Syllabus.add(new Fragment_Recent_Syllabus_rvModelClass(parsedName));
+            list_Syllabus.add(new Fragment_Recent_Syllabus_rvModelClass(parsedName,parsedUrl));
             Log.d("msgDB","Inserted data on recent - Syllabus");
 
         }
 
-        adapter_syllabus = new Fragment_Recent_Syllabus_rvAdapter(list_Syllabus);
-        rvSyllabus.setAdapter(adapter_syllabus);
-        adapter_syllabus.notifyDataSetChanged();
+//        adapter_syllabus = new Fragment_Recent_Syllabus_rvAdapter(list_Syllabus);
+//        rvSyllabus.setAdapter(adapter_syllabus);
+//        adapter_syllabus.notifyDataSetChanged();
     }
 
     @Override
@@ -195,10 +212,15 @@ public class Fragment_Recent extends Fragment {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
+                list_Subject.clear();
+                list_Syllabus.clear();
+
                 recentSubjectFetch();
                 recentSyllabusFetch();
+
+                adapter_subject.notifyDataSetChanged();
+                adapter_syllabus.notifyDataSetChanged();
             }
         },5000);
     }
-
 }

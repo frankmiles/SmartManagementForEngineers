@@ -56,6 +56,9 @@ public class SyllabusMain extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_syllabus_main);
 
+        Log.d("msg","data Recived througn Intent (URL): "+getIntent().getExtras().getString("url"));
+        Log.d("msg","data Recived througn Intent (NAME): "+getIntent().getExtras().getString("name"));
+
         tv_SubjectName_SyllabusMain = findViewById(R.id.tv_SubjectName_SyllabusMain);
         syllabusMain_tv = findViewById(R.id.syllabusMain_tv);
 
@@ -106,9 +109,13 @@ public class SyllabusMain extends AppCompatActivity {
     }
 
     private void getSyllabusXML() {
+//        new XMLDownloader(SyllabusMain.this, getApplicationContext(),
+//                "https://backendlessappcontent.com/A32C8534-709A-4E2C-829B-0614A16E5DF3/" +
+//                        "D2C8202D-06C9-4427-AFF2-8D444BBA8A77/files/syllabusXML/sample.xml",
+//                getIntent().getStringExtra("name")).execute();
+
         new XMLDownloader(SyllabusMain.this, getApplicationContext(),
-                "https://backendlessappcontent.com/A32C8534-709A-4E2C-829B-0614A16E5DF3/" +
-                        "D2C8202D-06C9-4427-AFF2-8D444BBA8A77/files/syllabusXML/sample.xml",
+                getIntent().getStringExtra("url").toString(),
                 getIntent().getStringExtra("name")).execute();
 
         Log.d("msg", "XMLDownloader Started");
