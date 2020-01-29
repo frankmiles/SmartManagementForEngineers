@@ -25,6 +25,7 @@ import com.freeoda.franktirkey.smartmanagementforengineers.Subject.SubjectMain;
 import com.freeoda.franktirkey.smartmanagementforengineers.Subject.subjectRoomForRecentTab.Subject;
 import com.freeoda.franktirkey.smartmanagementforengineers.Syllabus.SyllabusMain;
 import com.freeoda.franktirkey.smartmanagementforengineers.Subject.subjectRoomForRecentTab.getSubjectFromDB;
+import com.freeoda.franktirkey.smartmanagementforengineers.Syllabus.syllabusRoomForRecentTab.Syllabus;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -41,13 +42,16 @@ public class Fragment_Recent extends Fragment {
     private TextView tvSubject_recent, tvSyllabus_recent, tvLastGroupChat_recent;
 
     public static List<Subject> DBSubjectList = new ArrayList<>();
+    public static List<Syllabus> DBSyllabusList = new ArrayList<>();
     //getSubjectFromDB DBSubject = new getSubjectFromDB();
 
     String[] branch, sem;
 
     Fragment_Recent_Subject_rvAdapter adapter_subject;
+    Fragment_Recent_Syllabus_rvAdapter adapter_syllabus;
 
     final List<Fragment_Recent_Subject_rvModelClass> list_Subject = new ArrayList<>();
+    final List<Fragment_Recent_Syllabus_rvModelClass> list_Syllabus = new ArrayList<>();
 
     public Fragment_Recent() {
         // Required empty public constructor
@@ -84,22 +88,7 @@ public class Fragment_Recent extends Fragment {
 
         /*RVSyllabus LIST AND ADAPTER*/
 
-        LinearLayoutManager layoutManager_Syllabus = new LinearLayoutManager(this.getActivity());
-        layoutManager_Syllabus.setOrientation(LinearLayoutManager.HORIZONTAL);
-
-        rvSyllabus.setLayoutManager(layoutManager_Syllabus);
-
-        final List<Fragment_Recent_Syllabus_rvModelClass> list_Syllabus = new ArrayList<>();
-        list_Syllabus.add(new Fragment_Recent_Syllabus_rvModelClass("cat"));
-        list_Syllabus.add(new Fragment_Recent_Syllabus_rvModelClass("dog"));
-        list_Syllabus.add(new Fragment_Recent_Syllabus_rvModelClass("milk"));
-        list_Syllabus.add(new Fragment_Recent_Syllabus_rvModelClass("mouse"));
-        list_Syllabus.add(new Fragment_Recent_Syllabus_rvModelClass("duck"));
-        list_Syllabus.add(new Fragment_Recent_Syllabus_rvModelClass("sparrow"));
-
-        Fragment_Recent_Syllabus_rvAdapter adapter_syllabus = new Fragment_Recent_Syllabus_rvAdapter(list_Syllabus);
-        rvSyllabus.setAdapter(adapter_syllabus);
-        adapter_syllabus.notifyDataSetChanged();
+        recentSyllabusFetch();
         adapter_syllabus.setClickListner(new Fragment_Recent_Syllabus_rvAdapter.ItemClickListner() {
             @Override
             public void onItemClick(View view, int position) {
@@ -132,7 +121,7 @@ public class Fragment_Recent extends Fragment {
         adapter_LastChatGroup.setClickListener(new Fragment_Recent_LastChatGroup_rvAdapter.ItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                String data = list_LastChatGroup.get(position).getString();
+                String data = DBSyllabusList.get(position).getUrl();
                 Intent intent = new Intent(getContext(), ChatMain.class);
                 intent.putExtra("data", data);
                 startActivity(intent);
@@ -175,6 +164,29 @@ public class Fragment_Recent extends Fragment {
         adapter_subject.notifyDataSetChanged();
     }
 
+    private void recentSyllabusFetch(){
+
+        LinearLayoutManager layoutManager_Syllabus = new LinearLayoutManager(this.getActivity());
+        layoutManager_Syllabus.setOrientation(LinearLayoutManager.HORIZONTAL);
+
+        rvSyllabus.setLayoutManager(layoutManager_Syllabus);
+        DBSyllabusList = BackendlessApplication.getSyllabus_db().syllabusDao().getAll();
+
+        list_Syllabus.clear();
+        for(Syllabus s:DBSyllabusList){
+
+            String parsedName = s.getName();
+            String parsedUrl = s.getUrl();
+            list_Syllabus.add(new Fragment_Recent_Syllabus_rvModelClass(parsedName));
+            Log.d("msgDB","Inserted data on recent - Syllabus");
+
+        }
+
+        adapter_syllabus = new Fragment_Recent_Syllabus_rvAdapter(list_Syllabus);
+        rvSyllabus.setAdapter(adapter_syllabus);
+        adapter_syllabus.notifyDataSetChanged();
+    }
+
     @Override
     public void onResume() {
         super.onResume();
@@ -184,6 +196,7 @@ public class Fragment_Recent extends Fragment {
             @Override
             public void run() {
                 recentSubjectFetch();
+                recentSyllabusFetch();
             }
         },5000);
     }

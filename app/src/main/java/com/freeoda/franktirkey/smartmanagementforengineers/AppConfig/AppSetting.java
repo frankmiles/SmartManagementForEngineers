@@ -43,8 +43,11 @@ public class AppSetting extends AppCompatActivity {
 //                        BackendlessApplication.setUser(null);
 //                        BackendlessApplication.setDb(null);
 
+                        Log.d("msgDB","Deleting DB...");
                         BackendlessApplication.getDb().userDao().deleteAll();
                         BackendlessApplication.getSubject_db().subjectDao().deleteAll();
+                        BackendlessApplication.getSyllabus_db().syllabusDao().deleteAll();
+                        Log.d("msgDB","Deleted DB!");
 
                         finish();
                     }

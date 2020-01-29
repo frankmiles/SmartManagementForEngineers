@@ -19,15 +19,15 @@ import com.backendless.async.callback.AsyncCallback;
 import com.backendless.exceptions.BackendlessFault;
 import com.backendless.persistence.DataQueryBuilder;
 import com.freeoda.franktirkey.smartmanagementforengineers.BackendlessApplication;
-import com.freeoda.franktirkey.smartmanagementforengineers.MainActivity;
 import com.freeoda.franktirkey.smartmanagementforengineers.R;
 import com.freeoda.franktirkey.smartmanagementforengineers.Subject.subjectRoomForRecentTab.Subject;
 import com.freeoda.franktirkey.smartmanagementforengineers.Subject.subjectRoomForRecentTab.getSubjectFromDB;
 import com.freeoda.franktirkey.smartmanagementforengineers.Subject.subjectRoomForRecentTab.setSubjectFromDB;
 import com.freeoda.franktirkey.smartmanagementforengineers.Syllabus.SyllabusMain;
-import com.freeoda.franktirkey.smartmanagementforengineers.TabFragments.Fragment_Recent;
+import com.freeoda.franktirkey.smartmanagementforengineers.Syllabus.syllabusRoomForRecentTab.Syllabus;
+import com.freeoda.franktirkey.smartmanagementforengineers.Syllabus.syllabusRoomForRecentTab.getSyllabusFromDB;
+import com.freeoda.franktirkey.smartmanagementforengineers.Syllabus.syllabusRoomForRecentTab.setSyllabusFromDB;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -45,16 +45,18 @@ public class SubjectMain extends AppCompatActivity {
     List<String> urlList = new ArrayList<>();
     String clickedUrl;
 
-    getSubjectFromDB getSubject =new getSubjectFromDB();
+    getSubjectFromDB getSubjectDB =new getSubjectFromDB();
+    getSyllabusFromDB getSyllabusDB =new getSyllabusFromDB();
+
     static List<Subject> subjectListForRecent = new ArrayList<>();
+    static List<Syllabus> syllabusListForRecent = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_subject_main);
 
-        getSubject.execute();//TODO PUT Loading till it featched the result;
-
+        getSubjectDB.execute();//TODO PUT Loading till it featched the result;
         getSubjectFromDB(); //TODO fetiching the database before-hand
 
         syllabusMain_tv = findViewById(R.id.SubjectMain_tv);
@@ -62,6 +64,9 @@ public class SubjectMain extends AppCompatActivity {
 
         spinner_subject_main_sem = findViewById(R.id.spinner_subject_main_sem);
         spinner_subject_main_branch = findViewById(R.id.spinner_subject_main_branch);
+
+        getSyllabusDB.execute();//TODO PUT Loading till it featched the result;
+        getSyllabusFromDB(); //TODO fetiching the database before-hand
 
         interface_RvClickListner_Subject_Main onClickView = new interface_RvClickListner_Subject_Main() {
             @Override
@@ -72,8 +77,11 @@ public class SubjectMain extends AppCompatActivity {
                 intent.putExtra("name",list.get(position).subjName);
 
                 getSubjectFromDB();//For Fetching the Room Subject to update
-                arrangeList(spinner_subject_main_sem.getSelectedItemPosition(),
+                arrangeSubjectList(spinner_subject_main_sem.getSelectedItemPosition(),
                         spinner_subject_main_branch.getSelectedItemPosition());
+
+                getSyllabusFromDB();
+                arrangeSyllabusList(list.get(position).subjName,clickedUrl);
 
                 startActivity(intent);
             }
@@ -117,7 +125,6 @@ public class SubjectMain extends AppCompatActivity {
 
             }
         });
-
     }
 
     public void getUserData(){
@@ -182,7 +189,7 @@ public class SubjectMain extends AppCompatActivity {
 
     }
 
-    private void arrangeList(int sem,int branch) {
+    private void arrangeSubjectList(int sem, int branch) {
 
         if(subjectListForRecent == null){
             Log.d("msgDB","subjectListForRecent = null || 0");
@@ -209,11 +216,46 @@ public class SubjectMain extends AppCompatActivity {
         }
     }
 
+    private void arrangeSyllabusList(String name,String url){
+        if(syllabusListForRecent == null){
+            Log.d("msgDB","syllabusListForRecent = null || 0");
+
+            syllabusListForRecent = new ArrayList<>();
+
+            Log.d("msgDB","syllabusListForRecent = created & added");
+        }
+        else if(syllabusListForRecent.size() >= 0 && syllabusListForRecent.size() < 5){
+            syllabusListForRecent.add(new Syllabus(name,url));
+
+            Log.d("msgDB","Added to syllabusListForRecent = "+name+url);
+        }
+        else if(syllabusListForRecent.size()>=5){
+
+            syllabusListForRecent.remove(0);
+            Log.d("msgDB","Arranged syllabusListForRecent = "+syllabusListForRecent);
+
+            syllabusListForRecent.add(new Syllabus(name,url));
+            Log.d("msgDB","Added to syllabusListForRecent = "+name+url);
+        }
+        else{
+            Log.d("msgDB","Error Can't Insert the set = "+name+url);
+        }
+    }
+
     private void getSubjectFromDB(){
 
-        if(getSubject.getStatus().equals(AsyncTask.Status.FINISHED)){
-            subjectListForRecent = getSubject.getList();
+        if(getSubjectDB.getStatus().equals(AsyncTask.Status.FINISHED)){
+            subjectListForRecent = getSubjectDB.getList();
             Log.d("msgDB","Subject fetched from DB = "+subjectListForRecent.size());
+
+        }
+    }
+
+    private void getSyllabusFromDB(){
+
+        if(getSyllabusDB.getStatus().equals(AsyncTask.Status.FINISHED)){
+            syllabusListForRecent  = getSyllabusDB.getList();
+            Log.d("msgDB","Syllabus fetched from DB = "+subjectListForRecent.size());
         }
     }
 
@@ -221,6 +263,7 @@ public class SubjectMain extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         new setSubjectFromDB(subjectListForRecent).execute();
+        new setSyllabusFromDB(syllabusListForRecent).execute();
     }
 
 }

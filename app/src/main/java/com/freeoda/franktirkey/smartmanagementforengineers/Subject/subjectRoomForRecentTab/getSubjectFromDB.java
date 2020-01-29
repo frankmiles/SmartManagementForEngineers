@@ -27,7 +27,7 @@ public class getSubjectFromDB extends AsyncTask<Void,Void,Void> {
 
         list = BackendlessApplication.getSubject_db().subjectDao().getAll();
 
-        Log.d("msgDB","Fetched Subject From DB = " + list.toString());
+        Log.d("msgDB","Fetched Subject From DB = " + list.size());
 
         return null;
     }

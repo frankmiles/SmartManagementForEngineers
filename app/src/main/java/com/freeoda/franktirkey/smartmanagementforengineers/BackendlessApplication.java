@@ -11,13 +11,14 @@ import com.backendless.persistence.DataQueryBuilder;
 import com.freeoda.franktirkey.smartmanagementforengineers.LocalDBForBKs.AppDatabase;
 import com.freeoda.franktirkey.smartmanagementforengineers.LocalDBForBKs.User;
 import com.freeoda.franktirkey.smartmanagementforengineers.Subject.subjectRoomForRecentTab.SubjectAppDatabase;
+import com.freeoda.franktirkey.smartmanagementforengineers.Syllabus.syllabusRoomForRecentTab.SyllabusAppDatabase;
 
 import java.util.List;
 
 public class BackendlessApplication extends Application {
 
-    public static String APPLICATION_ID = "A32C8534-709A-4E2C-829B-0614A16E5DF3";
-    public static String API_KEY = "D5A68302-4647-45AC-82F2-33906138BFB0";
+    public static final String APPLICATION_ID = "A32C8534-709A-4E2C-829B-0614A16E5DF3";
+    public static final String API_KEY = "D5A68302-4647-45AC-82F2-33906138BFB0";
     public static final String SERVER_URL = "https://api.backendless.com";
 
     static BackendlessUser backendlessUser;
@@ -26,6 +27,7 @@ public class BackendlessApplication extends Application {
     static List<User> userFromDB;
 
     public static SubjectAppDatabase subject_db;
+    public static SyllabusAppDatabase syllabus_db;
 
     @Override
     public void onCreate() {
@@ -44,6 +46,13 @@ public class BackendlessApplication extends Application {
                 .fallbackToDestructiveMigration()
                 .allowMainThreadQueries() //TODO tESTING PURPOSE ONLY
                 .build();
+
+        syllabus_db = Room.databaseBuilder(BackendlessApplication.this,
+                SyllabusAppDatabase.class,"Syllabus")
+                .fallbackToDestructiveMigration()
+                .allowMainThreadQueries() //TODO tESTING PURPOSE ONLY
+                .build();
+
     }
 
     public static User getUser() {
@@ -86,5 +95,13 @@ public class BackendlessApplication extends Application {
 
     public static void setSubject_db(SubjectAppDatabase subject_db) {
         BackendlessApplication.subject_db = subject_db;
+    }
+
+    public static SyllabusAppDatabase getSyllabus_db() {
+        return syllabus_db;
+    }
+
+    public static void setSyllabus_db(SyllabusAppDatabase syllabus_db) {
+        BackendlessApplication.syllabus_db = syllabus_db;
     }
 }
