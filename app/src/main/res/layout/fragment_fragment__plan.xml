@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".TabFragments.Fragment_Plan"
+    tools:context=".TabFragments.Plan.Fragment_Plan"
     android:padding="15dp">
 
 
@@ -27,7 +27,7 @@
 
         <fragment
             android:id="@+id/fragment_addMeu"
-            android:name="com.freeoda.franktirkey.smartmanagementforengineers.TabFragments.FragmentPlanAddMenu"
+            android:name="com.freeoda.franktirkey.smartmanagementforengineers.TabFragments.Plan.FragmentPlanAddMenu"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 

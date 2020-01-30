@@ -1,14 +1,10 @@
-package com.freeoda.franktirkey.smartmanagementforengineers.TabFragments;
+package com.freeoda.franktirkey.smartmanagementforengineers.TabFragments.Recent;
 
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.core.util.Pools;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Lifecycle;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,20 +16,15 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.freeoda.franktirkey.smartmanagementforengineers.BackendlessApplication;
-import com.freeoda.franktirkey.smartmanagementforengineers.Chat.ChatMain;
+import com.freeoda.franktirkey.smartmanagementforengineers.Chat.chatWorkers.ChatMainWorker;
 import com.freeoda.franktirkey.smartmanagementforengineers.R;
 import com.freeoda.franktirkey.smartmanagementforengineers.Subject.SubjectMain;
 import com.freeoda.franktirkey.smartmanagementforengineers.Subject.subjectRoomForRecentTab.Subject;
 import com.freeoda.franktirkey.smartmanagementforengineers.Syllabus.SyllabusMain;
-import com.freeoda.franktirkey.smartmanagementforengineers.Subject.subjectRoomForRecentTab.getSubjectFromDB;
 import com.freeoda.franktirkey.smartmanagementforengineers.Syllabus.syllabusRoomForRecentTab.Syllabus;
 
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.SynchronousQueue;
 
 
 /**
@@ -142,7 +133,7 @@ public class Fragment_Recent extends Fragment {
             @Override
             public void onItemClick(View view, int position) {
                 String data = DBSyllabusList.get(position).getUrl();
-                Intent intent = new Intent(getContext(), ChatMain.class);
+                Intent intent = new Intent(getContext(), ChatMainWorker.class);
                 intent.putExtra("data", data);
                 startActivity(intent);
             }

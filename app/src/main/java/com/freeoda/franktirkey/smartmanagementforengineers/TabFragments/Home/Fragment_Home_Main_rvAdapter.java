@@ -1,4 +1,4 @@
-package com.freeoda.franktirkey.smartmanagementforengineers.TabFragments;
+package com.freeoda.franktirkey.smartmanagementforengineers.TabFragments.Home;
 
 import android.content.Context;
 import android.view.LayoutInflater;

@@ -1,4 +1,4 @@
-package com.freeoda.franktirkey.smartmanagementforengineers.TabFragments;
+package com.freeoda.franktirkey.smartmanagementforengineers.TabFragments.Home;
 
 
 import android.content.Context;
@@ -22,11 +22,10 @@ import com.freeoda.franktirkey.smartmanagementforengineers.AppConfig.AppAbout;
 import com.freeoda.franktirkey.smartmanagementforengineers.AppConfig.AppSetting;
 import com.freeoda.franktirkey.smartmanagementforengineers.AppConfig.HelpAndReport;
 import com.freeoda.franktirkey.smartmanagementforengineers.Attendance.AttendanceMain;
-import com.freeoda.franktirkey.smartmanagementforengineers.Chat.ChatMain;
+import com.freeoda.franktirkey.smartmanagementforengineers.Chat.chatWorkers.ChatMainWorker;
 import com.freeoda.franktirkey.smartmanagementforengineers.Collage.CollageFaculty;
 import com.freeoda.franktirkey.smartmanagementforengineers.R;
 import com.freeoda.franktirkey.smartmanagementforengineers.Subject.SubjectMain;
-import com.freeoda.franktirkey.smartmanagementforengineers.Syllabus.SyllabusMain;
 import com.freeoda.franktirkey.smartmanagementforengineers.ToDos.ToDoMain;
 
 
@@ -81,7 +80,7 @@ public class Fragment_Home extends Fragment {
                 switch (position){
                     case 0: startActivity(new Intent(context, SubjectMain.class));
                         break;
-                    case 1: startActivity(new Intent(context, ChatMain.class));
+                    case 1: startActivity(new Intent(context, ChatMainWorker.class));
                         break;
                     case 2: startActivity(new Intent(context, AttendanceMain.class));
                         break;

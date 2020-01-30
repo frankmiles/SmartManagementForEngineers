@@ -1,4 +1,4 @@
-package com.freeoda.franktirkey.smartmanagementforengineers.TabFragments;
+package com.freeoda.franktirkey.smartmanagementforengineers.TabFragments.Recent;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,20 +12,19 @@ import com.freeoda.franktirkey.smartmanagementforengineers.R;
 
 import java.util.List;
 
-public class Fragment_Recent_Syllabus_rvAdapter extends RecyclerView.Adapter<Fragment_Recent_Syllabus_rvAdapter.cViewHolder>{
+public class Fragment_Recent_LastChatGroup_rvAdapter extends RecyclerView.Adapter<Fragment_Recent_LastChatGroup_rvAdapter.cViewHolder> {
 
-    List<Fragment_Recent_Syllabus_rvModelClass> list;
-    private ItemClickListner mClickListener;
+    private List<Fragment_Recent_LastChatGroup_rvModelClass> list;
+    private ItemClickListener mClickListener;
 
-    public Fragment_Recent_Syllabus_rvAdapter(List<Fragment_Recent_Syllabus_rvModelClass> list) {
+    public Fragment_Recent_LastChatGroup_rvAdapter(List<Fragment_Recent_LastChatGroup_rvModelClass> list) {
         this.list = list;
     }
 
     @NonNull
     @Override
     public cViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_recent_syllabus_rv_layout,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_recent_lastchatgroup_rv_layout,parent,false);
 
         return new cViewHolder(view);
     }
@@ -33,9 +32,9 @@ public class Fragment_Recent_Syllabus_rvAdapter extends RecyclerView.Adapter<Fra
     @Override
     public void onBindViewHolder(@NonNull cViewHolder holder, int position) {
 
-        String string = list.get(position).getString();
+        String string_LastChatGroup = list.get(position).getString();
 
-        holder.setData(string);
+        holder.setData(string_LastChatGroup);
     }
 
     @Override
@@ -43,27 +42,26 @@ public class Fragment_Recent_Syllabus_rvAdapter extends RecyclerView.Adapter<Fra
         return list.size();
     }
 
-    void setClickListner(ItemClickListner itemClickListener){
+    void setClickListener(ItemClickListener itemClickListener) {
         this.mClickListener = itemClickListener;
     }
 
-    public interface ItemClickListner{
-        void onItemClick(View view,int position);
+    public interface ItemClickListener {
+        void onItemClick(View view, int position);
     }
 
     class cViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        TextView textView;
-
-        public cViewHolder(@NonNull View itemView) {
+        private TextView tvLastChatGroup;
+        private cViewHolder(@NonNull View itemView) {
             super(itemView);
-            textView = itemView.findViewById(R.id.tvSyllabus);
+            tvLastChatGroup = itemView.findViewById(R.id.tvLastgroupchat);
 
             itemView.setOnClickListener(this);
         }
 
         private void setData(String string){
-            textView.setText(string);
+            tvLastChatGroup.setText(string);
         }
 
         @Override

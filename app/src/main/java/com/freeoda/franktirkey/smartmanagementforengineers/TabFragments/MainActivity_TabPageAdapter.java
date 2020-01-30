@@ -5,6 +5,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
+import com.freeoda.franktirkey.smartmanagementforengineers.TabFragments.Home.Fragment_Home;
+import com.freeoda.franktirkey.smartmanagementforengineers.TabFragments.Plan.Fragment_Plan;
+import com.freeoda.franktirkey.smartmanagementforengineers.TabFragments.Recent.Fragment_Recent;
+
 public class MainActivity_TabPageAdapter extends FragmentPagerAdapter {
 
     private int numOfTabs;

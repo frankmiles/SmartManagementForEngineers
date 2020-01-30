@@ -27,8 +27,8 @@
         <activity android:name=".AppConfig.HelpAndReport" />
         <activity android:name=".AppConfig.AppSetting" />
         <activity android:name=".ToDos.ToDoMain" />
-        <activity android:name=".Chat.ChatMain" />
-        <activity android:name=".TabFragments.Chat" />
+        <activity android:name=".Chat.chatWorkers.ChatMainWorker" />
+        <activity android:name=".Chat.Chat" />
         <activity android:name=".Register" />
         <activity android:name=".MainActivity" />
         <activity android:name=".Login">

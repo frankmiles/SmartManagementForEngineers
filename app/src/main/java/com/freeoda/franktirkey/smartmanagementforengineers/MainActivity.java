@@ -9,10 +9,8 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.view.WindowManager;
 import android.widget.Toast;
 
-import com.freeoda.franktirkey.smartmanagementforengineers.TabFragments.Fragment_Recent;
 import com.freeoda.franktirkey.smartmanagementforengineers.TabFragments.MainActivity_TabPageAdapter;
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;

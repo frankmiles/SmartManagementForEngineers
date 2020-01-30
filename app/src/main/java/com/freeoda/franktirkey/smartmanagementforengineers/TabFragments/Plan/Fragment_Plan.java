@@ -1,4 +1,4 @@
-package com.freeoda.franktirkey.smartmanagementforengineers.TabFragments;
+package com.freeoda.franktirkey.smartmanagementforengineers.TabFragments.Plan;
 
 
 import android.content.Context;
@@ -27,7 +27,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.LinearLayout;
 
 
-import com.freeoda.franktirkey.smartmanagementforengineers.BackendlessApplication;
 import com.freeoda.franktirkey.smartmanagementforengineers.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;

@@ -8,7 +8,7 @@
     android:paddingLeft="5dp"
     android:paddingRight="5dp"
     android:paddingTop="5dp"
-    tools:context=".TabFragments.Chat">
+    tools:context=".Chat.Chat">
 
     <TextView
         android:id="@+id/textView"

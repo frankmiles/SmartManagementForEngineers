@@ -1,4 +1,4 @@
-package com.freeoda.franktirkey.smartmanagementforengineers.TabFragments;
+package com.freeoda.franktirkey.smartmanagementforengineers.TabFragments.Plan;
 
 
 import android.content.Context;
@@ -14,8 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.freeoda.franktirkey.smartmanagementforengineers.R;
-
-import java.util.ArrayList;
+import com.freeoda.franktirkey.smartmanagementforengineers.TabFragments.Plan.Fragment_Plan;
 
 /**
  * A simple {@link Fragment} subclass.

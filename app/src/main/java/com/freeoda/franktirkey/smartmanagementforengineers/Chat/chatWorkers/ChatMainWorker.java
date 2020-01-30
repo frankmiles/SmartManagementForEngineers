@@ -1,4 +1,4 @@
-package com.freeoda.franktirkey.smartmanagementforengineers.Chat;
+package com.freeoda.franktirkey.smartmanagementforengineers.Chat.chatWorkers;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,7 +17,7 @@ import com.backendless.messaging.MessageStatus;
 import com.backendless.rt.messaging.Channel;
 import com.freeoda.franktirkey.smartmanagementforengineers.R;
 
-public class ChatMain extends AppCompatActivity {
+public class ChatMainWorker extends AppCompatActivity {
 
     public static final String TAG = "RTChat";
     private EditText et_message;

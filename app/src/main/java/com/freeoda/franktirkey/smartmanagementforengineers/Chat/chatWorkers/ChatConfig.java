@@ -1,4 +1,4 @@
-package com.freeoda.franktirkey.smartmanagementforengineers.Chat;
+package com.freeoda.franktirkey.smartmanagementforengineers.Chat.chatWorkers;
 
 import com.backendless.Backendless;
 import com.freeoda.franktirkey.smartmanagementforengineers.BackendlessApplication;
