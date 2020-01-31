@@ -74,7 +74,7 @@ public class Fragment_Recent extends Fragment {
         layoutManager_Subject.setOrientation(LinearLayoutManager.HORIZONTAL);
         rvSubject.setLayoutManager(layoutManager_Subject);
         recentSubjectFetch();
-        adapter_subject = new Fragment_Recent_Subject_rvAdapter(list_Subject);
+        adapter_subject = new Fragment_Recent_Subject_rvAdapter(getContext(),list_Subject);
         rvSubject.setAdapter(adapter_subject);
 
         adapter_subject.setClickListener(new Fragment_Recent_Subject_rvAdapter.ItemClickListener() {
@@ -95,7 +95,7 @@ public class Fragment_Recent extends Fragment {
         layoutManager_Syllabus.setOrientation(LinearLayoutManager.HORIZONTAL);
         rvSyllabus.setLayoutManager(layoutManager_Syllabus);
         recentSyllabusFetch();
-        adapter_syllabus = new Fragment_Recent_Syllabus_rvAdapter(list_Syllabus);
+        adapter_syllabus = new Fragment_Recent_Syllabus_rvAdapter(getContext(),list_Syllabus);
         rvSyllabus.setAdapter(adapter_syllabus);
 
         adapter_syllabus.setClickListner(new Fragment_Recent_Syllabus_rvAdapter.ItemClickListner() {
@@ -126,7 +126,8 @@ public class Fragment_Recent extends Fragment {
         list_LastChatGroup.add(new Fragment_Recent_LastChatGroup_rvModelClass("suraj"));
         list_LastChatGroup.add(new Fragment_Recent_LastChatGroup_rvModelClass("pandit"));
 
-        Fragment_Recent_LastChatGroup_rvAdapter adapter_LastChatGroup = new Fragment_Recent_LastChatGroup_rvAdapter(list_LastChatGroup);
+        Fragment_Recent_LastChatGroup_rvAdapter adapter_LastChatGroup =
+                new Fragment_Recent_LastChatGroup_rvAdapter(getContext(),list_LastChatGroup);
         rvLastGroupChat.setAdapter(adapter_LastChatGroup);
         adapter_LastChatGroup.notifyDataSetChanged();
         adapter_LastChatGroup.setClickListener(new Fragment_Recent_LastChatGroup_rvAdapter.ItemClickListener() {

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,6 +15,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
+import android.view.animation.GridLayoutAnimationController;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,6 +30,8 @@ import com.freeoda.franktirkey.smartmanagementforengineers.Collage.CollageFacult
 import com.freeoda.franktirkey.smartmanagementforengineers.R;
 import com.freeoda.franktirkey.smartmanagementforengineers.Subject.SubjectMain;
 import com.freeoda.franktirkey.smartmanagementforengineers.ToDos.ToDoMain;
+
+import java.util.Objects;
 
 
 /**
@@ -70,6 +75,7 @@ public class Fragment_Home extends Fragment {
         tv_rvHome = viewRv.findViewById(R.id.tv_rvHome);
 
         int numberOfColumns = 1;
+
         rvHome.setLayoutManager(new GridLayoutManager(context,numberOfColumns));
         home_main_adapter = new Fragment_Home_Main_rvAdapter(context,data);
         home_main_adapter.setClickListener(new Fragment_Home_Main_rvAdapter.ItemClickListener() {
@@ -106,19 +112,19 @@ public class Fragment_Home extends Fragment {
 
         rvHome.setAdapter(home_main_adapter);
 
-        rvHome.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-                Log.println(Log.VERBOSE,"rvHome","working New State = "+newState); //TODO Testing Phase
-            }
-
-            @Override
-            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                Log.println(Log.VERBOSE,"rvHome","working dx = "+dx+" dy = "+dy); //TODO Testing Phase
-            }
-        });
+//        rvHome.addOnScrollListener(new RecyclerView.OnScrollListener() {
+////            @Override
+////            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+////                super.onScrollStateChanged(recyclerView, newState);
+////                Log.println(Log.VERBOSE,"rvHome","working New State = "+newState); //TODO Testing Phase
+////            }
+////
+////            @Override
+////            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+////                super.onScrolled(recyclerView, dx, dy);
+////                Log.println(Log.VERBOSE,"rvHome","working dx = "+dx+" dy = "+dy); //TODO Testing Phase
+////            }
+////        });
 
         // Inflate the layout for this fragment
         return view;

@@ -11,8 +11,7 @@
         android:id="@+id/tablayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/black"
-        app:tabSelectedTextColor="@android:color/holo_red_light"
+        android:background="@color/colorPrimary"
         app:tabTextColor="@android:color/white">
 
         <com.google.android.material.tabs.TabItem
@@ -20,7 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAlignment="center"
-            android:text="Resent" />
+            android:text="Recent" />
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tabHome"

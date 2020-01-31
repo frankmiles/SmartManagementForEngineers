@@ -44,12 +44,12 @@ public class MainActivity extends AppCompatActivity {
 
         viewPager.setCurrentItem(1);
 
+        tabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.colorAccent));
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tabLayout.getSelectedTabPosition());
-
             }
 
             @Override
@@ -61,7 +61,6 @@ public class MainActivity extends AppCompatActivity {
             public void onTabReselected(TabLayout.Tab tab) {
                 switch (tab.getPosition()){
                     case 0:
-
                         break;
                     case 1:
                         break;
@@ -71,7 +70,6 @@ public class MainActivity extends AppCompatActivity {
                             finish();
                             break;
                 }
-
             }
         });
 

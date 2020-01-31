@@ -28,8 +28,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="195dp"
                 android:layout_marginTop="5dp"
-                android:elevation="20dp"
-                android:outlineAmbientShadowColor="@android:color/black"/>
+                android:elevation="20dp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="2dp"
+                android:layout_marginEnd="2dp"
+                android:background="@color/colorDivider"
+                />
 
             <TextView
                 android:id="@+id/tvSyllabus_recent"
@@ -44,10 +52,19 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvSyllabus"
                 android:layout_width="match_parent"
-                android:layout_height="195dp"
+                android:layout_height="110dp"
                 android:layout_marginTop="5dp"
                 android:elevation="20dp"
                 android:outlineAmbientShadowColor="@android:color/black"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="2dp"
+                android:layout_marginEnd="2dp"
+                android:background="@color/colorDivider"
+                />
 
             <TextView
                 android:id="@+id/tvChatGroup_recent"
@@ -62,11 +79,27 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvchatGroup"
                 android:layout_width="match_parent"
-                android:layout_height="195dp"
+                android:layout_height="100dp"
                 android:layout_marginTop="5dp"
-                android:elevation="20dp"
-                android:outlineAmbientShadowColor="@android:color/black"/>
+                android:elevation="20dp" />
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="2dp"
+                android:layout_marginEnd="2dp"
+                android:background="@color/colorDivider"
+                />
+
+            <Button
+                android:id="@+id/btnDeleteRecent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@android:color/holo_red_light"
+                android:textColor="@color/colorPrimaryTextLight"
+                android:text="Delete History?"/>
         </LinearLayout>
     </ScrollView>
 

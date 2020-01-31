@@ -1,8 +1,11 @@
 package com.freeoda.franktirkey.smartmanagementforengineers.TabFragments.Recent;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,10 +17,14 @@ import java.util.List;
 
 public class Fragment_Recent_Subject_rvAdapter extends RecyclerView.Adapter<Fragment_Recent_Subject_rvAdapter.cViewHolder> {
 
+    private Context context;
     private List<Fragment_Recent_Subject_rvModelClass> list;
     private ItemClickListener mClickListener;
 
-    public Fragment_Recent_Subject_rvAdapter(List<Fragment_Recent_Subject_rvModelClass> list) {
+    int lastPosition = -1;
+
+    public Fragment_Recent_Subject_rvAdapter(Context context, List<Fragment_Recent_Subject_rvModelClass> list) {
+        this.context = context;
         this.list = list;
     }
 
@@ -36,7 +43,18 @@ public class Fragment_Recent_Subject_rvAdapter extends RecyclerView.Adapter<Frag
         String string = list.get(position).getText();
 
         holder.setData(string);
+        setAnimation(holder.vhTextView,position);
 
+    }
+
+    private void setAnimation(View viewToAnimate, int position) {  //Added for animation
+        // If the bound view wasn't previously displayed on screen, it's animated
+        if (position > lastPosition) {
+            Animation animation = AnimationUtils.loadAnimation(context, R.anim.silde_from_left); // for image
+            animation.setDuration(800);
+            viewToAnimate.startAnimation(animation);
+            lastPosition = position;
+        }
     }
 
     @Override

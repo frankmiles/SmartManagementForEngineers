@@ -2,10 +2,19 @@ package com.freeoda.franktirkey.smartmanagementforengineers;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.animation.Animator;
+import android.animation.ArgbEvaluator;
+import android.animation.ValueAnimator;
 import android.content.Intent;
+import android.graphics.drawable.TransitionDrawable;
 import android.os.Bundle;
+import android.text.Layout;
 import android.util.Log;
+import android.view.SurfaceControl;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.Interpolator;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -27,7 +36,7 @@ public class Login extends AppCompatActivity {
 
     TextView tvUsername,tvPass,getTvUsername_feedback,tvPass_feedback;
     EditText etUsername,etPass;
-    Button btnRegister,btnSignin;
+    static Button btnRegister,btnSignin;
 
     final String userObjectId = UserIdStorageFactory.instance().getStorage().get();
 
@@ -51,6 +60,8 @@ public class Login extends AppCompatActivity {
         btnRegister = findViewById(R.id.btnRegister);
         btnSignin = findViewById(R.id.btnSignin);
 
+        ValidLoginCheck();
+
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -63,6 +74,13 @@ public class Login extends AppCompatActivity {
         btnSignin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                btnRegister.setClickable(false);
+                btnSignin.setClickable(false);
+                btnSignin.setText("Loading...");
+                btnRegister.setBackgroundColor(getResources().getColor(R.color.colorLightPrimary));
+                btnSignin.setBackgroundColor(getResources().getColor(R.color.colorLightPrimary));
+
 
                 String user = etUsername.getText().toString()+"";
                 String pass = etPass.getText().toString()+"";
@@ -87,6 +105,100 @@ public class Login extends AppCompatActivity {
             }
         });
 
+
+        /*Valid Login*/
+
+        /*End of Valid Login*/
+    }
+
+    private void getSubject(){
+        final String whereClause = "email = '"+BackendlessApplication.backendlessUser.getEmail()+"'";
+
+        final DataQueryBuilder dqb = DataQueryBuilder.create();
+        dqb.setWhereClause(whereClause);
+
+        Backendless.Data.of("User").find(dqb, new AsyncCallback<List<Map>>() {
+            @Override
+            public void handleResponse(List<Map> response) {
+                if (response != null){
+
+                    btnSignin.setText(" ");
+                    Log.d("msg",response.toString()); //tODO FOR TESTING PURPOSE
+
+                    User signedInUser = new User();
+                    signedInUser.setUid(Integer.parseInt(response.get(0).get("uid").toString()));
+                    signedInUser.setOwnerId(response.get(0).get("ownerId").toString());
+                    signedInUser.setName(response.get(0).get("name").toString());
+                    signedInUser.setEmail(response.get(0).get("email").toString());
+                    signedInUser.setSemester(response.get(0).get("semester").toString());
+                    signedInUser.setCollageId(response.get(0).get("collageId").toString());
+                    signedInUser.setBranch(response.get(0).get("branch").toString());
+                    signedInUser.setRegNo(response.get(0).get("regNo").toString());
+                    BackendlessApplication.setUser(signedInUser);
+                    BackendlessApplication.setUser(signedInUser);
+
+
+                    btnSignin.animate()
+                            .scaleXBy(ViewGroup.LayoutParams.MATCH_PARENT + 20)
+                            .scaleYBy(ViewGroup.LayoutParams.MATCH_PARENT + 20)
+                            .alphaBy(0)
+                            .alphaBy(0)
+                            .setDuration(1000)
+                            .alphaBy(0)
+                            .setListener(new Animator.AnimatorListener() {
+                                @Override
+                                public void onAnimationStart(final Animator animator) {
+                                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+                                        int colorFrom = getResources().getColor(R.color.colorPrimaryTextLight);
+                                        int colorTo = getResources().getColor(R.color.colorAccent);
+                                        ValueAnimator valueAnimator = ValueAnimator.ofObject(
+                                                new ArgbEvaluator(), colorFrom,colorTo);
+                                        valueAnimator.setDuration(900);
+                                        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                                            @Override
+                                            public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                                                btnSignin.setBackgroundColor((Integer) valueAnimator.getAnimatedValue());
+                                            }
+                                        });
+                                        valueAnimator.start();
+                                    }else {
+                                        btnSignin.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                                    }
+
+                                }
+
+                                @Override
+                                public void onAnimationEnd(Animator animator) {
+                                    startActivity(new Intent(Login.this, MainActivity.class));
+                                    finish();
+                                }
+
+                                @Override
+                                public void onAnimationCancel(Animator animator) {
+
+                                }
+
+                                @Override
+                                public void onAnimationRepeat(Animator animator) {
+
+                                }
+                            })
+                            .start();
+                }
+            }
+
+            @Override
+            public void handleFault(BackendlessFault fault) {
+                Log.d("msg","error: "+fault.getMessage()); //tODO FOR TESTING PURPOSE
+            }
+        });
+    }
+
+    public void ValidLoginCheck() {
+
+        btnSignin.setClickable(false);
+        btnSignin.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+
         Backendless.UserService.isValidLogin(new AsyncCallback<Boolean>() {
             @Override
             public void handleResponse(Boolean response) {
@@ -100,14 +212,25 @@ public class Login extends AppCompatActivity {
                             BackendlessApplication.backendlessUser = response;
 
                             getSubject();
+                            btnRegister.setClickable(true);
+                            btnRegister.setClickable(true);
                         }
 
                         @Override
                         public void handleFault(BackendlessFault fault) {
                             Log.d("msg","Failed to logedin");
                             Toast.makeText(Login.this,fault.getCode(),Toast.LENGTH_LONG).show();
+                            btnRegister.setClickable(true);
+                            btnRegister.setClickable(true);
+                            btnRegister.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                            btnSignin.setBackgroundColor(getResources().getColor(R.color.colorAccent));
                         }
                     });
+                }else {
+                    btnRegister.setClickable(true);
+                    btnRegister.setClickable(true);
+                    btnRegister.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                    btnSignin.setBackgroundColor(getResources().getColor(R.color.colorAccent));
                 }
 
             }
@@ -116,43 +239,19 @@ public class Login extends AppCompatActivity {
             public void handleFault(BackendlessFault fault) {
                 Log.d("msg","Log in failed");
                 Toast.makeText(Login.this,fault.getCode(),Toast.LENGTH_LONG).show();
+                btnRegister.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                btnSignin.setBackgroundColor(getResources().getColor(R.color.colorAccent));
             }
+
+
         });
+
     }
 
-    private void getSubject(){
-        final String whereClause = "email = '"+BackendlessApplication.backendlessUser.getEmail()+"'";
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
 
-        final DataQueryBuilder dqb = DataQueryBuilder.create();
-        dqb.setWhereClause(whereClause);
-
-        Backendless.Data.of("User").find(dqb, new AsyncCallback<List<Map>>() {
-            @Override
-            public void handleResponse(List<Map> response) {
-                if (response != null){
-                    Log.d("msg",response.toString()); //tODO FOR TESTING PURPOSE
-
-                    User signedInUser = new User();
-                    signedInUser.setUid(Integer.parseInt(response.get(0).get("uid").toString()));
-                    signedInUser.setOwnerId(response.get(0).get("ownerId").toString());
-                    signedInUser.setName(response.get(0).get("name").toString());
-                    signedInUser.setEmail(response.get(0).get("email").toString());
-                    signedInUser.setSemester(response.get(0).get("semester").toString());
-                    signedInUser.setCollageId(response.get(0).get("collageId").toString());
-                    signedInUser.setBranch(response.get(0).get("branch").toString());
-                    signedInUser.setRegNo(response.get(0).get("regNo").toString());
-
-                    BackendlessApplication.setUser(signedInUser);
-                    startActivity(new Intent(Login.this, MainActivity.class));
-                    BackendlessApplication.setUser(signedInUser);
-                    finish();
-                }
-            }
-
-            @Override
-            public void handleFault(BackendlessFault fault) {
-                Log.d("msg","error: "+fault.getMessage()); //tODO FOR TESTING PURPOSE
-            }
-        });
+        this.finishAffinity();
     }
 }

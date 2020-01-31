@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,8 +19,13 @@ public class Fragment_Home_Main_rvAdapter extends RecyclerView.Adapter<Fragment_
     private LayoutInflater mInflater;
     private ItemClickListener mClickListener;
 
+    Context context;
+
+    private int lastPosition = -1;
+
     public Fragment_Home_Main_rvAdapter(Context context, String[] data) {
         this.mData = data;
+        this.context = context;
         this.mInflater = LayoutInflater.from(context);
     }
     @NonNull
@@ -33,6 +40,17 @@ public class Fragment_Home_Main_rvAdapter extends RecyclerView.Adapter<Fragment_
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         holder.myTextView.setText(mData[position]);
+        setAnimation(holder.myTextView,position);
+    }
+
+    private void setAnimation(View viewToAnimate, int position) {  //Added for animation
+        // If the bound view wasn't previously displayed on screen, it's animated
+        if (position > lastPosition) {
+            Animation animation = AnimationUtils.loadAnimation(context, R.anim.silde_from_left); // for image
+            animation.setDuration(800);
+            viewToAnimate.startAnimation(animation);
+            lastPosition = position;
+        }
     }
 
     @Override

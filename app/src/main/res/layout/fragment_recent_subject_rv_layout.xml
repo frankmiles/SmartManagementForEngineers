@@ -11,7 +11,7 @@
         android:orientation="vertical"
         android:paddingRight="5dp"
         android:paddingLeft="5dp"
-        android:background="@android:color/black"
+        android:background="@color/colorPrimary"
         android:gravity="center">
 
         <TextView
@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="tom"
-            android:textColor="@android:color/holo_red_light"
+            android:textColor="@color/colorPrimaryTextLight"
             android:textSize="24dp"
             android:textStyle="bold" />
     </LinearLayout>

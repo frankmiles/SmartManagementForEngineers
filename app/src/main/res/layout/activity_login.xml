@@ -4,10 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="5dp"
-    android:layout_marginLeft="5dp"
-    android:layout_marginRight="5dp"
     android:orientation="vertical"
+    android:animateLayoutChanges="true"
+    android:background="@color/colorPrimary"
     tools:context=".Login">
 
     <TextView
@@ -16,6 +15,10 @@
         android:layout_height="wrap_content"
         android:textSize="25dp"
         android:textStyle="bold"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:textColor="@color/colorPrimaryTextLight"
         android:text="tvUsername" />
 
     <EditText
@@ -25,6 +28,12 @@
         android:ems="10"
         android:layout_marginTop="5dp"
         android:inputType="textPersonName"
+        android:layout_marginStart="10dp"
+        android:backgroundTint="@color/colorPrimaryTextLight"
+        android:backgroundTintMode="src_atop"
+        android:layout_marginEnd="10dp"
+
+        android:textColor="@color/colorPrimaryTextLight"
         android:text="pojo@gmail.com" />
 
     <TextView
@@ -34,6 +43,9 @@
         android:textSize="15dp"
         android:textStyle="italic"
         android:layout_marginTop="5dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:textColor="@color/colorPrimaryTextLight"
         android:text="tvUsername_feedback" />
 
     <TextView
@@ -43,6 +55,9 @@
         android:layout_marginTop="25dp"
         android:textSize="25dp"
         android:textStyle="bold"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:textColor="@color/colorPrimaryTextLight"
         android:text="tvPass" />
 
     <EditText
@@ -52,6 +67,10 @@
         android:ems="10"
         android:layout_marginTop="5dp"
         android:inputType="textPassword"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:backgroundTint="@color/colorPrimaryTextLight"
+        android:textColor="@color/colorPrimaryTextLight"
         android:text="1234" />
 
     <TextView
@@ -61,18 +80,43 @@
         android:textSize="15dp"
         android:layout_marginTop="5dp"
         android:textStyle="italic"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:textColor="@color/colorPrimaryTextLight"
         android:text="tvPass_feedback" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:background="@color/colorDivider"
+        />
 
     <Button
         android:id="@+id/btnRegister"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="65dp"
-        android:text="btnRegister" />
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="10dp"
+        android:background="@color/colorAccent"
+        android:text="btnRegister"
+        android:textColor="@color/colorPrimaryTextLight"
+        android:textStyle="bold"
+        android:typeface="monospace" />
 
     <Button
         android:id="@+id/btnSignin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="btnSignin" />
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="10dp"
+        android:background="@color/colorAccent"
+        android:text="btnSignin"
+        android:textColor="@color/colorPrimaryTextLight"
+        android:textStyle="bold"
+        android:soundEffectsEnabled="true"
+        android:typeface="monospace" />
 </LinearLayout>
