@@ -313,4 +313,11 @@ public class Register extends AppCompatActivity {
         super.onStop();
 
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(Register.this,Login.class));
+        finish();
+    }
 }

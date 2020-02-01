@@ -196,6 +196,8 @@ public class Login extends AppCompatActivity {
 
     public void ValidLoginCheck() {
 
+        btnRegister.setClickable(false);
+        btnRegister.setBackgroundColor(getResources().getColor(R.color.colorLightPrimary));
         btnSignin.setClickable(false);
         btnSignin.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
 
