@@ -239,7 +239,7 @@ public class Register extends AppCompatActivity {
                 for(int i = 0;i<response.size();i++){    //Fetching Collage
                     collageNameList.add(response.get(i).getName());
                 }
-                dataAdapter = new ArrayAdapter<String>(Register.this, android.R.layout.simple_spinner_item,collageNameList);
+                dataAdapter = new ArrayAdapter<String>(Register.this, R.layout.spinner_txt_values,collageNameList);
                 dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinner_Register_collage.setAdapter(dataAdapter);
             }

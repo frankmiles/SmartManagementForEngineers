@@ -60,12 +60,13 @@ public class Login extends AppCompatActivity {
         btnRegister = findViewById(R.id.btnRegister);
         btnSignin = findViewById(R.id.btnSignin);
 
+        btnready();
         ValidLoginCheck();
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                btnbusy();
                 startActivity(new Intent(Login.this,Register.class));
                 finish();
             }
@@ -75,23 +76,18 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                btnRegister.setClickable(false);
-                btnSignin.setClickable(false);
+                btnbusy();
                 btnSignin.setText("Loading...");
-                btnRegister.setBackgroundColor(getResources().getColor(R.color.colorLightPrimary));
-                btnSignin.setBackgroundColor(getResources().getColor(R.color.colorLightPrimary));
-
 
                 String user = etUsername.getText().toString()+"";
                 String pass = etPass.getText().toString()+"";
-                btnSignin.setClickable(false);
 
                 Backendless.UserService.login(user, pass, new AsyncCallback<BackendlessUser>() {
                     @Override
                     public void handleResponse(BackendlessUser response) {
                         Toast.makeText(Login.this,"LogedIn",Toast.LENGTH_SHORT).show();
                         BackendlessApplication.backendlessUser = response;
-
+                        btnbusy();
                         getSubject();
                     }
 
@@ -99,7 +95,7 @@ public class Login extends AppCompatActivity {
                     public void handleFault(BackendlessFault fault) {
                         Toast.makeText(Login.this,"toast No: 21"+fault.getDetail(),Toast.LENGTH_LONG).show();
                         Log.println(Log.ASSERT,"Backendless_error",fault.getDetail()+"");
-                        btnSignin.setClickable(true);
+                        btnready();
                     }
                 },true);
             }
@@ -149,7 +145,7 @@ public class Login extends AppCompatActivity {
                                 @Override
                                 public void onAnimationStart(final Animator animator) {
                                     if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-                                        int colorFrom = getResources().getColor(R.color.colorPrimaryTextLight);
+                                        int colorFrom = getResources().getColor(R.color.colorLightPrimary);
                                         int colorTo = getResources().getColor(R.color.colorAccent);
                                         ValueAnimator valueAnimator = ValueAnimator.ofObject(
                                                 new ArgbEvaluator(), colorFrom,colorTo);
@@ -196,11 +192,6 @@ public class Login extends AppCompatActivity {
 
     public void ValidLoginCheck() {
 
-        btnRegister.setClickable(false);
-        btnRegister.setBackgroundColor(getResources().getColor(R.color.colorLightPrimary));
-        btnSignin.setClickable(false);
-        btnSignin.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-
         Backendless.UserService.isValidLogin(new AsyncCallback<Boolean>() {
             @Override
             public void handleResponse(Boolean response) {
@@ -209,30 +200,23 @@ public class Login extends AppCompatActivity {
                     Backendless.Data.of(BackendlessUser.class).findById(userObjectId, new AsyncCallback<BackendlessUser>() {
                         @Override
                         public void handleResponse(BackendlessUser response) {
+                            btnbusy();
                             Toast.makeText(Login.this,"LogedIn",Toast.LENGTH_SHORT).show();
                             Log.d("msg","LogedIn");
                             BackendlessApplication.backendlessUser = response;
 
                             getSubject();
-                            btnRegister.setClickable(true);
-                            btnRegister.setClickable(true);
                         }
 
                         @Override
                         public void handleFault(BackendlessFault fault) {
                             Log.d("msg","Failed to logedin");
                             Toast.makeText(Login.this,fault.getCode(),Toast.LENGTH_LONG).show();
-                            btnRegister.setClickable(true);
-                            btnRegister.setClickable(true);
-                            btnRegister.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-                            btnSignin.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                            btnready();
                         }
                     });
                 }else {
-                    btnRegister.setClickable(true);
-                    btnRegister.setClickable(true);
-                    btnRegister.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-                    btnSignin.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                    btnready();
                 }
 
             }
@@ -241,13 +225,28 @@ public class Login extends AppCompatActivity {
             public void handleFault(BackendlessFault fault) {
                 Log.d("msg","Log in failed");
                 Toast.makeText(Login.this,fault.getCode(),Toast.LENGTH_LONG).show();
-                btnRegister.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-                btnSignin.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                btnready();
             }
 
 
         });
 
+    }
+
+    private void btnready(){ //TO make button Available to click
+        btnRegister.setClickable(true);
+        btnSignin.setClickable(true);
+        btnSignin.setText("SIGNIN");
+        btnRegister.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+        btnSignin.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+    }
+
+    private void btnbusy(){ //TO make button Unavailable to click
+        btnRegister.setClickable(false);
+        btnSignin.setClickable(false);
+        btnSignin.setText("Loading...");
+        btnRegister.setBackgroundColor(getResources().getColor(R.color.colorLightPrimary));
+        btnSignin.setBackgroundColor(getResources().getColor(R.color.colorLightPrimary));
     }
 
     @Override

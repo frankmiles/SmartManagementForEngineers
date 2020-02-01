@@ -8,18 +8,22 @@
     android:paddingTop="5dp"
     android:paddingRight="5dp"
     android:paddingLeft="5dp"
+    android:background="@color/colorPrimary"
     tools:context=".Register">
 
     <Spinner
         android:id="@+id/spinner_Register_collage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/colorPrimaryTextLight"
+        android:foregroundTint="@color/colorPrimaryTextLight"
         android:textAlignment="center"/>
 
     <TextView
         android:id="@+id/tv_Name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimaryTextLight"
         android:text="tv_Name" />
 
     <EditText
@@ -28,12 +32,14 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
+        android:textColor="@color/colorPrimaryTextLight"
         android:text="et_Name"/>
 
     <TextView
         android:id="@+id/tv_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimaryTextLight"
         android:text="tv_email" />
 
     <EditText
@@ -42,36 +48,44 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textEmailAddress"
+        android:textColor="@color/colorPrimaryTextLight"
         android:text="pojo@gmail.com"/>
 
     <TextView
         android:id="@+id/tv_branch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimaryTextLight"
         android:text="tv_branch" />
 
     <Spinner
         android:id="@+id/spinner_Register_branch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/colorPrimaryTextLight"
+        android:foregroundTint="@color/colorPrimaryTextLight"
         android:entries="@array/Branch"/>
 
     <TextView
         android:id="@+id/tv_Sem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimaryTextLight"
         android:text="tv_Sem" />
 
     <Spinner
         android:id="@+id/spinner_Register_Sem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/colorPrimaryTextLight"
+        android:foregroundTint="@color/colorPrimaryTextLight"
         android:entries="@array/Sem"/>
 
     <TextView
         android:id="@+id/tv_RegNumber"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimaryTextLight"
         android:text="tv_RegNumber" />
 
     <EditText
@@ -80,12 +94,14 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="number"
+        android:textColor="@color/colorPrimaryTextLight"
         android:text="154235"/>
 
     <TextView
         android:id="@+id/tv_Pass"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimaryTextLight"
         android:text="tv_pass" />
 
     <EditText
@@ -94,12 +110,18 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPassword"
+        android:textColor="@color/colorPrimaryTextLight"
         android:text="1234"/>
 
     <Button
         android:id="@+id/btnRegister_Submit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="btnRegister_Submit" />
+        android:background="@color/colorAccent"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:textColor="@color/colorPrimaryTextLight"
+        android:layout_gravity="right"
+        android:text=" Register " />
 
 </LinearLayout>
