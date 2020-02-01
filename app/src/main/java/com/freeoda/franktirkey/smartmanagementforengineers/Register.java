@@ -4,8 +4,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -30,13 +33,20 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import javax.security.auth.callback.PasswordCallback;
 
 public class Register extends AppCompatActivity {
 
+    private boolean MainFlag = false;
+
+    final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=-])(?=\\S+$).{8,24}$";
+
     Spinner spinner_Register_collage,spinner_Register_branch,spinner_Register_Sem;
 
-    TextView tv_Name,tv_email,tv_branch,tv_Sem,tv_RegNumber;
+    TextView tv_Name,tv_email,tv_branch,tv_Sem,tv_RegNumber,tv_PassHint;
     EditText et_Name,et_email,et_RegNumber,et_pass;
     Button btnRegister_Submit;
 
@@ -45,7 +55,9 @@ public class Register extends AppCompatActivity {
     List<Collage> collageFromBKs = new ArrayList<>();
     List<String> collageNameList = new ArrayList<>();
     int SelectedCollagePosition=0;
-    ArrayAdapter<String> dataAdapter;
+    ArrayAdapter<String> CollageDataAdapter;
+    ArrayAdapter<String> BranchDataAdapter;
+    ArrayAdapter<String> SemDataAdapter;
 
     BackendlessUser registerBackendless = new BackendlessUser();
 
@@ -60,13 +72,12 @@ public class Register extends AppCompatActivity {
         spinner_Register_branch = findViewById(R.id.spinner_Register_branch);
         spinner_Register_Sem = findViewById(R.id.spinner_Register_Sem);
 
-
-
         tv_Name = findViewById(R.id.tv_Name);
         tv_email = findViewById(R.id.tv_email);
         tv_branch = findViewById(R.id.tv_branch);
         tv_Sem = findViewById(R.id.tv_Sem);
         tv_RegNumber = findViewById(R.id.tv_RegNumber);
+        tv_PassHint = findViewById(R.id.tv_PassHint);
 
         et_Name = findViewById(R.id.et_Name);
         et_email = findViewById(R.id.et_email);
@@ -74,13 +85,35 @@ public class Register extends AppCompatActivity {
         et_pass = findViewById(R.id.et_pass);
 
         btnRegister_Submit = findViewById(R.id.btnRegister_Submit);
+        btnRegister_Submit.setAlpha(0);
+
+        btnDisable();
+        tv_PassHint.setSelected(true);
+
+        BranchDataAdapter = new ArrayAdapter<String>(Register.this, R.layout.spinner_txt_values,
+                getResources().getStringArray(R.array.Branch));
+        BranchDataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner_Register_branch.setAdapter(BranchDataAdapter);
+
+        SemDataAdapter = new ArrayAdapter<String>(Register.this, R.layout.spinner_txt_values,
+                getResources().getStringArray(R.array.Sem));
+        SemDataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner_Register_Sem.setAdapter(SemDataAdapter);
 
         CollageData(); //setting spinner collage
 
         btnRegister_Submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setNewUserBackendless(et_email.getText().toString(),et_pass.getText().toString(),et_Name.getText().toString());
+
+                validRegistration();
+
+                if(MainFlag)
+                {
+                    setNewUserBackendless(et_email.getText().toString().trim(),
+                            et_pass.getText().toString().trim(),et_Name.getText().toString().trim());
+                }
+
             }
         });
 
@@ -95,6 +128,83 @@ public class Register extends AppCompatActivity {
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
 
+            }
+        });
+
+//        et_pass.getBackground().setColorFilter(getResources().getColor(R.color.colorAccent),
+//                PorterDuff.Mode.SRC_ATOP);
+//        tv_PassHint.setText(et_pass.getText().toString().trim());
+//        validRegistration();
+
+        et_Name.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int i, KeyEvent keyEvent) {
+
+                validRegistration();
+
+                return false;
+            }
+        });
+
+        et_Name.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+
+                validRegistration();
+            }
+        });
+
+        et_email.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int i, KeyEvent keyEvent) {
+
+                validRegistration();
+
+                return false;
+            }
+        });
+
+        et_email.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+
+                validRegistration();
+            }
+        });
+
+        et_RegNumber.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int i, KeyEvent keyEvent) {
+
+                validRegistration();
+
+                return false;
+            }
+        });
+
+        et_RegNumber.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+
+                validRegistration();
+            }
+        });
+
+        et_pass.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int i, KeyEvent keyEvent) {
+
+                validRegistration();
+
+                return false;
+            }
+        });
+
+        et_pass.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+
+                validRegistration();
             }
         });
     }
@@ -114,22 +224,22 @@ public class Register extends AppCompatActivity {
                         .getUser()
                         .setOwnerId(response
                                 .getProperty("ownerId")
-                                .toString());
+                                .toString().trim());
                 BackendlessApplication
                         .getUser()
                         .setName(response
                                 .getProperty("name")
-                                .toString());
+                                .toString().trim());
                 BackendlessApplication
                         .getUser()
                         .setRegNo(et_RegNumber
                                 .getText()
-                                .toString());
+                                .toString().trim());
                 BackendlessApplication
                         .getUser()
                         .setSemester(spinner_Register_Sem
                                 .getSelectedItem()
-                                .toString());
+                                .toString().trim());
                 BackendlessApplication
                         .getUser()
                         .setCollageId(getSelectedCollageObjId);
@@ -141,7 +251,7 @@ public class Register extends AppCompatActivity {
                         .getUser()
                         .setBranch(spinner_Register_branch
                                 .getSelectedItem()
-                                .toString());
+                                .toString().trim());
 
                 BackendlessApplication
                         .db
@@ -239,9 +349,11 @@ public class Register extends AppCompatActivity {
                 for(int i = 0;i<response.size();i++){    //Fetching Collage
                     collageNameList.add(response.get(i).getName());
                 }
-                dataAdapter = new ArrayAdapter<String>(Register.this, R.layout.spinner_txt_values,collageNameList);
-                dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                spinner_Register_collage.setAdapter(dataAdapter);
+                CollageDataAdapter = new ArrayAdapter<String>(Register.this, R.layout.spinner_txt_values,collageNameList);
+                CollageDataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinner_Register_collage.setAdapter(CollageDataAdapter);
+
+                btnRegister_Submit.setAlpha(1); //This is to be validated to the Input
             }
 
             @Override
@@ -250,6 +362,95 @@ public class Register extends AppCompatActivity {
                 Log.d("msg","error: "+fault.getMessage());
             }
         });
+    }
+
+    private void btnDisable(){
+        btnRegister_Submit.setEnabled(false);
+        btnRegister_Submit.setBackgroundColor(getResources().getColor(R.color.colorLightPrimary));
+    }
+
+    private void btnEnable(){
+        btnRegister_Submit.setEnabled(true);
+        btnRegister_Submit.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+    }
+
+    public void validRegistration(){
+
+        boolean flagName,flagEmail,flagCollage_RegNo,flagPassword;
+        flagName=false;
+        flagEmail=false;
+        flagCollage_RegNo=false;
+        flagPassword=false;
+
+        String name = et_Name != null ? et_Name.getText().toString().trim() : "";
+        String email = et_email != null ? et_email.getText().toString().trim() : "";
+        int collage_RegNo = et_pass != null ? (et_RegNumber.getText().toString().trim().equals("") ?
+                0 : Integer.parseInt(et_RegNumber.getText().toString().trim())) : 0;
+        String passWord = et_pass != null ? et_pass.getText().toString().trim():"";
+
+        if(Pattern.matches("^[A-Za-z\\s]{1,}[\\.]{0,1}[A-Za-z\\s]{0,}$",name)){
+            flagName = true;
+            et_Name.getBackground().setColorFilter(getResources().getColor(android.R.color.holo_green_light),
+                    PorterDuff.Mode.SRC_ATOP);
+        }
+        else {
+            //Name Field Error
+            Log.d("msg","Error in Name: "+ name);
+            MainFlag = false;
+            et_Name.getBackground().setColorFilter(getResources().getColor(R.color.colorAccent),
+                    PorterDuff.Mode.SRC_ATOP);
+            btnDisable();
+
+        }
+        if (Pattern.matches("^[\\w-_.+]*[\\w-_.]@([\\w]+\\.)+[\\w]+[\\w]$",email)){
+            flagEmail = true;
+            et_email.getBackground().setColorFilter(getResources().getColor(android.R.color.holo_green_light),
+                    PorterDuff.Mode.SRC_ATOP);
+        }
+        else {
+            //Email Field Error
+            Log.d("msg","Error in Email: "+ email);
+            MainFlag = false;
+            et_email.getBackground().setColorFilter(getResources().getColor(R.color.colorAccent),
+                    PorterDuff.Mode.SRC_ATOP);
+            btnDisable();
+
+        }
+        if(collage_RegNo != 0){
+            flagCollage_RegNo = true;
+            et_RegNumber.getBackground().setColorFilter(getResources().getColor(android.R.color.holo_green_light),
+                    PorterDuff.Mode.SRC_ATOP);
+        }
+        else {
+            //Collage Reg Error
+            Log.d("msg","Error in CollageRegNo: "+collage_RegNo);
+            MainFlag = false;
+            et_RegNumber.getBackground().setColorFilter(getResources().getColor(R.color.colorAccent),
+                    PorterDuff.Mode.SRC_ATOP);
+            btnDisable();
+        }
+
+        if(Pattern.compile(PASSWORD_PATTERN).matcher(passWord).matches()){ //Matches the password Pattern
+            flagPassword = true;
+            et_pass.getBackground().setColorFilter(getResources().getColor(android.R.color.holo_green_light),
+                    PorterDuff.Mode.SRC_ATOP);
+        }else{
+             //Error in Password
+            Log.d("msg","Error in Password: "+passWord);
+            MainFlag = false;
+            et_pass.getBackground().setColorFilter(getResources().getColor(R.color.colorAccent),
+                    PorterDuff.Mode.SRC_ATOP);
+            btnDisable();
+        }
+
+        if(flagName && flagEmail && flagPassword && flagCollage_RegNo){
+
+            MainFlag = true;
+            btnEnable();
+        }else {
+            btnDisable();
+        }
+
     }
 
     public void BksUserTable(){

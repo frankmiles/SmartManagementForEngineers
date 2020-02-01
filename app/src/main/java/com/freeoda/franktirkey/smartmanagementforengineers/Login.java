@@ -93,7 +93,7 @@ public class Login extends AppCompatActivity {
 
                     @Override
                     public void handleFault(BackendlessFault fault) {
-                        Toast.makeText(Login.this,"toast No: 21"+fault.getDetail(),Toast.LENGTH_LONG).show();
+                        Toast.makeText(Login.this,fault.getDetail(),Toast.LENGTH_LONG).show();
                         Log.println(Log.ASSERT,"Backendless_error",fault.getDetail()+"");
                         btnready();
                     }
@@ -144,6 +144,7 @@ public class Login extends AppCompatActivity {
                             .setListener(new Animator.AnimatorListener() {
                                 @Override
                                 public void onAnimationStart(final Animator animator) {
+                                    btnRegister.setVisibility(View.INVISIBLE);
                                     if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
                                         int colorFrom = getResources().getColor(R.color.colorLightPrimary);
                                         int colorTo = getResources().getColor(R.color.colorAccent);
@@ -205,6 +206,7 @@ public class Login extends AppCompatActivity {
                             Log.d("msg","LogedIn");
                             BackendlessApplication.backendlessUser = response;
 
+                            btnready();
                             getSubject();
                         }
 

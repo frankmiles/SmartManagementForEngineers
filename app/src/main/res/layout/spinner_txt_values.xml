@@ -8,4 +8,5 @@
     android:gravity="left"
     android:textColor="@color/colorPrimaryTextLight"
     android:padding="5dip"
-    />
+    android:ellipsize="marquee"
+    android:singleLine="true" />
