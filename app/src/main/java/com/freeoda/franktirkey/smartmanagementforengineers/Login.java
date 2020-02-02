@@ -146,6 +146,8 @@ public class Login extends AppCompatActivity {
                                 public void onAnimationStart(final Animator animator) {
                                     btnRegister.setVisibility(View.INVISIBLE);
                                     if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+                                        btnSignin.setText("SMFE");
+                                        btnSignin.setTextSize(5);
                                         int colorFrom = getResources().getColor(R.color.colorLightPrimary);
                                         int colorTo = getResources().getColor(R.color.colorAccent);
                                         ValueAnimator valueAnimator = ValueAnimator.ofObject(
@@ -167,6 +169,7 @@ public class Login extends AppCompatActivity {
                                 @Override
                                 public void onAnimationEnd(Animator animator) {
                                     startActivity(new Intent(Login.this, MainActivity.class));
+                                    overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_from_left);
                                     finish();
                                 }
 
