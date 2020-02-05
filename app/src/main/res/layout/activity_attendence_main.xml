@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Attendance.AttendanceMain">
+    tools:context=".Attendance.AttendanceMain"
+    android:id="@+id/rl_attenMain">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fb_attendenceAddSubject"
@@ -52,7 +53,8 @@
                 android:layout_height="wrap_content"
                 android:text="Total 85%"
                 android:textColor="@color/colorPrimaryTextLight"
-                android:textSize="30sp" />
+                android:textStyle="bold"
+                android:textSize="26sp" />
 
             <TextView
                 android:id="@+id/tv_atten_name"
@@ -63,10 +65,12 @@
                 android:textSize="24sp" />
 
             <TextView
-                android:id="@+id/tv_atten_collage"
+                android:id="@+id/tv_atten_branch"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textSize="16sp"
                 android:text="tv_atten_collage"
+                android:singleLine="true"
                 android:textColor="@color/colorPrimaryTextLight" />
 
         </LinearLayout>
@@ -78,13 +82,133 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/ll1"
+        android:layout_marginTop="5dp"
         android:layout_marginStart="3dp"
         android:orientation="vertical">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_attendance"
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cv_ViewAtten"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:elevation="5dp"
+            android:fadingEdge="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ca.antonious.materialdaypicker.MaterialDayPicker
+                    android:id="@+id/day_picker_main"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    app:selectionMode="ca.antonious.materialdaypicker.SingleSelectionMode"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_attendance"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cv_attenEdit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:elevation="5dp"
+            android:fadingEdge="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                    <EditText
+                        android:id="@+id/et_subjName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:hint="Subject Name"/>
+
+                    <EditText
+                        android:id="@+id/et_subjProff"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:hint="Subject Professor"/>
+
+                <ca.antonious.materialdaypicker.MaterialDayPicker
+                    android:id="@+id/day_picker_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    app:selectionMode="ca.antonious.materialdaypicker.SingleSelectionMode"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="15dp"
+                    android:gravity="center_horizontal">
+
+                    <Button
+                        android:id="@+id/btn_SelectTime_Start"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@color/colorPrimaryDark"
+                        android:textColor="@color/colorPrimaryTextLight"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        android:text="  Time Start  "/>
+
+                    <Button
+                        android:id="@+id/btn_SelectTime_End"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@color/colorPrimaryDark"
+                        android:textColor="@color/colorPrimaryTextLight"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        android:text=" Time End "/>
+
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/btn_SaveEdit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@color/colorAccent"
+                    android:textColor="@color/colorPrimaryTextLight"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:text=" Save "/>
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
     </LinearLayout>
 
 </RelativeLayout>

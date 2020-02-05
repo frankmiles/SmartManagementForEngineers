@@ -34,7 +34,6 @@ public class SubjectMainAdapter extends RecyclerView.Adapter<SubjectMainAdapter.
     public void onBindViewHolder(@NonNull cViewModel holder, int position) {
 
         holder.tv_subject_main_rv_layout.setText(list.get(position).subjName);
-        holder.iv_subject_main_rv_layout.setImageResource(list.get(position).subjRes);
     }
 
     @Override
@@ -52,15 +51,13 @@ public class SubjectMainAdapter extends RecyclerView.Adapter<SubjectMainAdapter.
         public cViewModel(@NonNull View itemView,interface_RvClickListner_Subject_Main ocl) {
             super(itemView);
             tv_subject_main_rv_layout = itemView.findViewById(R.id.tv_subject_main_rv_layout);
-            iv_subject_main_rv_layout = itemView.findViewById(R.id.iv_subject_main_rv_layout);
             itemView.setOnClickListener(this);
             this.ocl = ocl;
 
         }
 
-        public void saveData(String str,int res){
+        public void saveData(String str){
             tv_subject_main_rv_layout.setText(str);
-            iv_subject_main_rv_layout.setImageResource(res);
         }
 
         @Override

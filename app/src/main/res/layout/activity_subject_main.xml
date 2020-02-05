@@ -7,46 +7,34 @@
     android:orientation="vertical"
     tools:context=".Subject.SubjectMain">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginTop="0dp"
-        android:scaleType="centerCrop"
-        app:srcCompat="@drawable/act_bg"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="38dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="65dp"
-        android:text="Subjects"
-        android:textSize="32sp"
-        android:textColor="@android:color/white"
-        android:gravity="center"
-        android:textStyle="bold"/>
-
-    <TextView
-        android:id="@+id/SubjectMain_tv"
+    <LinearLayout
+        android:id="@+id/ll_Title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/imageView"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginBottom="0dp"
-        android:text="SubjectMain"
-        android:textColor="@android:color/white"
-        android:textSize="24sp" />
+        android:gravity="center"
+        android:layout_marginTop="0dp"
+        android:background="@color/colorPrimary"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Subjects"
+            android:gravity="center_horizontal"
+            android:textColor="@android:color/white"
+            android:textSize="32sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/ll_Subject_sp"
         android:layout_width="match_parent"
         android:layout_height="32dp"
-        android:layout_below="@+id/SubjectMain_tv"
+        android:layout_below="@+id/ll_Title"
         android:layout_marginTop="0dp"
         android:layout_marginStart="0dp"
+        android:background="@color/colorLightPrimary"
         android:orientation="horizontal">
 
         <androidx.appcompat.widget.AppCompatSpinner
@@ -55,12 +43,16 @@
             android:layout_height="match_parent"
             android:textAlignment="center"
             android:entries="@array/Sem"
+            android:backgroundTint="@color/colorPrimaryTextLight"
+            android:foregroundTint="@color/colorPrimaryTextLight"
             android:visibility="invisible"/>
         <androidx.appcompat.widget.AppCompatSpinner
             android:id="@+id/spinner_subject_main_branch"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:textAlignment="center"
+            android:backgroundTint="@color/colorPrimaryTextLight"
+            android:foregroundTint="@color/colorPrimaryTextLight"
             android:entries="@array/BranchAbbr"
             android:visibility="invisible"/>
 

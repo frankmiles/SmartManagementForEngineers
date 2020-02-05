@@ -52,4 +52,7 @@ dependencies {
 
     //facebook Shemer
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
+
+    //implementing Date https://github.com/gantonious/MaterialDayPicker
+    implementation 'ca.antonious:materialdaypicker:0.7.1'
 }

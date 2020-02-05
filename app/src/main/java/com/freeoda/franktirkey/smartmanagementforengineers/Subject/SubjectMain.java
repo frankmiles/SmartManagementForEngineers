@@ -62,7 +62,6 @@ public class SubjectMain extends AppCompatActivity {
         getSubjectDB.execute();//TODO PUT Loading till it featched the result;
         getSubjectFromDB(); //TODO fetiching the database before-hand
 
-        syllabusMain_tv = findViewById(R.id.SubjectMain_tv);
         rv_subject_main = findViewById(R.id.rv_subject_main);
 
         spinner_subject_main_sem = findViewById(R.id.spinner_subject_main_sem);

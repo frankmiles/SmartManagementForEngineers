@@ -7,4 +7,14 @@
     <color name="colorPrimaryText">#212121</color>
     <color name="colorPrimaryTextLight">#FFFFFF</color>
     <color name="colorDivider">#BDBDBD</color>
+    <color name="colorCardPrimary">#03A9F4</color>
+
+    <color name="dayPressed">@color/colorPrimaryDark</color>
+    <color name="daySelected">@color/colorCardPrimary</color>
+    <color name="daySelectedTextColor">@android:color/white</color>
+    <color name="dayDeselected">@color/colorLightPrimary</color>
+    <color name="dayDeselectedTextColor">@android:color/black</color>
+
+    <color name="atten_up">#8BC34A</color>
+    <color name="atten_down">#E91E63</color>
 </resources>

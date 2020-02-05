@@ -223,7 +223,6 @@ public class Login extends AppCompatActivity {
                 }else {
                     btnready();
                 }
-
             }
 
             @Override
