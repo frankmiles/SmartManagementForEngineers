@@ -307,7 +307,7 @@ public class AttendanceMain extends AppCompatActivity {
         }
     }
 
-    private void totalPer(){
+    private void totalPer(){   //TODO Not working Full @bug-0.0.1
 
         int Present=0,Absent=0;
         int overallPresent = 0;

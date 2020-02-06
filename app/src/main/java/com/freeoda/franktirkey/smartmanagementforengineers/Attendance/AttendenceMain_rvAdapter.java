@@ -106,7 +106,7 @@ public class AttendenceMain_rvAdapter extends RecyclerView.Adapter<AttendenceMai
         }
 
         @Override
-        public void onClick(View view) {
+        public void onClick(View view) { //TODO Not working Full @bug-0.0.1
             Log.d("msg","got Posotion: "+getLayoutPosition());
 
             if(view == btn_atten_up){
