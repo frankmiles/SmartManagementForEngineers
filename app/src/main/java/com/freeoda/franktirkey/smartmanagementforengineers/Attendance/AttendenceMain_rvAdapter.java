@@ -7,26 +7,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.freeoda.franktirkey.smartmanagementforengineers.Attendance.localDBAttendance.AttendanceAppDB;
 import com.freeoda.franktirkey.smartmanagementforengineers.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import ca.antonious.materialdaypicker.MaterialDayPicker;
 
 public class AttendenceMain_rvAdapter extends RecyclerView.Adapter<AttendenceMain_rvAdapter.cViewHolder> {
 
-    private List<AttendenceMain_rvModel> list;
+    private List<AttendanceMain_rvModel> tempList;
     private LayoutInflater mInflater;
 
-    public AttendenceMain_rvAdapter(Context context, List<AttendenceMain_rvModel> list) {
+    public AttendenceMain_rvAdapter(Context context, List<AttendanceMain_rvModel> list) {
         mInflater = LayoutInflater.from(context);
-        this.list = list;
+        this.tempList = list;
     }
 
     @NonNull
@@ -43,30 +42,18 @@ public class AttendenceMain_rvAdapter extends RecyclerView.Adapter<AttendenceMai
         int persent, absent;
         MaterialDayPicker.Weekday Day;
 
-        SubjectName = list.get(position).getSubject();
-        teacher = list.get(position).getSubject();
-        persent = list.get(position).getPresent();
-        absent = list.get(position).getAbsent();
-        Day = list.get(position).getDay();
+        SubjectName = tempList.get(position).getSubject();
+        teacher = tempList.get(position).getTeacher();
+        persent = tempList.get(position).getPresent();
+        absent = tempList.get(position).getAbsent();
+        Day = tempList.get(position).getDay();
 
         holder.setData(SubjectName, teacher, persent, absent, Day);
     }
 
     @Override
     public int getItemCount() {
-        return list.size();
-    }
-
-    public void getFilterdList(MaterialDayPicker.Weekday day){
-        List<AttendenceMain_rvModel> filterdList = new ArrayList<>();
-
-        for(AttendenceMain_rvModel model:list){
-            if(model.getDay() == day){
-                filterdList.add(model);
-            }
-        }
-
-        list = filterdList;
+        return tempList.size();
     }
 
     public class cViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
@@ -123,10 +110,12 @@ public class AttendenceMain_rvAdapter extends RecyclerView.Adapter<AttendenceMai
             Log.d("msg","got Posotion: "+getLayoutPosition());
 
             if(view == btn_atten_up){
-                list.get(getLayoutPosition()).setPresent(persent + 1);
+                tempList.get(getLayoutPosition()).setPresent(persent + 1);
+                AttendanceMain.subjectList.get(getLayoutPosition()).setPresent(persent+1);
             }
             else{
-                list.get(getLayoutPosition()).setAbsent(absent + 1);
+                tempList.get(getLayoutPosition()).setAbsent(absent + 1);
+                AttendanceMain.subjectList.get(getLayoutPosition()).setPresent(absent+1);
             }
 
             notifyDataSetChanged();

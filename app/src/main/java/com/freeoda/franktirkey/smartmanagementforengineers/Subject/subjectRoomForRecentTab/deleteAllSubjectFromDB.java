@@ -11,7 +11,7 @@ public class deleteAllSubjectFromDB extends AsyncTask<Void,Void,Void>{
 
         BackendlessApplication.getSubject_db().subjectDao().deleteAll();
 
-        Log.d("msgDB","Deleted from the database");
+        Log.d("msgDB","Deleted Subject from the database");
 
         return null;
     }

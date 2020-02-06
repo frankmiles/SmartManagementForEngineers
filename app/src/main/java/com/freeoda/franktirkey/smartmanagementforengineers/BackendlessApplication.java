@@ -8,6 +8,7 @@ import androidx.room.Room;
 import com.backendless.Backendless;
 import com.backendless.BackendlessUser;
 import com.backendless.persistence.DataQueryBuilder;
+import com.freeoda.franktirkey.smartmanagementforengineers.Attendance.localDBAttendance.AttendanceAppDB;
 import com.freeoda.franktirkey.smartmanagementforengineers.LocalDBForBKs.AppDatabase;
 import com.freeoda.franktirkey.smartmanagementforengineers.LocalDBForBKs.User;
 import com.freeoda.franktirkey.smartmanagementforengineers.Subject.subjectRoomForRecentTab.SubjectAppDatabase;
@@ -28,6 +29,7 @@ public class BackendlessApplication extends Application {
 
     public static SubjectAppDatabase subject_db;
     public static SyllabusAppDatabase syllabus_db;
+    public static AttendanceAppDB attendance_db;
 
     @Override
     public void onCreate() {
@@ -49,6 +51,12 @@ public class BackendlessApplication extends Application {
 
         syllabus_db = Room.databaseBuilder(BackendlessApplication.this,
                 SyllabusAppDatabase.class,"Syllabus")
+                .fallbackToDestructiveMigration()
+                .allowMainThreadQueries() //TODO tESTING PURPOSE ONLY
+                .build();
+
+        attendance_db = Room.databaseBuilder(BackendlessApplication.this,
+                AttendanceAppDB.class,"Attendance")
                 .fallbackToDestructiveMigration()
                 .allowMainThreadQueries() //TODO tESTING PURPOSE ONLY
                 .build();
@@ -103,5 +111,13 @@ public class BackendlessApplication extends Application {
 
     public static void setSyllabus_db(SyllabusAppDatabase syllabus_db) {
         BackendlessApplication.syllabus_db = syllabus_db;
+    }
+
+    public static AttendanceAppDB getAttendance_db() {
+        return attendance_db;
+    }
+
+    public static void setAttendance_db(AttendanceAppDB attendance_db) {
+        BackendlessApplication.attendance_db = attendance_db;
     }
 }
