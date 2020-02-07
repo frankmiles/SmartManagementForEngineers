@@ -48,6 +48,8 @@ public class AttendanceMain extends AppCompatActivity {
     MaterialDayPicker day_picker_edit,day_picker_main;
 
     Button btn_SelectTime_Start,btn_SelectTime_End,btn_SaveEdit;
+    Button rv_btn_atten_up,rv_btn_atten_down;
+
     TimePicker tp_timeSelected;
 
     static int selectedHr_start, selectedMin_start, selectedHr_end, selectedMin_end;
@@ -80,6 +82,9 @@ public class AttendanceMain extends AppCompatActivity {
         btn_SelectTime_Start = findViewById(R.id.btn_SelectTime_Start);
         btn_SelectTime_End = findViewById(R.id.btn_SelectTime_End);
         btn_SaveEdit = findViewById(R.id.btn_SaveEdit);
+
+        rv_btn_atten_up = findViewById(R.id.btn_atten_up);
+        rv_btn_atten_down = findViewById(R.id.btn_atten_down);
 
         day_picker_edit = findViewById(R.id.day_picker_edit);
         day_picker_main = findViewById(R.id.day_picker_main);
@@ -169,6 +174,7 @@ public class AttendanceMain extends AppCompatActivity {
             public void onDaySelectionChanged(List<MaterialDayPicker.Weekday> list) {
 
                 applyFilter(subjectList,list.get(0));
+                totalPer();
                 Log.d("msg","DaySelectionChangedListener: "+list.get(0));
 
             }

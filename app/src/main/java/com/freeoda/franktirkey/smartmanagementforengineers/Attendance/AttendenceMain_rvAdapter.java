@@ -11,7 +11,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.freeoda.franktirkey.smartmanagementforengineers.Attendance.localDBAttendance.AttendanceAppDB;
 import com.freeoda.franktirkey.smartmanagementforengineers.R;
 
 import java.util.List;
@@ -22,6 +21,8 @@ public class AttendenceMain_rvAdapter extends RecyclerView.Adapter<AttendenceMai
 
     private List<AttendanceMain_rvModel> tempList;
     private LayoutInflater mInflater;
+    private ItemClickListener mClickListener;
+
 
     public AttendenceMain_rvAdapter(Context context, List<AttendanceMain_rvModel> list) {
         mInflater = LayoutInflater.from(context);
@@ -56,6 +57,14 @@ public class AttendenceMain_rvAdapter extends RecyclerView.Adapter<AttendenceMai
         return tempList.size();
     }
 
+    void setClickListener(ItemClickListener itemClickListener) {
+        this.mClickListener = itemClickListener;
+    }
+
+    public interface ItemClickListener {
+        void onItemClick(View view, int position);
+    }
+
     public class cViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         TextView tv_percen_rv_attendance,tv_subj_rv_attendance,tv_teacher_rv_attendance,
@@ -63,7 +72,7 @@ public class AttendenceMain_rvAdapter extends RecyclerView.Adapter<AttendenceMai
         Button btn_atten_up,btn_atten_down;
 
         String SubjectName, teacher;
-        int persent, absent;
+        int persant, absent;
         MaterialDayPicker.Weekday Day;
 
         public cViewHolder(@NonNull View itemView) {
@@ -80,19 +89,19 @@ public class AttendenceMain_rvAdapter extends RecyclerView.Adapter<AttendenceMai
             btn_atten_down.setOnClickListener(this);
         }
 
-        public void setData(String SubjectName, String teacher, int persent, int absent,
+        public void setData(String SubjectName, String teacher, int persant, int absent,
                             MaterialDayPicker.Weekday Day){
 
             this.SubjectName = SubjectName;
             this.teacher = teacher;
-            this.persent = persent;
+            this.persant = persant;
             this.absent = absent;
             this.Day = Day;
 
-            int total = persent+absent;
+            int total = persant+absent;
             int per = 0;
             try {
-                per = (persent*100)/total;
+                per = (persant*100)/total;
             }catch (Exception e){
                 e.printStackTrace();
             }
@@ -100,25 +109,42 @@ public class AttendenceMain_rvAdapter extends RecyclerView.Adapter<AttendenceMai
             tv_percen_rv_attendance.setText(String.valueOf(per)+"%");
             tv_subj_rv_attendance.setText(SubjectName);
             tv_teacher_rv_attendance.setText(teacher);
-            tv_present.setText(String.valueOf(persent));
+            tv_present.setText(String.valueOf(persant));
             tv_absent.setText(String.valueOf(absent));
 
         }
 
         @Override
         public void onClick(View view) { //TODO Not working Full @bug-0.0.1
+
+            if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());
+
             Log.d("msg","got Posotion: "+getLayoutPosition());
 
             if(view == btn_atten_up){
-                tempList.get(getLayoutPosition()).setPresent(persent + 1);
-                AttendanceMain.subjectList.get(getLayoutPosition()).setPresent(persent+1);
+                tempList.get(getLayoutPosition()).setPresent(persant + 1);
+                updateData();
+                //AttendanceMain.subjectList.get(getLayoutPosition()).setPresent(persant +1);
             }
             else{
                 tempList.get(getLayoutPosition()).setAbsent(absent + 1);
-                AttendanceMain.subjectList.get(getLayoutPosition()).setPresent(absent+1);
+                updateData();
+                //AttendanceMain.subjectList.get(getLayoutPosition()).setAbsent(absent+1);
             }
 
             notifyDataSetChanged();
+        }
+
+        private void updateData(){
+            for(int i = 0; i<AttendanceMain.subjectList.size();i++){
+                for(int j = 0; j<tempList.size();j++){
+                    if(AttendanceMain.subjectList.get(i).getId() == tempList.get(j).getId()){
+                        AttendanceMain.subjectList.get(i).setAbsent(tempList.get(j).getAbsent()) ;
+                        AttendanceMain.subjectList.get(i).setPresent(tempList.get(j).getPresent()); ;
+                    }
+                }
+
+            }
         }
     }
 }
