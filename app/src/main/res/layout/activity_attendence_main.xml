@@ -105,8 +105,7 @@
                     android:id="@+id/day_picker_main"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    app:selectionMode="ca.antonious.materialdaypicker.SingleSelectionMode"/>
+                    android:layout_marginTop="5dp"/>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_attendance"
@@ -152,8 +151,7 @@
                     android:id="@+id/day_picker_edit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    app:selectionMode="ca.antonious.materialdaypicker.SingleSelectionMode"/>
+                    android:layout_marginTop="5dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"

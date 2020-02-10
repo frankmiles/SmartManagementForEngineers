@@ -3,8 +3,12 @@ package com.freeoda.franktirkey.smartmanagementforengineers.Attendance;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
-import androidx.room.Insert;
 import androidx.room.PrimaryKey;
+
+import com.freeoda.franktirkey.smartmanagementforengineers.Attendance.localDBAttendance.Converters;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import ca.antonious.materialdaypicker.MaterialDayPicker;
 
@@ -14,11 +18,17 @@ public class AttendanceMain_rvModel {
     @PrimaryKey(autoGenerate = true)
     int id;
 
-    @Ignore
-    MaterialDayPicker.Weekday day;
+    @ColumnInfo
+    String name;
 
     @ColumnInfo
-    String DayInString;
+    String proff;
+
+    @ColumnInfo
+    String Stringdays;
+
+    @Ignore
+    List<MaterialDayPicker.Weekday> weekdays = new ArrayList<>();
 
     @ColumnInfo
     int present;
@@ -26,24 +36,81 @@ public class AttendanceMain_rvModel {
     @ColumnInfo
     int absent;
 
-    @ColumnInfo
-    String subject;
-
-    @ColumnInfo
-    String teacher;
 
     public AttendanceMain_rvModel() {
     }
 
     @Ignore
-    public AttendanceMain_rvModel(String subject, String teacher,
-                                  MaterialDayPicker.Weekday day, int present, int absent) {
-        this.day = day;
+    public AttendanceMain_rvModel(String name, String proff, List<MaterialDayPicker.Weekday> weekdays, int present, int absent) {
+        this.name = name;
+        this.proff = proff;
         this.present = present;
         this.absent = absent;
-        this.subject = subject;
-        this.teacher = teacher;
-        DayInString = day.toString();
+        this.weekdays = weekdays;
+        convertMaterialdaysToString(weekdays);
+    }
+
+    @Ignore
+    private void convertMaterialdaysToString(List<MaterialDayPicker.Weekday> weekdays){
+        ArrayList<String> day = new ArrayList<>();
+        for(MaterialDayPicker.Weekday wd:weekdays){
+            switch (wd){
+                case SUNDAY:
+                    day.add(MaterialDayPicker.Weekday.SUNDAY.toString());
+                    break;
+                case MONDAY:
+                    day.add(MaterialDayPicker.Weekday.MONDAY.toString());
+                    break;
+                case TUESDAY:
+                    day.add(MaterialDayPicker.Weekday.TUESDAY.toString());
+                    break;
+                case WEDNESDAY:
+                    day.add(MaterialDayPicker.Weekday.WEDNESDAY.toString());
+                    break;
+                case THURSDAY:
+                    day.add(MaterialDayPicker.Weekday.THURSDAY.toString());
+                    break;
+                case FRIDAY:
+                    day.add(MaterialDayPicker.Weekday.FRIDAY.toString());
+                    break;
+                case SATURDAY:
+                    day.add(MaterialDayPicker.Weekday.SATURDAY.toString());
+                    break;
+            }
+        }
+        this.Stringdays = Converters.fromArrayList(day);
+    }
+
+    @Ignore
+    private void ConvertStringToMaterialdays(String day){
+
+        ArrayList<String> weekdays = Converters.fromString(day);
+        this.weekdays.clear();
+        for(String sd:weekdays){
+            switch (sd.toUpperCase()){
+                case "SUNDAY":
+                    this.weekdays.add(MaterialDayPicker.Weekday.SUNDAY);
+                    break;
+                case "MONDAY":
+                    this.weekdays.add(MaterialDayPicker.Weekday.MONDAY);
+                    break;
+                case "TUESDAY":
+                    this.weekdays.add(MaterialDayPicker.Weekday.TUESDAY);
+                    break;
+                case "WEDNESDAY":
+                    this.weekdays.add(MaterialDayPicker.Weekday.WEDNESDAY);
+                    break;
+                case "THURSDAY":
+                    this.weekdays.add(MaterialDayPicker.Weekday.THURSDAY);
+                    break;
+                case "FRIDAY":
+                    this.weekdays.add(MaterialDayPicker.Weekday.FRIDAY);
+                    break;
+                case "SATURDAY":
+                    this.weekdays.add(MaterialDayPicker.Weekday.SATURDAY);
+                    break;
+            }
+        }
     }
 
     public int getId() {
@@ -54,20 +121,38 @@ public class AttendanceMain_rvModel {
         this.id = id;
     }
 
-    public MaterialDayPicker.Weekday getDay() {
-        return day;
+    public String getName() {
+        return name;
     }
 
-    public void setDay(MaterialDayPicker.Weekday day) {
-        this.day = day;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getDayInString() {
-        return DayInString;
+    public String getProff() {
+        return proff;
     }
 
-    public void setDayInString(String dayInString) {
-        DayInString = dayInString;
+    public void setProff(String proff) {
+        this.proff = proff;
+    }
+
+    public String getStringdays() {
+        return Stringdays;
+    }
+
+    public void setStringdays(String stringdays) {
+        Stringdays = stringdays;
+    }
+
+    public List<MaterialDayPicker.Weekday> getWeekdays() {
+        ConvertStringToMaterialdays(this.Stringdays);
+        return weekdays;
+    }
+
+    public void setWeekdays(List<MaterialDayPicker.Weekday> weekdays) {
+        this.weekdays = weekdays;
+        convertMaterialdaysToString(this.weekdays);
     }
 
     public int getPresent() {
@@ -84,21 +169,5 @@ public class AttendanceMain_rvModel {
 
     public void setAbsent(int absent) {
         this.absent = absent;
-    }
-
-    public String getSubject() {
-        return subject;
-    }
-
-    public void setSubject(String subject) {
-        this.subject = subject;
-    }
-
-    public String getTeacher() {
-        return teacher;
-    }
-
-    public void setTeacher(String teacher) {
-        this.teacher = teacher;
     }
 }

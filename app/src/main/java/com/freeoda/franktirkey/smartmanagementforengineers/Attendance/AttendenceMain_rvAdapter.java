@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,138 +15,162 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.freeoda.franktirkey.smartmanagementforengineers.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import ca.antonious.materialdaypicker.MaterialDayPicker;
 
-public class AttendenceMain_rvAdapter extends RecyclerView.Adapter<AttendenceMain_rvAdapter.cViewHolder> {
+public class AttendenceMain_rvAdapter extends RecyclerView.Adapter<AttendenceMain_rvAdapter.cViewHolder> implements Filterable {
 
-    private List<AttendanceMain_rvModel> tempList;
-    private LayoutInflater mInflater;
-    private ItemClickListener mClickListener;
+    List<AttendanceMain_rvModel> list;
+    List<AttendanceMain_rvModel> listFiltered = new ArrayList<>();
+    List<MaterialDayPicker.Weekday> days;
 
+    public void setDays(List<MaterialDayPicker.Weekday> days) {
+        this.days = days;
+    }
 
-    public AttendenceMain_rvAdapter(Context context, List<AttendanceMain_rvModel> list) {
-        mInflater = LayoutInflater.from(context);
-        this.tempList = list;
+    public AttendenceMain_rvAdapter(List<AttendanceMain_rvModel> list) {
+        this.list = list;
     }
 
     @NonNull
     @Override
     public cViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = mInflater.inflate(R.layout.attendance_main_rv_layout,parent,false);
+
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.attendance_main_rv_layout,parent,false);
+
         return new cViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull cViewHolder holder, int position) {
+        String name = listFiltered.get(position).getName();
+        String proff = listFiltered.get(position).getProff();
+        int present = listFiltered.get(position).getPresent();
+        int absent = listFiltered.get(position).getAbsent();
 
-        String SubjectName, teacher;
-        int persent, absent;
-        MaterialDayPicker.Weekday Day;
-
-        SubjectName = tempList.get(position).getSubject();
-        teacher = tempList.get(position).getTeacher();
-        persent = tempList.get(position).getPresent();
-        absent = tempList.get(position).getAbsent();
-        Day = tempList.get(position).getDay();
-
-        holder.setData(SubjectName, teacher, persent, absent, Day);
+        holder.setData(name,proff,present,absent);
     }
 
     @Override
     public int getItemCount() {
-        return tempList.size();
+        return listFiltered.size();
     }
 
-    void setClickListener(ItemClickListener itemClickListener) {
-        this.mClickListener = itemClickListener;
+    @Override
+    public Filter getFilter() {
+
+
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+                // String charString = charSequence.toString().trim();
+                listFiltered.clear();
+                if(days.isEmpty()){
+                    listFiltered = list;
+                }else {
+                    List<AttendanceMain_rvModel> filteredList = new ArrayList<>();
+                    for(AttendanceMain_rvModel model:list){//per list item
+                        for(MaterialDayPicker.Weekday wd:model.getWeekdays()){ //per day of model
+                            for(MaterialDayPicker.Weekday dd: days){ //per day of querry
+                                if(wd.equals(dd)) //days in model ?have? querry day
+                                    filteredList.add(model); //add model to filtered list
+                            }
+                        }
+
+                    }
+                    listFiltered = filteredList;
+                }
+
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = listFiltered;
+
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                listFiltered = (List<AttendanceMain_rvModel>) filterResults.values;
+                notifyDataSetChanged();
+            }
+        };
     }
 
-    public interface ItemClickListener {
-        void onItemClick(View view, int position);
-    }
+    class cViewHolder extends RecyclerView.ViewHolder {
 
-    public class cViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-
-        TextView tv_percen_rv_attendance,tv_subj_rv_attendance,tv_teacher_rv_attendance,
-                tv_present,tv_absent;
-        Button btn_atten_up,btn_atten_down;
-
-        String SubjectName, teacher;
-        int persant, absent;
-        MaterialDayPicker.Weekday Day;
+        //Model Layout
+        TextView tv_Perce, tv_subj, tv_teacher, tv_present, tv_absent;
+        Button btn_atten_up, btn_atten_down;
 
         public cViewHolder(@NonNull View itemView) {
             super(itemView);
-            this.tv_percen_rv_attendance = itemView.findViewById(R.id.tv_percen_rv_attendance);
-            this.tv_subj_rv_attendance = itemView.findViewById(R.id.tv_subj_rv_attendance);
-            this.tv_teacher_rv_attendance = itemView.findViewById(R.id.tv_teacher_rv_attendance);
-            this.tv_present = itemView.findViewById(R.id.tv_present);
-            this.tv_absent = itemView.findViewById(R.id.tv_absent);
-            this.btn_atten_up = itemView.findViewById(R.id.btn_atten_up);
-            this.btn_atten_down = itemView.findViewById(R.id.btn_atten_down);
 
-            btn_atten_up.setOnClickListener(this);
-            btn_atten_down.setOnClickListener(this);
+            tv_Perce = itemView.findViewById(R.id.tv_percen_rv_attendance);
+            tv_subj = itemView.findViewById(R.id.tv_subj_rv_attendance);
+            tv_teacher = itemView.findViewById(R.id.tv_teacher_rv_attendance);
+            tv_present = itemView.findViewById(R.id.tv_present);
+            tv_absent = itemView.findViewById(R.id.tv_absent);
+            btn_atten_up = itemView.findViewById(R.id.btn_atten_up);
+            btn_atten_down = itemView.findViewById(R.id.btn_atten_down);
+
+            btn_atten_up.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int pres = list.get(getAdapterPosition()).getPresent();
+                    pres = pres + 1;
+                    list.get(getAdapterPosition()).setPresent(pres);
+                    tv_present.setText(String.valueOf(list.get(getAdapterPosition()).getPresent()));
+                    tv_Perce.setText(String.valueOf(
+                            calculatePerce(
+                                    list.get(getAdapterPosition()).getPresent(),
+                                    listFiltered.get(getAdapterPosition()).getAbsent()))
+                            .concat("%"));
+
+                    Log.d("msg",String.valueOf(list.get(getAdapterPosition()).getName())
+                            .concat("present->")
+                            .concat(String.valueOf(list.get(getAdapterPosition()).getPresent())));
+                }
+            });
+
+            btn_atten_down.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int absens = list.get(getAdapterPosition()).getAbsent();
+                    absens = absens + 1;
+                    list.get(getAdapterPosition()).setAbsent(absens);
+                    tv_absent.setText(String.valueOf(list.get(getAdapterPosition()).getAbsent()));
+                    tv_Perce.setText(String.valueOf(
+                            calculatePerce(
+                                    list.get(getAdapterPosition()).getPresent(),
+                                    listFiltered.get(getAdapterPosition()).getAbsent()))
+                            .concat("%"));
+
+                    Log.d("msg",String.valueOf(list.get(getAdapterPosition()).getProff())
+                            .concat("absent->")
+                            .concat(String.valueOf(list.get(getAdapterPosition()).getAbsent())));
+                }
+            });
         }
 
-        public void setData(String SubjectName, String teacher, int persant, int absent,
-                            MaterialDayPicker.Weekday Day){
+        public void setData(String Subject,String preff,int present,int absent){
 
-            this.SubjectName = SubjectName;
-            this.teacher = teacher;
-            this.persant = persant;
-            this.absent = absent;
-            this.Day = Day;
+            tv_subj.setText(Subject);
+            tv_teacher.setText(preff);
+            tv_present.setText(String.valueOf(present));
+            tv_absent.setText(String.valueOf(absent));
+            tv_Perce.setText(String.valueOf((int)calculatePerce(present,absent)).concat("%"));
 
-            int total = persant+absent;
-            int per = 0;
-            try {
-                per = (persant*100)/total;
+        }
+
+        private int calculatePerce(int present,int absent){
+            int total = present + absent;
+            try{
+                return ((present*100)/total);
             }catch (Exception e){
                 e.printStackTrace();
             }
-
-            tv_percen_rv_attendance.setText(String.valueOf(per)+"%");
-            tv_subj_rv_attendance.setText(SubjectName);
-            tv_teacher_rv_attendance.setText(teacher);
-            tv_present.setText(String.valueOf(persant));
-            tv_absent.setText(String.valueOf(absent));
-
-        }
-
-        @Override
-        public void onClick(View view) { //TODO Not working Full @bug-0.0.1
-
-            if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());
-
-            Log.d("msg","got Posotion: "+getLayoutPosition());
-
-            if(view == btn_atten_up){
-                tempList.get(getLayoutPosition()).setPresent(persant + 1);
-                updateData();
-                //AttendanceMain.subjectList.get(getLayoutPosition()).setPresent(persant +1);
-            }
-            else{
-                tempList.get(getLayoutPosition()).setAbsent(absent + 1);
-                updateData();
-                //AttendanceMain.subjectList.get(getLayoutPosition()).setAbsent(absent+1);
-            }
-
-            notifyDataSetChanged();
-        }
-
-        private void updateData(){
-            for(int i = 0; i<AttendanceMain.subjectList.size();i++){
-                for(int j = 0; j<tempList.size();j++){
-                    if(AttendanceMain.subjectList.get(i).getId() == tempList.get(j).getId()){
-                        AttendanceMain.subjectList.get(i).setAbsent(tempList.get(j).getAbsent()) ;
-                        AttendanceMain.subjectList.get(i).setPresent(tempList.get(j).getPresent()); ;
-                    }
-                }
-
-            }
+            return 0;
         }
     }
 }

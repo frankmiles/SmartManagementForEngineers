@@ -60,7 +60,7 @@ public class Fragment_Home extends Fragment {
         String[] data = {
                 "Subject",
                 "Group Discussion",
-                "Attendance",
+                "Manage Attendance",
                 "Approach Faculty",
                 "Plannings",
                 "Reach Collage",

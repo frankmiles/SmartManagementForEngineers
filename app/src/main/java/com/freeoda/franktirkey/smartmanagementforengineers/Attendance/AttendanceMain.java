@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.TimePickerDialog;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -25,6 +26,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 
 import ca.antonious.materialdaypicker.MaterialDayPicker;
@@ -48,7 +50,7 @@ public class AttendanceMain extends AppCompatActivity {
     MaterialDayPicker day_picker_edit,day_picker_main;
 
     Button btn_SelectTime_Start,btn_SelectTime_End,btn_SaveEdit;
-    Button rv_btn_atten_up,rv_btn_atten_down;
+    Button btn_atten_up,btn_atten_down;
 
     TimePicker tp_timeSelected;
 
@@ -83,18 +85,18 @@ public class AttendanceMain extends AppCompatActivity {
         btn_SelectTime_End = findViewById(R.id.btn_SelectTime_End);
         btn_SaveEdit = findViewById(R.id.btn_SaveEdit);
 
-        rv_btn_atten_up = findViewById(R.id.btn_atten_up);
-        rv_btn_atten_down = findViewById(R.id.btn_atten_down);
+        btn_atten_up = findViewById(R.id.btn_atten_up);
+        btn_atten_down = findViewById(R.id.btn_atten_down);
 
         day_picker_edit = findViewById(R.id.day_picker_edit);
         day_picker_main = findViewById(R.id.day_picker_main);
 
+        setCurrentDay();
 
-        String branch = BackendlessApplication.getUser().getBranch();
-        tv_atten_branch.setText(branch);
-
-        String name = BackendlessApplication.getUser().getName();
-        tv_atten_name.setText(name);
+        subjectList = fetchDataFromDB();
+//        ArrayList<MaterialDayPicker.Weekday> tempList =  new ArrayList<>();
+//        tempList.add(MaterialDayPicker.Weekday.MONDAY);
+//        subjectList.add(new AttendanceMain_rvModel("DBMS","oom",tempList,0,0));
 
         fb_attendenceAddSubject.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -128,18 +130,31 @@ public class AttendanceMain extends AppCompatActivity {
             }
         });
 
-        final LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        layoutManager.setOrientation(RecyclerView.VERTICAL);
-        rv_attendance.setLayoutManager(layoutManager);
+        LinearLayoutManager linearLayout = new LinearLayoutManager(AttendanceMain.this);
+        rv_attendance.setLayoutManager(linearLayout);
 
-        subjectList = fetchDataFromDB(); //Fetching Data from DB
-        Log.d("msg","fetched Attendence for DB -> "+ subjectList.size());
+        //dayPicker_main.setSelectionMode(SingleSelectionMode.create());
+        day_picker_main.selectDay(MaterialDayPicker.Weekday.TUESDAY);
+        day_picker_main.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                adapter = new AttendenceMain_rvAdapter(subjectList);
+                rv_attendance.setAdapter(adapter);
+                adapter.setDays(day_picker_main.getSelectedDays());
+                adapter.getFilter().filter("");
+            }
+        });
 
-
-//        materialDayPicker.setSelectionMode(SingleSelectionMode.create()); //TO make it single Selection mode
-
-        setCurrentDay();
-        totalPer();
+        day_picker_main.performClick();
+        day_picker_main.setDaySelectionChangedListener(new MaterialDayPicker.DaySelectionChangedListener() {
+            @Override
+            public void onDaySelectionChanged(List<MaterialDayPicker.Weekday> list) {
+                adapter = new AttendenceMain_rvAdapter(subjectList);
+                rv_attendance.setAdapter(adapter);
+                adapter.setDays(list);
+                adapter.getFilter().filter("");
+            }
+        });
 
         btn_SaveEdit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -147,62 +162,28 @@ public class AttendanceMain extends AppCompatActivity {
 
                 String SubjName = et_subjName.getText().toString().trim();
                 String SubjProff = et_subjProff.getText().toString().trim();
-                List<MaterialDayPicker.Weekday> dayList = day_picker_edit.getSelectedDays();
-
-                MaterialDayPicker.Weekday day = getWeekDay(dayList.get(0).toString());
-
-                String msg = SubjName.concat(SubjProff).concat(" ").concat(String.valueOf(day))
-                        .concat(" ").concat(String.valueOf(selectedHr_start)).concat(" ")
-                        .concat(String.valueOf(selectedMin_start)).concat(" ").concat(String.valueOf(selectedHr_end))
-                        .concat(" ").concat(String.valueOf(selectedMin_end));
-
-
 
                 subjectList.add(new AttendanceMain_rvModel(SubjName,SubjProff,
-                       day,10,0));
+                       day_picker_edit.getSelectedDays(),0,0));
+
+                et_subjName.setText(null);
+                et_subjProff.setText(null);
 
                 fb_attendenceAddSubject.performClick();
                 setCurrentDay();
                 adapter.notifyDataSetChanged();
-                Log.d("msgAtten","Added: "+msg);
-
             }
         });
-
-        day_picker_main.setDaySelectionChangedListener(new MaterialDayPicker.DaySelectionChangedListener() {
-            @Override
-            public void onDaySelectionChanged(List<MaterialDayPicker.Weekday> list) {
-
-                applyFilter(subjectList,list.get(0));
-                totalPer();
-                Log.d("msg","DaySelectionChangedListener: "+list.get(0));
-
-            }
-        });
-
-    }
-
-    private  void applyFilter( List<AttendanceMain_rvModel> list,MaterialDayPicker.Weekday day){
-
-        List<AttendanceMain_rvModel> tempList = new ArrayList<>();
-
-        for(AttendanceMain_rvModel model: list){
-            Log.d("msg", model.DayInString+ "->" + day.toString());
-            if(model.DayInString.equalsIgnoreCase(day.toString())){
-                tempList.add(model);
-            }
-        }
-        adapter = new AttendenceMain_rvAdapter(
-                AttendanceMain.this, tempList);
-        rv_attendance.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
 
     }
 
     private List<AttendanceMain_rvModel> fetchDataFromDB(){
-
         return BackendlessApplication.getAttendance_db().attendanceDAO().getAll();
+    }
 
+    private void getDays(){
+        selectedDays = day_picker_edit.getSelectedDays();
+        Log.d("msg",selectedDays.toString()); //For testing purpose only
     }
 
     private void showTImePicker(View view){
@@ -233,120 +214,49 @@ public class AttendanceMain extends AppCompatActivity {
         }
     }
 
-    private void getDays(){
-        selectedDays = day_picker_edit.getSelectedDays();
-        Log.d("msg",selectedDays.toString()); //For testing purpose only
-    }
-
     private void setCurrentDay(){
-        SimpleDateFormat sdf = new SimpleDateFormat("EEEE");
+        SimpleDateFormat sdf = new SimpleDateFormat("EEEE", Locale.US);
         Date d = new Date();
         String dayOfTheWeek = sdf.format(d).toUpperCase();
 
         switch(dayOfTheWeek){
 
-            case "MONDAY":
-                day_picker_edit.setSelectedDays(MaterialDayPicker.Weekday.MONDAY);
-                day_picker_main.setSelectedDays(MaterialDayPicker.Weekday.MONDAY);
-                applyFilter(subjectList,MaterialDayPicker.Weekday.MONDAY);
-                break;
             case "TUESDAY":
                 day_picker_edit.setSelectedDays(MaterialDayPicker.Weekday.TUESDAY);
                 day_picker_main.setSelectedDays(MaterialDayPicker.Weekday.TUESDAY);
-                applyFilter(subjectList,MaterialDayPicker.Weekday.TUESDAY);
                 break;
             case "WEDNESDAY":
                 day_picker_edit.setSelectedDays(MaterialDayPicker.Weekday.WEDNESDAY);
                 day_picker_main.setSelectedDays(MaterialDayPicker.Weekday.WEDNESDAY);
-                applyFilter(subjectList,MaterialDayPicker.Weekday.WEDNESDAY);
                 break;
             case "THURSDAY":
                 day_picker_edit.setSelectedDays(MaterialDayPicker.Weekday.THURSDAY);
                 day_picker_main.setSelectedDays(MaterialDayPicker.Weekday.THURSDAY);
-                applyFilter(subjectList,MaterialDayPicker.Weekday.THURSDAY);
                 break;
             case "FRIDAY":
                 day_picker_edit.setSelectedDays(MaterialDayPicker.Weekday.FRIDAY);
                 day_picker_main.setSelectedDays(MaterialDayPicker.Weekday.FRIDAY);
-                applyFilter(subjectList,MaterialDayPicker.Weekday.FRIDAY);
                 break;
             case "SATURDAY":
                 day_picker_edit.setSelectedDays(MaterialDayPicker.Weekday.SATURDAY);
                 day_picker_main.setSelectedDays(MaterialDayPicker.Weekday.SATURDAY);
-                applyFilter(subjectList,MaterialDayPicker.Weekday.SATURDAY);
                 break;
             case "SUNDAY":
                 day_picker_edit.setSelectedDays(MaterialDayPicker.Weekday.SUNDAY);
                 day_picker_main.setSelectedDays(MaterialDayPicker.Weekday.SUNDAY);
-                applyFilter(subjectList,MaterialDayPicker.Weekday.SUNDAY);
                 break;
 
-                default:
-                    day_picker_edit.setSelectedDays(MaterialDayPicker.Weekday.MONDAY);
-                    day_picker_main.setSelectedDays(MaterialDayPicker.Weekday.MONDAY);
-                    applyFilter(subjectList,MaterialDayPicker.Weekday.MONDAY);
-                    break;
-        }
-    }
-
-    private MaterialDayPicker.Weekday getWeekDay(String dayOfTheWeek){
-
-        switch(dayOfTheWeek.toUpperCase()){
-
-            case "MONDAY":
-                return MaterialDayPicker.Weekday.MONDAY;
-            case "TUESDAY":
-                return MaterialDayPicker.Weekday.TUESDAY;
-            case "WEDNESDAY":
-                return MaterialDayPicker.Weekday.WEDNESDAY;
-            case "THURSDAY":
-                return MaterialDayPicker.Weekday.THURSDAY;
-            case "FRIDAY":
-                return MaterialDayPicker.Weekday.FRIDAY;
-            case "SATURDAY":
-                return MaterialDayPicker.Weekday.SATURDAY;
-            case "SUNDAY":
-                return MaterialDayPicker.Weekday.SUNDAY;
-
             default:
-                return MaterialDayPicker.Weekday.MONDAY;
+                day_picker_edit.setSelectedDays(MaterialDayPicker.Weekday.MONDAY);
+                day_picker_main.setSelectedDays(MaterialDayPicker.Weekday.MONDAY);
+                break;
         }
-    }
-
-    private void totalPer(){   //TODO Not working Full @bug-0.0.1
-
-        int Present=0,Absent=0;
-        int overallPresent = 0;
-        int overallAbsent = 0;
-        int overallTotal=0;
-
-        for(AttendanceMain_rvModel model : subjectList){
-
-            Present = model.getPresent();
-            Absent = model.getAbsent();
-            overallPresent =+ Present;
-            overallAbsent =+ Absent;
-            overallTotal =+ Absent+Present;
-        }
-
-        float totalPer = 0;
-        try {
-            totalPer = (overallPresent * 100) / overallTotal;
-        }catch (Exception e){
-            e.printStackTrace();
-            totalPer = 0;
-        }
-
-
-        tv_atten_percen.setText("Total Percent "+String.valueOf(totalPer).concat("%"));
-
-
     }
 
     @Override
-    public void onDestroy() {
+    protected void onDestroy() {
         super.onDestroy();
 
-        new setAllAttendanceFromDB(subjectList).execute();
+        BackendlessApplication.getAttendance_db().attendanceDAO().insertAll(subjectList);
     }
 }
