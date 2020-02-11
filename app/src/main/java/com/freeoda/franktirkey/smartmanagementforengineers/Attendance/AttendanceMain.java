@@ -49,7 +49,7 @@ public class AttendanceMain extends AppCompatActivity {
 
     MaterialDayPicker day_picker_edit,day_picker_main;
 
-    Button btn_SelectTime_Start,btn_SelectTime_End,btn_SaveEdit;
+    Button btn_SaveEdit;
     Button btn_atten_up,btn_atten_down;
 
     TimePicker tp_timeSelected;
@@ -81,8 +81,8 @@ public class AttendanceMain extends AppCompatActivity {
         rv_attendance = findViewById(R.id.rv_attendance);
         fb_attendenceAddSubject = findViewById(R.id.fb_attendenceAddSubject);
 
-        btn_SelectTime_Start = findViewById(R.id.btn_SelectTime_Start);
-        btn_SelectTime_End = findViewById(R.id.btn_SelectTime_End);
+//        btn_SelectTime_Start = findViewById(R.id.btn_SelectTime_Start);
+//        btn_SelectTime_End = findViewById(R.id.btn_SelectTime_End);
         btn_SaveEdit = findViewById(R.id.btn_SaveEdit);
 
         btn_atten_up = findViewById(R.id.btn_atten_up);
@@ -91,7 +91,7 @@ public class AttendanceMain extends AppCompatActivity {
         day_picker_edit = findViewById(R.id.day_picker_edit);
         day_picker_main = findViewById(R.id.day_picker_main);
 
-        setCurrentDay();
+//        setCurrentDay();
 
         subjectList = fetchDataFromDB();
 //        ArrayList<MaterialDayPicker.Weekday> tempList =  new ArrayList<>();
@@ -114,21 +114,21 @@ public class AttendanceMain extends AppCompatActivity {
             }
         });
 
-        btn_SelectTime_Start.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showTImePicker(view);
-                getDays();
-            }
-        });
-
-        btn_SelectTime_End.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showTImePicker(view);
-                getDays();
-            }
-        });
+//        btn_SelectTime_Start.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                showTImePicker(view);
+//                getDays();
+//            }
+//        });
+//
+//        btn_SelectTime_End.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                showTImePicker(view);
+//                getDays();
+//            }
+//        });
 
         LinearLayoutManager linearLayout = new LinearLayoutManager(AttendanceMain.this);
         rv_attendance.setLayoutManager(linearLayout);
@@ -138,7 +138,7 @@ public class AttendanceMain extends AppCompatActivity {
         day_picker_main.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                adapter = new AttendenceMain_rvAdapter(subjectList);
+                adapter = new AttendenceMain_rvAdapter(subjectList,tv_atten_percen);
                 rv_attendance.setAdapter(adapter);
                 adapter.setDays(day_picker_main.getSelectedDays());
                 adapter.getFilter().filter("");
@@ -149,7 +149,7 @@ public class AttendanceMain extends AppCompatActivity {
         day_picker_main.setDaySelectionChangedListener(new MaterialDayPicker.DaySelectionChangedListener() {
             @Override
             public void onDaySelectionChanged(List<MaterialDayPicker.Weekday> list) {
-                adapter = new AttendenceMain_rvAdapter(subjectList);
+                adapter = new AttendenceMain_rvAdapter(subjectList,tv_atten_percen);
                 rv_attendance.setAdapter(adapter);
                 adapter.setDays(list);
                 adapter.getFilter().filter("");
@@ -170,7 +170,7 @@ public class AttendanceMain extends AppCompatActivity {
                 et_subjProff.setText(null);
 
                 fb_attendenceAddSubject.performClick();
-                setCurrentDay();
+//                setCurrentDay();
                 adapter.notifyDataSetChanged();
             }
         });
@@ -181,77 +181,77 @@ public class AttendanceMain extends AppCompatActivity {
         return BackendlessApplication.getAttendance_db().attendanceDAO().getAll();
     }
 
-    private void getDays(){
-        selectedDays = day_picker_edit.getSelectedDays();
-        Log.d("msg",selectedDays.toString()); //For testing purpose only
-    }
+//    private void getDays(){
+//        selectedDays = day_picker_edit.getSelectedDays();
+//        Log.d("msg",selectedDays.toString()); //For testing purpose only
+//    }
+//
+//    private void showTImePicker(View view){
+//
+//        if(view == btn_SelectTime_Start){
+//
+//            TimePickerDialog timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
+//                @Override
+//                public void onTimeSet(TimePicker timePicker, int i, int i1) {
+//                    btn_SelectTime_Start.setText(i + ":" + i1);
+//                    selectedHr_start = i;
+//                    selectedMin_start = i1;
+//                    flagStart = true;
+//                }
+//            },selectedHr_start,selectedMin_start,false);
+//            timePickerDialog.show();
+//        }else {
+//            TimePickerDialog timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
+//                @Override
+//                public void onTimeSet(TimePicker timePicker, int i, int i1) {
+//                    btn_SelectTime_End.setText(i + ":" + i1);
+//                    selectedHr_end = i;
+//                    selectedMin_end = i1;
+//                    flagEnd = true;
+//                }
+//            },selectedHr_end,selectedMin_end,false);
+//            timePickerDialog.show();
+//        }
+//    }
 
-    private void showTImePicker(View view){
-
-        if(view == btn_SelectTime_Start){
-
-            TimePickerDialog timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
-                @Override
-                public void onTimeSet(TimePicker timePicker, int i, int i1) {
-                    btn_SelectTime_Start.setText(i + ":" + i1);
-                    selectedHr_start = i;
-                    selectedMin_start = i1;
-                    flagStart = true;
-                }
-            },selectedHr_start,selectedMin_start,false);
-            timePickerDialog.show();
-        }else {
-            TimePickerDialog timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
-                @Override
-                public void onTimeSet(TimePicker timePicker, int i, int i1) {
-                    btn_SelectTime_End.setText(i + ":" + i1);
-                    selectedHr_end = i;
-                    selectedMin_end = i1;
-                    flagEnd = true;
-                }
-            },selectedHr_end,selectedMin_end,false);
-            timePickerDialog.show();
-        }
-    }
-
-    private void setCurrentDay(){
-        SimpleDateFormat sdf = new SimpleDateFormat("EEEE", Locale.US);
-        Date d = new Date();
-        String dayOfTheWeek = sdf.format(d).toUpperCase();
-
-        switch(dayOfTheWeek){
-
-            case "TUESDAY":
-                day_picker_edit.setSelectedDays(MaterialDayPicker.Weekday.TUESDAY);
-                day_picker_main.setSelectedDays(MaterialDayPicker.Weekday.TUESDAY);
-                break;
-            case "WEDNESDAY":
-                day_picker_edit.setSelectedDays(MaterialDayPicker.Weekday.WEDNESDAY);
-                day_picker_main.setSelectedDays(MaterialDayPicker.Weekday.WEDNESDAY);
-                break;
-            case "THURSDAY":
-                day_picker_edit.setSelectedDays(MaterialDayPicker.Weekday.THURSDAY);
-                day_picker_main.setSelectedDays(MaterialDayPicker.Weekday.THURSDAY);
-                break;
-            case "FRIDAY":
-                day_picker_edit.setSelectedDays(MaterialDayPicker.Weekday.FRIDAY);
-                day_picker_main.setSelectedDays(MaterialDayPicker.Weekday.FRIDAY);
-                break;
-            case "SATURDAY":
-                day_picker_edit.setSelectedDays(MaterialDayPicker.Weekday.SATURDAY);
-                day_picker_main.setSelectedDays(MaterialDayPicker.Weekday.SATURDAY);
-                break;
-            case "SUNDAY":
-                day_picker_edit.setSelectedDays(MaterialDayPicker.Weekday.SUNDAY);
-                day_picker_main.setSelectedDays(MaterialDayPicker.Weekday.SUNDAY);
-                break;
-
-            default:
-                day_picker_edit.setSelectedDays(MaterialDayPicker.Weekday.MONDAY);
-                day_picker_main.setSelectedDays(MaterialDayPicker.Weekday.MONDAY);
-                break;
-        }
-    }
+//    private void setCurrentDay(){
+//        SimpleDateFormat sdf = new SimpleDateFormat("EEEE", Locale.US);
+//        Date d = new Date();
+//        String dayOfTheWeek = sdf.format(d).toUpperCase();
+//
+//        switch(dayOfTheWeek){
+//
+//            case "TUESDAY":
+//                day_picker_edit.setSelectedDays(MaterialDayPicker.Weekday.TUESDAY);
+//                day_picker_main.setSelectedDays(MaterialDayPicker.Weekday.TUESDAY);
+//                break;
+//            case "WEDNESDAY":
+//                day_picker_edit.setSelectedDays(MaterialDayPicker.Weekday.WEDNESDAY);
+//                day_picker_main.setSelectedDays(MaterialDayPicker.Weekday.WEDNESDAY);
+//                break;
+//            case "THURSDAY":
+//                day_picker_edit.setSelectedDays(MaterialDayPicker.Weekday.THURSDAY);
+//                day_picker_main.setSelectedDays(MaterialDayPicker.Weekday.THURSDAY);
+//                break;
+//            case "FRIDAY":
+//                day_picker_edit.setSelectedDays(MaterialDayPicker.Weekday.FRIDAY);
+//                day_picker_main.setSelectedDays(MaterialDayPicker.Weekday.FRIDAY);
+//                break;
+//            case "SATURDAY":
+//                day_picker_edit.setSelectedDays(MaterialDayPicker.Weekday.SATURDAY);
+//                day_picker_main.setSelectedDays(MaterialDayPicker.Weekday.SATURDAY);
+//                break;
+//            case "SUNDAY":
+//                day_picker_edit.setSelectedDays(MaterialDayPicker.Weekday.SUNDAY);
+//                day_picker_main.setSelectedDays(MaterialDayPicker.Weekday.SUNDAY);
+//                break;
+//
+//            default:
+//                day_picker_edit.setSelectedDays(MaterialDayPicker.Weekday.MONDAY);
+//                day_picker_main.setSelectedDays(MaterialDayPicker.Weekday.MONDAY);
+//                break;
+//        }
+//    }
 
     @Override
     protected void onDestroy() {

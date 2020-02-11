@@ -105,7 +105,8 @@
                     android:id="@+id/day_picker_main"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"/>
+                    android:layout_marginTop="5dp"
+                    app:selectionMode="ca.antonious.materialdaypicker.SingleSelectionMode"/>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_attendance"
@@ -160,32 +161,32 @@
                     android:layout_marginTop="15dp"
                     android:gravity="center_horizontal">
 
-                    <Button
-                        android:id="@+id/btn_SelectTime_Start"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginBottom="5dp"
-                        android:layout_gravity="center_horizontal"
-                        android:background="@color/colorPrimaryDark"
-                        android:textColor="@color/colorPrimaryTextLight"
-                        android:textStyle="bold"
-                        android:textSize="16sp"
-                        android:text="  Time Start  "/>
+<!--                    <Button-->
+<!--                        android:id="@+id/btn_SelectTime_Start"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginTop="8dp"-->
+<!--                        android:layout_marginBottom="5dp"-->
+<!--                        android:layout_gravity="center_horizontal"-->
+<!--                        android:background="@color/colorPrimaryDark"-->
+<!--                        android:textColor="@color/colorPrimaryTextLight"-->
+<!--                        android:textStyle="bold"-->
+<!--                        android:textSize="16sp"-->
+<!--                        android:text="  Time Start  "/>-->
 
-                    <Button
-                        android:id="@+id/btn_SelectTime_End"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginBottom="5dp"
-                        android:layout_gravity="center_horizontal"
-                        android:background="@color/colorPrimaryDark"
-                        android:textColor="@color/colorPrimaryTextLight"
-                        android:textStyle="bold"
-                        android:textSize="16sp"
-                        android:text=" Time End "/>
+<!--                    <Button-->
+<!--                        android:id="@+id/btn_SelectTime_End"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginStart="10dp"-->
+<!--                        android:layout_marginTop="8dp"-->
+<!--                        android:layout_marginBottom="5dp"-->
+<!--                        android:layout_gravity="center_horizontal"-->
+<!--                        android:background="@color/colorPrimaryDark"-->
+<!--                        android:textColor="@color/colorPrimaryTextLight"-->
+<!--                        android:textStyle="bold"-->
+<!--                        android:textSize="16sp"-->
+<!--                        android:text=" Time End "/>-->
 
                 </LinearLayout>
 
