@@ -53,16 +53,12 @@ public class Login extends AppCompatActivity {
         tvPass = findViewById(R.id.tvPass);
         getTvUsername_feedback = findViewById(R.id.tvUsername_feedback);
         tvPass_feedback = findViewById(R.id.tvPass_feedback);
-
         etUsername = findViewById(R.id.etUsername);
         etPass = findViewById(R.id.etPass);
-
         btnRegister = findViewById(R.id.btnRegister);
         btnSignin = findViewById(R.id.btnSignin);
-
         btnready();
         ValidLoginCheck();
-
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -75,13 +71,10 @@ public class Login extends AppCompatActivity {
         btnSignin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 btnbusy();
                 btnSignin.setText("Loading...");
-
                 String user = etUsername.getText().toString()+"";
                 String pass = etPass.getText().toString()+"";
-
                 Backendless.UserService.login(user, pass, new AsyncCallback<BackendlessUser>() {
                     @Override
                     public void handleResponse(BackendlessUser response) {
@@ -90,7 +83,6 @@ public class Login extends AppCompatActivity {
                         btnbusy();
                         getSubject();
                     }
-
                     @Override
                     public void handleFault(BackendlessFault fault) {
                         Toast.makeText(Login.this,fault.getDetail(),Toast.LENGTH_LONG).show();
@@ -132,8 +124,6 @@ public class Login extends AppCompatActivity {
                     signedInUser.setRegNo(response.get(0).get("regNo").toString());
                     BackendlessApplication.setUser(signedInUser);
                     BackendlessApplication.setUser(signedInUser);
-
-
                     btnSignin.animate()
                             .scaleXBy(ViewGroup.LayoutParams.MATCH_PARENT + 20)
                             .scaleYBy(ViewGroup.LayoutParams.MATCH_PARENT + 20)
@@ -212,7 +202,6 @@ public class Login extends AppCompatActivity {
                             btnready();
                             getSubject();
                         }
-
                         @Override
                         public void handleFault(BackendlessFault fault) {
                             Log.d("msg","Failed to logedin");
@@ -231,8 +220,6 @@ public class Login extends AppCompatActivity {
                 Toast.makeText(Login.this,fault.getCode(),Toast.LENGTH_LONG).show();
                 btnready();
             }
-
-
         });
 
     }

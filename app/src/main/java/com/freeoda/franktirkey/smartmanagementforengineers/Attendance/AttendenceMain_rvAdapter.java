@@ -82,14 +82,12 @@ public class AttendenceMain_rvAdapter extends RecyclerView.Adapter<AttendenceMai
                                     filteredList.add(model); //add model to filtered list
                             }
                         }
-
                     }
                     listFiltered = filteredList;
                 }
 
                 FilterResults filterResults = new FilterResults();
                 filterResults.values = listFiltered;
-
                 return filterResults;
             }
 
@@ -111,7 +109,12 @@ public class AttendenceMain_rvAdapter extends RecyclerView.Adapter<AttendenceMai
             totalAbsent = totalAbsent + model.getAbsent();
         }
         int totalClass = totalAbsent + totalPresent;
-        totalPercentage = (totalPresent * 100)/totalClass;
+        try {
+            totalPercentage = (totalPresent * 100)/totalClass;
+        }catch (Exception e){
+            totalPercentage = 0;
+            e.printStackTrace();
+        }
 
         totalPercentageView.setText(String.valueOf(totalPercentage).concat("%"));
     }
@@ -139,72 +142,86 @@ public class AttendenceMain_rvAdapter extends RecyclerView.Adapter<AttendenceMai
             btn_atten_up.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    int pres = list.get(getAdapterPosition()).getPresent(); //TODO notWorking well
-                    pres = pres + 1;
-                    list.get(getAdapterPosition()).setPresent(pres);
-                    tv_present.setText(String.valueOf(list.get(getAdapterPosition()).getPresent()));
-                    tv_Perce.setText(String.valueOf(
-                            calculatePerce(
-                                    list.get(getAdapterPosition()).getPresent(),
-                                    listFiltered.get(getAdapterPosition()).getAbsent()))
-                            .concat("%"));
-                    setTotalPercentage();
-                    Log.d("msg",String.valueOf(list.get(getAdapterPosition()).getName())
-                            .concat("present->")
-                            .concat(String.valueOf(list.get(getAdapterPosition()).getPresent())));
+
+                    String FilterName = listFiltered.get(getAdapterPosition()).getName();
+                    String FilterProff = listFiltered.get(getAdapterPosition()).getProff();
+                    if(list.contains(listFiltered.get(getAdapterPosition()))){
+                        for(int i = 0;i<list.size();i++){
+                            if(list.get(i).getName().equals(FilterName)  && list.get(i).getProff().equals(FilterProff)){
+                                list.get(i).setPresent(list.get(i).getPresent()+1);
+                                tv_present.setText(String.valueOf(list.get(i).getPresent()));
+                                tv_Perce.setText(String.valueOf(calculatePerce(list.get(i).getPresent(),list.get(i).getAbsent())));
+                                setTotalPercentage();
+                            }
+                        }
+                    }
                 }
             });
 
             btn_atten_down.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    int absens = list.get(getAdapterPosition()).getAbsent(); //TODO notWorking well
-                    absens = absens + 1;
-                    list.get(getAdapterPosition()).setAbsent(absens);
-                    tv_absent.setText(String.valueOf(list.get(getAdapterPosition()).getAbsent()));
-                    tv_Perce.setText(String.valueOf(
-                            calculatePerce(
-                                    list.get(getAdapterPosition()).getPresent(),
-                                    listFiltered.get(getAdapterPosition()).getAbsent()))
-                            .concat("%"));
-                    setTotalPercentage();
-                    Log.d("msg",String.valueOf(list.get(getAdapterPosition()).getProff())
-                            .concat("absent->")
-                            .concat(String.valueOf(list.get(getAdapterPosition()).getAbsent())));
+
+
+                    String FilterName = listFiltered.get(getAdapterPosition()).getName();
+                    String FilterProff = listFiltered.get(getAdapterPosition()).getProff();
+                    if(list.contains(listFiltered.get(getAdapterPosition()))){
+                        for(int i = 0;i<list.size();i++){
+                            if(list.get(i).getName().equals(FilterName)  && list.get(i).getProff().equals(FilterProff)){
+                                list.get(i).setAbsent(list.get(i).getAbsent()+1);
+                                tv_absent.setText(String.valueOf(list.get(i).getAbsent()));
+                                tv_Perce.setText(String.valueOf(calculatePerce(list.get(i).getPresent(),list.get(i).getAbsent())));
+                                setTotalPercentage();
+                            }
+                        }
+                    }
+
                 }
             });
 
             iv_present_minus.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    int pres = list.get(getAdapterPosition()).getPresent();
-                    if(!(pres<=0)){
-                        pres = pres - 1;
-                        list.get(getAdapterPosition()).setPresent(pres);
-                        tv_present.setText(String.valueOf(list.get(getAdapterPosition()).getPresent()));
-                        tv_Perce.setText(String.valueOf(
-                                calculatePerce(
-                                        list.get(getAdapterPosition()).getPresent(),
-                                        listFiltered.get(getAdapterPosition()).getAbsent()))
-                                .concat("%"));
+
+
+                    String FilterName = listFiltered.get(getAdapterPosition()).getName();
+                    String FilterProff = listFiltered.get(getAdapterPosition()).getProff();
+                    if(list.contains(listFiltered.get(getAdapterPosition()))){
+                        for(int i = 0;i<list.size();i++){
+                            if(list.get(i).getName().equals(FilterName)  && list.get(i).getProff().equals(FilterProff)){
+                                if(!(list.get(i).getPresent() == 0)){
+                                    list.get(i).setPresent(list.get(i).getPresent()-1);
+                                    tv_present.setText(String.valueOf(list.get(i).getPresent()));
+                                    tv_Perce.setText(String.valueOf(calculatePerce(list.get(i).getPresent(),list.get(i).getAbsent())));
+                                    setTotalPercentage();
+                                }
+                            }
+                        }
                     }
+
                 }
             });
 
             iv_absent_minus.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    int absens = list.get(getAdapterPosition()).getAbsent();
-                    if(!(absens<=0)){
-                        absens = absens - 1;
-                        list.get(getAdapterPosition()).setAbsent(absens);
-                        tv_absent.setText(String.valueOf(list.get(getAdapterPosition()).getAbsent()));
-                        tv_Perce.setText(String.valueOf(
-                                calculatePerce(
-                                        list.get(getAdapterPosition()).getPresent(),
-                                        listFiltered.get(getAdapterPosition()).getAbsent()))
-                                .concat("%"));
+
+
+                    String FilterName = listFiltered.get(getAdapterPosition()).getName();
+                    String FilterProff = listFiltered.get(getAdapterPosition()).getProff();
+                    if(list.contains(listFiltered.get(getAdapterPosition()))){
+                        for(int i = 0;i<list.size();i++){
+                            if(list.get(i).getName().equals(FilterName)  && list.get(i).getProff().equals(FilterProff)){
+                                if(!(list.get(i).getAbsent() == 0)){
+                                    list.get(i).setAbsent(list.get(i).getAbsent()-1);
+                                    tv_absent.setText(String.valueOf(list.get(i).getAbsent()));
+                                    tv_Perce.setText(String.valueOf(calculatePerce(list.get(i).getPresent(),list.get(i).getAbsent())));
+                                    setTotalPercentage();
+                                }
+                            }
+                        }
                     }
+
                 }
             });
         }
@@ -216,7 +233,6 @@ public class AttendenceMain_rvAdapter extends RecyclerView.Adapter<AttendenceMai
             tv_present.setText(String.valueOf(present));
             tv_absent.setText(String.valueOf(absent));
             tv_Perce.setText(String.valueOf((int)calculatePerce(present,absent)).concat("%"));
-
         }
 
         private int calculatePerce(int present,int absent){

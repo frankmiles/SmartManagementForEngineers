@@ -81,8 +81,6 @@ public class AttendanceMain extends AppCompatActivity {
         rv_attendance = findViewById(R.id.rv_attendance);
         fb_attendenceAddSubject = findViewById(R.id.fb_attendenceAddSubject);
 
-//        btn_SelectTime_Start = findViewById(R.id.btn_SelectTime_Start);
-//        btn_SelectTime_End = findViewById(R.id.btn_SelectTime_End);
         btn_SaveEdit = findViewById(R.id.btn_SaveEdit);
 
         btn_atten_up = findViewById(R.id.btn_atten_up);
@@ -113,22 +111,6 @@ public class AttendanceMain extends AppCompatActivity {
                 }
             }
         });
-
-//        btn_SelectTime_Start.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                showTImePicker(view);
-//                getDays();
-//            }
-//        });
-//
-//        btn_SelectTime_End.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                showTImePicker(view);
-//                getDays();
-//            }
-//        });
 
         LinearLayoutManager linearLayout = new LinearLayoutManager(AttendanceMain.this);
         rv_attendance.setLayoutManager(linearLayout);
