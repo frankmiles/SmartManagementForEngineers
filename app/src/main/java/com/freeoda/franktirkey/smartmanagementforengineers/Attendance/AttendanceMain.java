@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.TimePickerDialog;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -89,8 +90,9 @@ public class AttendanceMain extends AppCompatActivity {
         day_picker_edit = findViewById(R.id.day_picker_edit);
         day_picker_main = findViewById(R.id.day_picker_main);
 
+        tv_atten_name.setText(BackendlessApplication.getUser().getName());
+        tv_atten_branch.setText(BackendlessApplication.getUser().getBranch());
 //        setCurrentDay();
-
         subjectList = fetchDataFromDB();
 //        ArrayList<MaterialDayPicker.Weekday> tempList =  new ArrayList<>();
 //        tempList.add(MaterialDayPicker.Weekday.MONDAY);

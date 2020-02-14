@@ -2,10 +2,7 @@ package com.freeoda.franktirkey.smartmanagementforengineers.AbsTestingBKs;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.text.GetChars;
 import android.util.Log;
 import android.widget.TextView;
 
@@ -13,17 +10,9 @@ import com.backendless.Backendless;
 import com.backendless.async.callback.AsyncCallback;
 import com.backendless.exceptions.BackendlessFault;
 import com.backendless.persistence.DataQueryBuilder;
-import com.freeoda.franktirkey.smartmanagementforengineers.BackendlessApplication;
-import com.freeoda.franktirkey.smartmanagementforengineers.Collage.Collage;
-import com.freeoda.franktirkey.smartmanagementforengineers.LocalDBForBKs.User;
-import com.freeoda.franktirkey.smartmanagementforengineers.LocalDBForBKs.getLocalDB;
-import com.freeoda.franktirkey.smartmanagementforengineers.MainActivity;
 import com.freeoda.franktirkey.smartmanagementforengineers.R;
-import com.freeoda.franktirkey.smartmanagementforengineers.Register;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 

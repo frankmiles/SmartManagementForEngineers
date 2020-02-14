@@ -71,7 +71,13 @@
                 android:textSize="16sp"
                 android:text="tv_atten_collage"
                 android:singleLine="true"
-                android:textColor="@color/colorPrimaryTextLight" />
+                android:textColor="@color/colorPrimaryTextLight"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:scrollHorizontally="true"
+                android:freezesText="true"
+                android:focusableInTouchMode="true"
+                android:focusable="true"
+                android:ellipsize="marquee"/>
 
         </LinearLayout>
 

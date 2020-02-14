@@ -19,7 +19,7 @@
         android:theme="@style/AppMaterialTheme">
         <activity android:name=".AbsTestingBKs.AbsTestingBks"></activity>
         <activity android:name=".Subject.SubjectMain" />
-        <activity android:name=".Collage.CollageFaculty" />
+        <activity android:name=".Collage.CollageMain" />
         <activity android:name=".Attendance.AttendanceMain" />
         <activity android:name=".Routine.RoutineMain" />
         <activity android:name=".Syllabus.SyllabusMain" />

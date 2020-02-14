@@ -29,10 +29,9 @@
         android:layout_marginTop="5dp"
         android:inputType="textPersonName"
         android:layout_marginStart="10dp"
-        android:backgroundTint="@color/colorPrimaryTextLight"
+        android:background="@color/colorPrimaryDark"
         android:backgroundTintMode="src_atop"
         android:layout_marginEnd="10dp"
-
         android:textColor="@color/colorPrimaryTextLight"
         android:text="pojo@gmail.com" />
 
@@ -46,7 +45,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:textColor="@color/colorPrimaryTextLight"
-        android:text="tvUsername_feedback" />
+        android:text="tvUsername_feedback"/>
 
     <TextView
         android:id="@+id/tvPass"
@@ -69,7 +68,7 @@
         android:inputType="textPassword"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
-        android:backgroundTint="@color/colorPrimaryTextLight"
+        android:background="@color/colorPrimaryDark"
         android:textColor="@color/colorPrimaryTextLight"
         android:text="1234" />
 
@@ -93,31 +92,41 @@
         android:background="@color/colorDivider"
         />
 
-    <Button
-        android:id="@+id/btnSignin"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginTop="30dp"
-        android:background="@color/colorAccent"
-        android:text="Sign In"
-        android:textColor="@color/colorPrimaryTextLight"
-        android:textStyle="bold"
-        android:soundEffectsEnabled="true"
-        android:typeface="monospace" />
+        android:layout_marginTop="20dp"
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btnRegister"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="10dp"
-        android:background="@color/colorAccent"
-        android:text="New User? Register Now!"
-        android:textColor="@color/colorPrimaryTextLight"
-        android:textStyle="bold"
-        android:typeface="monospace" />
+        <Button
+            android:id="@+id/btnRegister"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="10dp"
+            android:background="@color/colorAccent"
+            android:text="New User? Register Now!"
+            android:textColor="@color/colorPrimaryTextLight"
+            android:textStyle="bold"
+            android:typeface="monospace"
+            android:layout_gravity="center_horizontal"/>
+
+        <Button
+            android:id="@+id/btnSignin"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="30dp"
+            android:background="@color/colorAccent"
+            android:text="Sign In"
+            android:textColor="@color/colorPrimaryTextLight"
+            android:textStyle="bold"
+            android:soundEffectsEnabled="true"
+            android:typeface="monospace"
+            android:layout_gravity="center_horizontal"/>
+
+    </LinearLayout>
 
 </LinearLayout>

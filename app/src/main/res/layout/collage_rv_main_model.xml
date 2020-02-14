@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="300dp"
+    android:layout_height="400dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginStart="10dp"
+    android:layout_marginEnd="10dp"
+    android:elevation="2dp"
+    android:layout_gravity="center">
+            <LinearLayout
+                android:id="@+id/ll_main_rv_collage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:background="@color/colorCardPrimary">
+
+                <TextView
+                    android:id="@+id/tv_collage_domain"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fadeScrollbars="true"
+                    android:text="Loading"
+                    android:textAlignment="center"
+                    android:textSize="18sp"
+                    android:focusable="true"
+                    android:scrollHorizontally="true"
+                    android:ellipsize="marquee"
+                    android:focusableInTouchMode="true"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:textColor="@color/colorPrimaryTextLight"
+                    android:textStyle="bold" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_main_domain_contact"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:layout_margin="2dp"/>
+
+            </LinearLayout>
+</androidx.cardview.widget.CardView>

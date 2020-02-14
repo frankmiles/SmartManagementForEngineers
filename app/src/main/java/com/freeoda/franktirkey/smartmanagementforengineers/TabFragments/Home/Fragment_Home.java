@@ -5,18 +5,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AnimationUtils;
-import android.view.animation.GridLayoutAnimationController;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,12 +21,10 @@ import com.freeoda.franktirkey.smartmanagementforengineers.AppConfig.AppSetting;
 import com.freeoda.franktirkey.smartmanagementforengineers.AppConfig.HelpAndReport;
 import com.freeoda.franktirkey.smartmanagementforengineers.Attendance.AttendanceMain;
 import com.freeoda.franktirkey.smartmanagementforengineers.Chat.chatWorkers.ChatMainWorker;
-import com.freeoda.franktirkey.smartmanagementforengineers.Collage.CollageFaculty;
+import com.freeoda.franktirkey.smartmanagementforengineers.Collage.CollageMain;
 import com.freeoda.franktirkey.smartmanagementforengineers.R;
 import com.freeoda.franktirkey.smartmanagementforengineers.Subject.SubjectMain;
 import com.freeoda.franktirkey.smartmanagementforengineers.ToDos.ToDoMain;
-
-import java.util.Objects;
 
 
 /**
@@ -61,9 +54,8 @@ public class Fragment_Home extends Fragment {
                 "Subject",
                 "Group Discussion",
                 "Manage Attendance",
-                "Approach Faculty",
                 "Plannings",
-                "Reach Collage",
+                "Collage",
                 "Important Dates",
                 "Set Goals",
                 "Setting",
@@ -90,21 +82,19 @@ public class Fragment_Home extends Fragment {
                         break;
                     case 2: startActivity(new Intent(context, AttendanceMain.class));
                         break;
-                    case 3: startActivity(new Intent(context,CollageFaculty.class).putExtra("data","Faculty"));
+                    case 3: startActivity(new Intent(context, ToDoMain.class).putExtra("data","planning"));
                         break;
-                    case 4: startActivity(new Intent(context, ToDoMain.class).putExtra("data","planning"));
+                    case 4: startActivity(new Intent(context, CollageMain.class).putExtra("data","reachCollage"));
                         break;
-                    case 5: startActivity(new Intent(context,CollageFaculty.class).putExtra("data","reachCollage"));
+                    case 5: startActivity(new Intent(context,ToDoMain.class).putExtra("data","impDate"));
                         break;
-                    case 6: startActivity(new Intent(context,ToDoMain.class).putExtra("data","impDate"));
+                    case 6: startActivity(new Intent(context,ToDoMain.class).putExtra("data","Set Goal"));
                         break;
-                    case 7: startActivity(new Intent(context,ToDoMain.class).putExtra("data","Set Goal"));
+                    case 7: startActivity(new Intent(context, AppSetting.class));
                         break;
-                    case 8: startActivity(new Intent(context, AppSetting.class));
+                    case 8: startActivity(new Intent(context, HelpAndReport.class));
                         break;
-                    case 9: startActivity(new Intent(context, HelpAndReport.class));
-                        break;
-                    case 10: startActivity(new Intent(context, AppAbout.class));
+                    case 9: startActivity(new Intent(context, AppAbout.class));
                         break;
                 }
             }

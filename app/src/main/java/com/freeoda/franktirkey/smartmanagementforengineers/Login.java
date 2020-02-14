@@ -57,7 +57,8 @@ public class Login extends AppCompatActivity {
         etPass = findViewById(R.id.etPass);
         btnRegister = findViewById(R.id.btnRegister);
         btnSignin = findViewById(R.id.btnSignin);
-        btnready();
+
+        btnbusy();
         ValidLoginCheck();
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,6 +114,7 @@ public class Login extends AppCompatActivity {
                     btnSignin.setText(" ");
                     Log.d("msg",response.toString()); //tODO FOR TESTING PURPOSE
 
+
                     User signedInUser = new User();
                     signedInUser.setUid(Integer.parseInt(response.get(0).get("uid").toString()));
                     signedInUser.setOwnerId(response.get(0).get("ownerId").toString());
@@ -124,56 +126,59 @@ public class Login extends AppCompatActivity {
                     signedInUser.setRegNo(response.get(0).get("regNo").toString());
                     BackendlessApplication.setUser(signedInUser);
                     BackendlessApplication.setUser(signedInUser);
-                    btnSignin.animate()
-                            .scaleXBy(ViewGroup.LayoutParams.MATCH_PARENT + 20)
-                            .scaleYBy(ViewGroup.LayoutParams.MATCH_PARENT + 20)
-                            .alphaBy(0)
-                            .alphaBy(0)
-                            .setDuration(1000)
-                            .alphaBy(0)
-                            .setListener(new Animator.AnimatorListener() {
-                                @Override
-                                public void onAnimationStart(final Animator animator) {
-                                    btnRegister.setVisibility(View.INVISIBLE);
-                                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-                                        btnSignin.setText("SMFE");
-                                        btnSignin.setTextSize(5);
-                                        int colorFrom = getResources().getColor(R.color.colorLightPrimary);
-                                        int colorTo = getResources().getColor(R.color.colorAccent);
-                                        ValueAnimator valueAnimator = ValueAnimator.ofObject(
-                                                new ArgbEvaluator(), colorFrom,colorTo);
-                                        valueAnimator.setDuration(900);
-                                        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-                                            @Override
-                                            public void onAnimationUpdate(ValueAnimator valueAnimator) {
-                                                btnSignin.setBackgroundColor((Integer) valueAnimator.getAnimatedValue());
-                                            }
-                                        });
-                                        valueAnimator.start();
-                                    }else {
-                                        btnSignin.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-                                    }
+//                    btnSignin.animate()
+//                            .scaleXBy(ViewGroup.LayoutParams.MATCH_PARENT + 20)
+//                            .scaleYBy(ViewGroup.LayoutParams.MATCH_PARENT + 20)
+//                            .alphaBy(0)
+//                            .alphaBy(0)
+//                            .setDuration(1000)
+//                            .alphaBy(0)
+//                            .setListener(new Animator.AnimatorListener() {
+//                                @Override
+//                                public void onAnimationStart(final Animator animator) {
+//                                    btnRegister.setVisibility(View.INVISIBLE);
+//                                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+//                                        btnSignin.setText("SMFE");
+//                                        btnSignin.setTextSize(5);
+//                                        int colorFrom = getResources().getColor(R.color.colorLightPrimary);
+//                                        int colorTo = getResources().getColor(R.color.colorAccent);
+//                                        ValueAnimator valueAnimator = ValueAnimator.ofObject(
+//                                                new ArgbEvaluator(), colorFrom,colorTo);
+//                                        valueAnimator.setDuration(900);
+//                                        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+//                                            @Override
+//                                            public void onAnimationUpdate(ValueAnimator valueAnimator) {
+//                                                btnSignin.setBackgroundColor((Integer) valueAnimator.getAnimatedValue());
+//                                            }
+//                                        });
+//                                        valueAnimator.start();
+//                                    }else {
+//                                        btnSignin.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+//                                    }
+//                                }
+//
+//                                @Override
+//                                public void onAnimationEnd(Animator animator) {
+//                                    startActivity(new Intent(Login.this, MainActivity.class));
+//                                    overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_from_left);
+//                                    finish();
+//                                }
+//
+//                                @Override
+//                                public void onAnimationCancel(Animator animator) {
+//
+//                                }
+//
+//                                @Override
+//                                public void onAnimationRepeat(Animator animator) {
+//
+//                                }
+//                            })
+//                            .start();
 
-                                }
-
-                                @Override
-                                public void onAnimationEnd(Animator animator) {
-                                    startActivity(new Intent(Login.this, MainActivity.class));
-                                    overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_from_left);
-                                    finish();
-                                }
-
-                                @Override
-                                public void onAnimationCancel(Animator animator) {
-
-                                }
-
-                                @Override
-                                public void onAnimationRepeat(Animator animator) {
-
-                                }
-                            })
-                            .start();
+                    startActivity(new Intent(Login.this, MainActivity.class));
+                    overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_from_left);
+                    finish();
                 }
             }
 
@@ -198,8 +203,6 @@ public class Login extends AppCompatActivity {
                             Toast.makeText(Login.this,"LogedIn",Toast.LENGTH_SHORT).show();
                             Log.d("msg","LogedIn");
                             BackendlessApplication.backendlessUser = response;
-
-                            btnready();
                             getSubject();
                         }
                         @Override
@@ -225,6 +228,8 @@ public class Login extends AppCompatActivity {
     }
 
     private void btnready(){ //TO make button Available to click
+        btnRegister.setEnabled(true);
+        btnSignin.setEnabled(true);
         btnRegister.setClickable(true);
         btnSignin.setClickable(true);
         btnSignin.setText("SIGNIN");
@@ -233,6 +238,8 @@ public class Login extends AppCompatActivity {
     }
 
     private void btnbusy(){ //TO make button Unavailable to click
+        btnRegister.setEnabled(false);
+        btnSignin.setEnabled(false);
         btnRegister.setClickable(false);
         btnSignin.setClickable(false);
         btnSignin.setText("Loading...");

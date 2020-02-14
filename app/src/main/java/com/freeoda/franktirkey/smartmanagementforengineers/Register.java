@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
@@ -25,7 +24,7 @@ import com.backendless.async.callback.AsyncCallback;
 import com.backendless.async.callback.BackendlessCallback;
 import com.backendless.exceptions.BackendlessFault;
 import com.backendless.persistence.DataQueryBuilder;
-import com.freeoda.franktirkey.smartmanagementforengineers.Collage.Collage;
+import com.freeoda.franktirkey.smartmanagementforengineers.Collage.CollageModel;
 import com.freeoda.franktirkey.smartmanagementforengineers.LocalDBForBKs.User;
 import com.freeoda.franktirkey.smartmanagementforengineers.LocalDBForBKs.getLocalDB;
 
@@ -33,10 +32,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import javax.security.auth.callback.PasswordCallback;
 
 public class Register extends AppCompatActivity {
 
@@ -52,7 +48,7 @@ public class Register extends AppCompatActivity {
 
 
     String getSelectedCollageObjId;
-    List<Collage> collageFromBKs = new ArrayList<>();
+    List<CollageModel> collageFromBKs = new ArrayList<>();
     List<String> collageNameList = new ArrayList<>();
     int SelectedCollagePosition=0;
     ArrayAdapter<String> CollageDataAdapter;
@@ -340,13 +336,13 @@ public class Register extends AppCompatActivity {
 
     void CollageData(){
 
-        Backendless.Data.of(Collage.class).find(new AsyncCallback<List<Collage>>() {
+        Backendless.Data.of(CollageModel.class).find(new AsyncCallback<List<CollageModel>>() {
             @Override
-            public void handleResponse(List<Collage> response) {
+            public void handleResponse(List<CollageModel> response) {
                 Log.d("msg","Got collage data");
                 collageFromBKs = response;
 
-                for(int i = 0;i<response.size();i++){    //Fetching Collage
+                for(int i = 0;i<response.size();i++){    //Fetching CollageModel
                     collageNameList.add(response.get(i).getName());
                 }
                 CollageDataAdapter = new ArrayAdapter<String>(Register.this, R.layout.spinner_txt_values,collageNameList);
@@ -422,7 +418,7 @@ public class Register extends AppCompatActivity {
                     PorterDuff.Mode.SRC_ATOP);
         }
         else {
-            //Collage Reg Error
+            //CollageModel Reg Error
             Log.d("msg","Error in CollageRegNo: "+collage_RegNo);
             MainFlag = false;
             et_RegNumber.getBackground().setColorFilter(getResources().getColor(R.color.colorAccent),
