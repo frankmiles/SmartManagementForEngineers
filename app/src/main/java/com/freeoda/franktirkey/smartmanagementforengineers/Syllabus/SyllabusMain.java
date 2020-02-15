@@ -21,11 +21,12 @@ import com.freeoda.franktirkey.smartmanagementforengineers.R;
 import com.freeoda.franktirkey.smartmanagementforengineers.Syllabus.XMLManager.XMLDownloader;
 import com.freeoda.franktirkey.smartmanagementforengineers.Syllabus.XMLManager.xmlParser;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.youtube.player.YouTubeBaseActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SyllabusMain extends AppCompatActivity {
+public class SyllabusMain extends YouTubeBaseActivity {
 
     TextView syllabusMain_tv,tv_cv_Syllabus_Main,tv_SubjectName_SyllabusMain;
     RecyclerView rv_syllabus_main_subjectSelect;
