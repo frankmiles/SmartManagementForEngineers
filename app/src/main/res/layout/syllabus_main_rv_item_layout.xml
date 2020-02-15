@@ -1,15 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    xmlns:app="http://schemas.android.com/tools"
-    android:orientation="horizontal"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:paddingTop="8dp"
-    android:paddingStart="10dp"
-    android:paddingEnd="10dp">
-
-    <androidx.cardview.widget.CardView
+<androidx.cardview.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        xmlns:app="http://schemas.android.com/tool"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -17,18 +10,48 @@
         card_view:cardBackgroundColor="@android:color/white"
         card_view:cardElevation="2dp"
         app:cardUseCompatPadding="true"
+    android:paddingBottom="5dp"
         card_view:cardUseCompatPadding="true">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="8dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp">
+
         <TextView
-            android:id="@+id/tv_rv_item_syllabus"
+            android:id="@+id/tv_rv_item_syllabus_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textSize="32sp"
+            android:textSize="18sp"
             android:padding="5dp"
-            android:layout_gravity="center_horizontal"
-            android:text="Loading..." />
-    </androidx.cardview.widget.CardView>
+            android:layout_gravity="start"
+            android:textStyle="bold"
+            android:text="Loading Title..." />
 
+        <TextView
+            android:id="@+id/tv_rv_syllabus_body"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:textStyle="italic"
+            android:layout_marginTop="5dp"
+            android:text="loading data..."/>
 
-</LinearLayout>
+        <VideoView
+            android:id="@+id/vv_syllabus_yoututbePlayer"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="5dp" />
+
+    </LinearLayout>
+    </ScrollView>
+</androidx.cardview.widget.CardView>

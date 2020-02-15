@@ -20,39 +20,35 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-
     //Google Meterial UI
     implementation 'com.google.android.material:material:1.0.0'
-
     //Server-Backendless
-    implementation group: 'com.backendless', name: 'backendless', version: '5.3.1'
-
+    implementation 'com.backendless:backendless:5.3.1'
     //Socket.IO for Chating
-    implementation ( group: 'io.socket', name: 'socket.io-client', version: '1.0.0' ) {
+    implementation('io.socket:socket.io-client:1.0.0') {
         //      excluding org.json which is provided by Android
         exclude group: 'org.json', module: 'json'
     }
-
     //Room dependency
     implementation 'android.arch.persistence.room:runtime:1.1.1'
     annotationProcessor 'android.arch.persistence.room:compiler:1.1.1'
-
     //Gson Dep
     implementation 'com.google.code.gson:gson:2.8.5'
-
     //image Lib
     implementation 'jp.wasabeef:blurry:3.0.0'
-
     //facebook Shemer
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
-
     //implementing Date https://github.com/gantonious/MaterialDayPicker
     implementation 'ca.antonious:materialdaypicker:0.7.1'
+    //implementating the stepView https://github.com/kofigyan/StateProgressBar
+    implementation 'com.kofigyan.stateprogressbar:stateprogressbar:1.0.0'
+    //implementating the youtube Api 
+    implementation files('libs/YouTubeAndroidPlayerApi.jar')
 }

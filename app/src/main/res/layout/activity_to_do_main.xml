@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,15 +7,64 @@
     android:orientation="vertical"
     tools:context=".ToDos.ToDoMain">
 
-    <TextView
-        android:id="@+id/te"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fb_ToDoMain"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="toDO"/>
-    <TextView
-        android:id="@+id/tv_todo_main_data"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="NoData"/>
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="35dp"
+        android:layout_marginBottom="35dp"
+        android:clickable="true"
+        app:srcCompat="@drawable/add_icon"
+        android:focusable="true" />
 
-</LinearLayout>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_ToDoMain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:elevation="2dp"
+        android:visibility="gone"
+        app:cardBackgroundColor="@color/colorCardPrimary">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="@string/initialCardTodoMsg"
+                android:textAlignment="center"
+                android:textColor="@color/colorPrimaryTextLight"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_card_skip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="Skip >"
+                android:textColor="@color/colorPrimaryTextLight"
+                android:textSize="24sp"
+                android:textStyle="italic" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_ToDoMain"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+</RelativeLayout>
