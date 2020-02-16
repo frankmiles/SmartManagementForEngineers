@@ -92,7 +92,7 @@ public class xmlParser extends AsyncTask<Void,Void,Void> {
                         sXml.getTopic(),
                         sXml.getDetail(),
                         sXml.getUrl(),
-                        sXml.getUrl()
+                        sXml.getYoutube()
                         )
                 );
             }

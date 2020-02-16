@@ -9,6 +9,8 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 
 import com.freeoda.franktirkey.smartmanagementforengineers.TabFragments.MainActivity_TabPageAdapter;
@@ -50,6 +52,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tabLayout.getSelectedTabPosition());
+                Animation animation = AnimationUtils.loadAnimation(MainActivity.this,R.anim.slide_from_side);
+                viewPager.setAnimation(animation);
             }
 
             @Override
@@ -76,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(MainActivity.this,BackendlessApplication.backendlessUser.getProperty("email").toString(),Toast.LENGTH_LONG).show();
 
         verifyStoragePermissions(MainActivity.this);
+
     }
 
     public static void verifyStoragePermissions(Activity activity) {

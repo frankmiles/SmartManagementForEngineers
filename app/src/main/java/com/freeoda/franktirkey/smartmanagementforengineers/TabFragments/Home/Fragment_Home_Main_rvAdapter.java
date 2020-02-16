@@ -47,7 +47,7 @@ public class Fragment_Home_Main_rvAdapter extends RecyclerView.Adapter<Fragment_
         // If the bound view wasn't previously displayed on screen, it's animated
         if (position > lastPosition) {
             Animation animation = AnimationUtils.loadAnimation(context, R.anim.slide_from_bottom); // for image
-            animation.setDuration(800);
+            animation.setDuration(500);
             viewToAnimate.startAnimation(animation);
             lastPosition = position;
         }

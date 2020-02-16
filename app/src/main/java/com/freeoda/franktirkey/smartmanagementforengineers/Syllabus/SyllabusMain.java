@@ -73,11 +73,10 @@ public class SyllabusMain extends YouTubeBaseActivity {
         container = findViewById(R.id.shimmer_view_container);
         container.setVisibility(View.GONE);
 
-        list.add(new SyllabusMainModel("module","topic", "detail", "url", "youtube"));
+//        list.add(new SyllabusMainModel("module","topic", "detail", "url", "youtube"));
 //        list.add(new SyllabusMainModel(002,"Check your internet!"));
 //        list.add(new SyllabusMainModel(003,"'Even a Talent can be"));
 //        list.add(new SyllabusMainModel(004,"bitten by plan!'"));
-
 
         fb_Syllabus_main.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("RestrictedApi")
