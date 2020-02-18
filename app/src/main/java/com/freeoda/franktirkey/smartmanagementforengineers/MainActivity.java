@@ -52,8 +52,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tabLayout.getSelectedTabPosition());
-                Animation animation = AnimationUtils.loadAnimation(MainActivity.this,R.anim.slide_from_side);
-                viewPager.setAnimation(animation);
+
             }
 
             @Override
