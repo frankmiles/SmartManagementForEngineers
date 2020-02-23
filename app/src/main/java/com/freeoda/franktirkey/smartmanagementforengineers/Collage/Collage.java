@@ -1,12 +1,12 @@
 package com.freeoda.franktirkey.smartmanagementforengineers.Collage;
 
-public class CollageModel {
+public class Collage {
 
     String collageId;
     String name;
     String objectId;
 
-    public CollageModel() {
+    public Collage() {
     }
 
     public String getCollageId() {

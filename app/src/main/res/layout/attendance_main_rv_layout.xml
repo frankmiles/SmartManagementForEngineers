@@ -19,9 +19,10 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:text="100%"
-            android:textSize="40sp"
+            android:textSize="25sp"
             android:layout_gravity="center"
             android:textColor="@color/colorCardPrimary"
+            android:gravity="center"
             android:textStyle="bold" />
 
         <LinearLayout
@@ -32,18 +33,30 @@
 
             <TextView
                 android:id="@+id/tv_subj_rv_attendance"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView"
+                android:text="Subject"
                 android:textSize="24sp"
+                android:maxWidth="200dp"
                 android:textColor="@color/colorPrimaryText"
                 android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/btn_rv_delete"
+                android:layout_width="wrap_content"
+                android:layout_height="18dp"
+                android:layout_gravity="end"
+                android:gravity="center"
+                android:layout_marginStart="5dp"
+                android:background="@android:color/holo_red_dark"
+                android:textColor="@color/colorPrimaryTextLight"
+                android:text="delete" />
 
             <TextView
                 android:id="@+id/tv_teacher_rv_attendance"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView"
+                android:text="Proff"
                 android:textSize="20sp"
                 android:textColor="@color/colorPrimaryText"
                 android:textStyle="italic" />
@@ -104,7 +117,7 @@
                 <Button
                     android:id="@+id/btn_atten_up"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="30dp"
                     android:text="Present"
                     android:background="@color/atten_up"
                     android:textColor="@color/colorPrimaryTextLight" />
@@ -112,11 +125,21 @@
                 <Button
                     android:id="@+id/btn_atten_down"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="30dp"
                     android:layout_marginStart="10dp"
+                    android:background="#D32F2F"
                     android:text="Absent"
-                    android:background="@color/atten_down"
                     android:textColor="@color/colorPrimaryTextLight" />
+
+                <Button
+                    android:id="@+id/btn_edit_attendance_subject"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="10dp"
+                    android:background="#FF6F00"
+                    android:text="Edit"
+                    android:textColor="@color/colorPrimaryTextLight"
+                    android:textStyle="bold" />
 
             </LinearLayout>
         </LinearLayout>

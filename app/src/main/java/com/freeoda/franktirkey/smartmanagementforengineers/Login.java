@@ -234,8 +234,8 @@ public class Login extends AppCompatActivity {
         btnRegister.setClickable(true);
         btnSignin.setClickable(true);
         btnSignin.setText("SIGNIN");
-        btnRegister.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-        btnSignin.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+        btnRegister.setBackground(getResources().getDrawable(R.drawable.rounded_button_active));
+        btnSignin.setBackground(getResources().getDrawable(R.drawable.rounded_button_active));
     }
 
     private void btnbusy(){ //TO make button Unavailable to click
@@ -244,8 +244,8 @@ public class Login extends AppCompatActivity {
         btnRegister.setClickable(false);
         btnSignin.setClickable(false);
         btnSignin.setText("Loading...");
-        btnRegister.setBackgroundColor(getResources().getColor(R.color.colorLightPrimary));
-        btnSignin.setBackgroundColor(getResources().getColor(R.color.colorLightPrimary));
+        btnRegister.setBackground(getResources().getDrawable(R.drawable.rounded_button_deactive));
+        btnSignin.setBackground(getResources().getDrawable(R.drawable.rounded_button_deactive));
     }
 
     @Override

@@ -7,14 +7,11 @@
     tools:context=".TabFragments.Plan.Fragment_Plan"
     android:padding="15dp">
 
-
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvPlan"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="10dp">
-
     </androidx.recyclerview.widget.RecyclerView>
 
     <LinearLayout
@@ -29,7 +26,8 @@
             android:id="@+id/fragment_addMeu"
             android:name="com.freeoda.franktirkey.smartmanagementforengineers.TabFragments.Plan.FragmentPlanAddMenu"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            tools:layout="@layout/fragment_fragment_plan_add_menu" />
 
     </LinearLayout>
 

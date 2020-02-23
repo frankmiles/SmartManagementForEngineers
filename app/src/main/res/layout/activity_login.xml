@@ -83,14 +83,6 @@
         android:layout_marginEnd="10dp"
         android:textColor="@color/colorPrimaryTextLight"
         android:text="tvPass_feedback" />
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:background="@color/colorDivider"
-        />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -99,31 +91,40 @@
         android:orientation="vertical">
 
         <Button
-            android:id="@+id/btnRegister"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="10dp"
-            android:background="@color/colorAccent"
-            android:text="New User? Register Now!"
-            android:textColor="@color/colorPrimaryTextLight"
-            android:textStyle="bold"
-            android:typeface="monospace"
-            android:layout_gravity="center_horizontal"/>
-
-        <Button
             android:id="@+id/btnSignin"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
-            android:layout_marginTop="30dp"
-            android:background="@color/colorAccent"
+            android:layout_marginTop="0dp"
+            android:background="@drawable/rounded_button_active"
             android:text="Sign In"
             android:textColor="@color/colorPrimaryTextLight"
             android:textStyle="bold"
             android:soundEffectsEnabled="true"
+            android:typeface="monospace"
+            android:layout_gravity="center_horizontal"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:background="@color/colorDivider"
+            />
+
+        <Button
+            android:id="@+id/btnRegister"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/rounded_button_active"
+            android:text="Register Now!"
+            android:textColor="@color/colorPrimaryTextLight"
+            android:textStyle="bold"
             android:typeface="monospace"
             android:layout_gravity="center_horizontal"/>
 

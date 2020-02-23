@@ -1,11 +1,11 @@
 package com.freeoda.franktirkey.smartmanagementforengineers.Attendance;
 
-import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
@@ -14,7 +14,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.freeoda.franktirkey.smartmanagementforengineers.MainActivity;
 import com.freeoda.franktirkey.smartmanagementforengineers.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,13 +31,20 @@ public class AttendenceMain_rvAdapter extends RecyclerView.Adapter<AttendenceMai
 
     TextView totalPercentageView;
 
+    FloatingActionButton fb_attendenceAddSubject;
+
+    EditText et_subjNameAdd, et_subjProffAdd;
+    MaterialDayPicker day_picker_Add;
+    Button btn_SaveAdd;
+
     public void setDays(List<MaterialDayPicker.Weekday> days) {
         this.days = days;
     }
 
-    public AttendenceMain_rvAdapter(List<AttendanceMain_rvModel> list,TextView view) {
+    public AttendenceMain_rvAdapter(List<AttendanceMain_rvModel> list,TextView view,FloatingActionButton fb_attendenceAddSubject) {
         this.totalPercentageView = view;
         this.list = list;
+        this.fb_attendenceAddSubject =fb_attendenceAddSubject;
     }
 
     @NonNull
@@ -119,11 +128,31 @@ public class AttendenceMain_rvAdapter extends RecyclerView.Adapter<AttendenceMai
         totalPercentageView.setText(String.valueOf(totalPercentage).concat("%"));
     }
 
+    public void setEt_subjNameAdd(EditText et_subjNameAdd) {
+        this.et_subjNameAdd = et_subjNameAdd;
+    }
+
+    public void setEt_subjProffAdd(EditText et_subjProffAdd) {
+        this.et_subjProffAdd = et_subjProffAdd;
+    }
+
+    public void setDay_picker_Add(MaterialDayPicker day_picker_Add) {
+        this.day_picker_Add = day_picker_Add;
+    }
+
+    public void setBtn_SaveAdd(Button btn_SaveAdd) {
+        this.btn_SaveAdd = btn_SaveAdd;
+    }
+
+    public List<AttendanceMain_rvModel> getListFiltered() {
+        return listFiltered;
+    }
+
     class cViewHolder extends RecyclerView.ViewHolder {
 
         //Model Layout
         TextView tv_Perce, tv_subj, tv_teacher, tv_present, tv_absent;
-        Button btn_atten_up, btn_atten_down;
+        Button btn_atten_up, btn_atten_down,btn_edit_attendance_subject,btn_rv_delete;
         ImageView iv_present_minus,iv_absent_minus;
 
         public cViewHolder(@NonNull View itemView) {
@@ -136,13 +165,38 @@ public class AttendenceMain_rvAdapter extends RecyclerView.Adapter<AttendenceMai
             tv_absent = itemView.findViewById(R.id.tv_absent);
             btn_atten_up = itemView.findViewById(R.id.btn_atten_up);
             btn_atten_down = itemView.findViewById(R.id.btn_atten_down);
+            btn_edit_attendance_subject = itemView.findViewById(R.id.btn_edit_attendance_subject);
+            btn_rv_delete = itemView.findViewById(R.id.btn_rv_delete);
             iv_present_minus = itemView.findViewById(R.id.iv_present_minus);
             iv_absent_minus = itemView.findViewById(R.id.iv_absent_minus);
+
+            btn_rv_delete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    list.remove(listFiltered.get(getAdapterPosition()));
+                    listFiltered.remove(getAdapterPosition());
+                    notifyDataSetChanged();
+                }
+            });
+
+            btn_edit_attendance_subject.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    fb_attendenceAddSubject.performClick();
+
+                    Log.d("msg",String.valueOf(listFiltered.get(getAdapterPosition()).getName()));
+
+                    setEditFields();
+                    deleteFromClickedPosition();
+                    AttendanceMain.getAdapterClickedPosition = getAdapterPosition();
+                    AttendanceMain.editBtnClicked = true;
+                    notifyDataSetChanged();
+                }
+            });
 
             btn_atten_up.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
                     String FilterName = listFiltered.get(getAdapterPosition()).getName();
                     String FilterProff = listFiltered.get(getAdapterPosition()).getProff();
                     if(list.contains(listFiltered.get(getAdapterPosition()))){
@@ -161,8 +215,6 @@ public class AttendenceMain_rvAdapter extends RecyclerView.Adapter<AttendenceMai
             btn_atten_down.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
-
                     String FilterName = listFiltered.get(getAdapterPosition()).getName();
                     String FilterProff = listFiltered.get(getAdapterPosition()).getProff();
                     if(list.contains(listFiltered.get(getAdapterPosition()))){
@@ -182,8 +234,6 @@ public class AttendenceMain_rvAdapter extends RecyclerView.Adapter<AttendenceMai
             iv_present_minus.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
-
                     String FilterName = listFiltered.get(getAdapterPosition()).getName();
                     String FilterProff = listFiltered.get(getAdapterPosition()).getProff();
                     if(list.contains(listFiltered.get(getAdapterPosition()))){
@@ -205,8 +255,6 @@ public class AttendenceMain_rvAdapter extends RecyclerView.Adapter<AttendenceMai
             iv_absent_minus.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
-
                     String FilterName = listFiltered.get(getAdapterPosition()).getName();
                     String FilterProff = listFiltered.get(getAdapterPosition()).getProff();
                     if(list.contains(listFiltered.get(getAdapterPosition()))){
@@ -243,6 +291,22 @@ public class AttendenceMain_rvAdapter extends RecyclerView.Adapter<AttendenceMai
                 e.printStackTrace();
             }
             return 0;
+        }
+
+        public void deleteFromClickedPosition(){
+            int savePresent = listFiltered.get(getAdapterPosition()).getPresent();
+            int saveAbsent = listFiltered.get(getAdapterPosition()).getAbsent();
+            AttendanceMain.editedSubjectPresent = savePresent;
+            AttendanceMain.editedSubjectAbsent = saveAbsent;
+
+            list.remove(listFiltered.get(getAdapterPosition()));
+            listFiltered.remove(getAdapterPosition());
+        }
+
+        public void setEditFields(){
+            et_subjNameAdd.setText(listFiltered.get(getAdapterPosition()).getName());
+            et_subjProffAdd.setText(listFiltered.get(getAdapterPosition()).getProff());
+            day_picker_Add.setSelectedDays(listFiltered.get(getAdapterPosition()).getWeekdays());
         }
     }
 }

@@ -7,257 +7,291 @@
     android:background="@color/colorPrimary"
     tools:context=".Register">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:paddingTop="5dp"
-        android:paddingRight="5dp"
-        android:paddingLeft="5dp">
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/tv_SelectCollage"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorPrimaryTextLight"
-            android:layout_marginTop="6dp"
-            android:textStyle="bold"
-            android:textSize="24sp"
-            android:text="Select Collage" />
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingTop="5dp"
+            android:paddingRight="5dp"
+            android:paddingLeft="5dp">
 
-        <Spinner
-            android:id="@+id/spinner_Register_collage"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/colorPrimaryTextLight"
-            android:foregroundTint="@color/colorPrimaryTextLight"
-            android:layout_marginTop="2dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:textAlignment="center"/>
+            <TextView
+                android:id="@+id/tv_SelectCollage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimaryTextLight"
+                android:layout_marginTop="6dp"
+                android:textStyle="bold"
+                android:textSize="24sp"
+                android:text="Select Collage" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="5dp"
-            android:background="@color/colorDivider"
-            />
+            <Spinner
+                android:id="@+id/spinner_Register_collage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorPrimaryTextLight"
+                android:foregroundTint="@color/colorPrimaryTextLight"
+                android:layout_marginTop="2dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:textAlignment="center"/>
 
-        <TextView
-            android:id="@+id/tv_Name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorPrimaryTextLight"
-            android:layout_marginTop="10dp"
-            android:textStyle="bold"
-            android:textSize="24sp"
-            android:text="Your Full Name" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:background="@color/colorDivider"
+                />
 
-        <EditText
-            android:id="@+id/et_Name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:textColor="@color/colorPrimaryTextLight"
-            android:layout_marginTop="2dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:backgroundTint="@color/colorAccent"
-            android:text=""/>
+            <TextView
+                android:id="@+id/tv_Name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimaryTextLight"
+                android:layout_marginTop="10dp"
+                android:textStyle="bold"
+                android:textSize="24sp"
+                android:text="Your Full Name" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="5dp"
-            android:background="@color/colorDivider"
-            />
+            <EditText
+                android:id="@+id/et_Name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:textColor="@color/colorPrimaryTextLight"
+                android:layout_marginTop="2dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:hint="John Adward Smith"
+                android:textColorHint="@color/colorLightPrimary"
+                android:backgroundTint="@color/colorAccent"
+                android:text=""/>
 
-        <TextView
-            android:id="@+id/tv_email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorPrimaryTextLight"
-            android:layout_marginTop="10dp"
-            android:textStyle="bold"
-            android:textSize="24sp"
-            android:text="Email" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:background="@color/colorDivider"
+                />
 
-        <EditText
-            android:id="@+id/et_email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textEmailAddress"
-            android:textColor="@color/colorPrimaryTextLight"
-            android:layout_marginTop="2dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:backgroundTint="@color/colorAccent"
-            android:text=""/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="5dp"
-            android:background="@color/colorDivider"
-            />
+            <TextView
+                android:id="@+id/tv_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimaryTextLight"
+                android:layout_marginTop="10dp"
+                android:textStyle="bold"
+                android:textSize="24sp"
+                android:text="Email" />
 
-        <TextView
-            android:id="@+id/tv_branch"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorPrimaryTextLight"
-            android:layout_marginTop="10dp"
-            android:textStyle="bold"
-            android:textSize="24sp"
-            android:text="Branch" />
+            <EditText
+                android:id="@+id/et_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textEmailAddress"
+                android:textColor="@color/colorPrimaryTextLight"
+                android:layout_marginTop="2dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:backgroundTint="@color/colorAccent"
+                android:hint="example@yourdomain.com"
+                android:textColorHint="@color/colorLightPrimary"
+                android:text=""/>
 
-        <Spinner
-            android:id="@+id/spinner_Register_branch"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/colorPrimaryTextLight"
-            android:foregroundTint="@color/colorPrimaryTextLight"
-            android:layout_marginTop="2dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:background="@color/colorDivider"
+                />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="5dp"
-            android:background="@color/colorDivider"
-            />
+            <TextView
+                android:id="@+id/tv_branch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimaryTextLight"
+                android:layout_marginTop="10dp"
+                android:textStyle="bold"
+                android:textSize="24sp"
+                android:text="Branch" />
 
-        <TextView
-            android:id="@+id/tv_Sem"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorPrimaryTextLight"
-            android:layout_marginTop="10dp"
-            android:textStyle="bold"
-            android:textSize="24sp"
-            android:text="Current Semester" />
+            <Spinner
+                android:id="@+id/spinner_Register_branch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorPrimaryTextLight"
+                android:foregroundTint="@color/colorPrimaryTextLight"
+                android:layout_marginTop="2dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"/>
 
-        <Spinner
-            android:id="@+id/spinner_Register_Sem"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/colorPrimaryTextLight"
-            android:foregroundTint="@color/colorPrimaryTextLight"
-            android:layout_marginTop="2dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:background="@color/colorDivider"
+                />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="5dp"
-            android:background="@color/colorDivider"
-            />
+            <TextView
+                android:id="@+id/tv_Sem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimaryTextLight"
+                android:layout_marginTop="10dp"
+                android:textStyle="bold"
+                android:textSize="24sp"
+                android:text="Current Semester" />
 
-        <TextView
-            android:id="@+id/tv_RegNumber"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorPrimaryTextLight"
-            android:layout_marginTop="10dp"
-            android:textStyle="bold"
-            android:textSize="24sp"
-            android:text="Collage Registration Number" />
+            <Spinner
+                android:id="@+id/spinner_Register_Sem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorPrimaryTextLight"
+                android:foregroundTint="@color/colorPrimaryTextLight"
+                android:layout_marginTop="2dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"/>
 
-        <EditText
-            android:id="@+id/et_RegNumber"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="number"
-            android:textColor="@color/colorPrimaryTextLight"
-            android:layout_marginTop="2dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:backgroundTint="@color/colorAccent"
-            android:text=""/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:background="@color/colorDivider"
+                />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="5dp"
-            android:background="@color/colorDivider"
-            />
+            <TextView
+                android:id="@+id/tv_RegNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimaryTextLight"
+                android:layout_marginTop="10dp"
+                android:textStyle="bold"
+                android:textSize="24sp"
+                android:text="Collage Registration Number" />
 
-        <TextView
-            android:id="@+id/tv_Pass"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorPrimaryTextLight"
-            android:layout_marginTop="10dp"
-            android:textStyle="bold"
-            android:textSize="24sp"
-            android:text="Create Password" />
+            <EditText
+                android:id="@+id/et_RegNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="number"
+                android:textColor="@color/colorPrimaryTextLight"
+                android:layout_marginTop="2dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:hint="1701287000"
+                android:textColorHint="@color/colorLightPrimary"
+                android:backgroundTint="@color/colorAccent"
+                android:text=""/>
 
-        <TextView
-            android:id="@+id/tv_PassHint"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorPrimaryTextLight"
-            android:layout_marginTop="2dp"
-            android:textStyle="bold"
-            android:textSize="14sp"
-            android:singleLine="true"
-            android:ellipsize="marquee"
-            android:scrollHorizontally="true"
-            android:marqueeRepeatLimit="marquee_forever"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:freezesText="true"
-            android:text="Should Contain  8 to 24 Alphanumeric Characters, No Space ,At Least One Capital Letter And Special Symbol" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:background="@color/colorDivider"
+                />
 
-        <EditText
-            android:id="@+id/et_pass"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPassword"
-            android:textColor="@color/colorPrimaryTextLight"
-            android:layout_marginTop="2dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:backgroundTint="@color/colorAccent"
-            android:text=""/>
+            <TextView
+                android:id="@+id/tv_Pass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimaryTextLight"
+                android:layout_marginTop="10dp"
+                android:textStyle="bold"
+                android:textSize="24sp"
+                android:text="Create Password" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="3dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="5dp"
-            android:background="@color/colorDivider"
-            />
+            <TextView
+                android:id="@+id/tv_PassHint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimaryTextLight"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:singleLine="true"
+                android:layout_marginTop="2dp"
+                android:ellipsize="marquee"
+                android:scrollHorizontally="true"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:freezesText="true"
+                android:text="Should Contain  8 to 24 Alphanumeric Characters, No Space ,At Least One Capital Letter And Special Symbol(Not at Last)" />
 
-        <Button
-            android:id="@+id/btnRegister_Submit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorAccent"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="15dp"
-            android:textColor="@color/colorPrimaryTextLight"
-            android:layout_gravity="right"
-            android:text=" Register " />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="2dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:gravity="center"
+                android:orientation="horizontal">
 
-    </LinearLayout>
+                <EditText
+                    android:id="@+id/et_pass"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="textPassword"
+                    android:textColor="@color/colorPrimaryTextLight"
+                    android:backgroundTint="@color/colorAccent"
+                    android:hint="Example-1234"
+                    android:textColorHint="@color/colorLightPrimary"
+                    android:text=""/>
+
+                <Button
+                    android:id="@+id/btn_passShow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="2dp"
+                    android:textColor="@color/colorPrimaryTextLight"
+                    android:background="@color/colorLightPrimary"
+                    android:textSize="16sp"
+                    android:text="show"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:background="@color/colorDivider"
+                />
+
+            <Button
+                android:id="@+id/btnRegister_Submit"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:background="@color/colorAccent"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:textColor="@color/colorPrimaryTextLight"
+                android:layout_gravity="center"
+                android:text=" Register " />
+
+        </LinearLayout>
+
+    </ScrollView>
 </androidx.core.widget.NestedScrollView>

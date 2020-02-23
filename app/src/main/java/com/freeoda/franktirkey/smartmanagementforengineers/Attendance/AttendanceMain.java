@@ -5,30 +5,22 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.TimePickerDialog;
-import android.content.res.Resources;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.freeoda.franktirkey.smartmanagementforengineers.Attendance.localDBAttendance.setAllAttendanceFromDB;
 import com.freeoda.franktirkey.smartmanagementforengineers.BackendlessApplication;
 import com.freeoda.franktirkey.smartmanagementforengineers.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
-import java.util.Objects;
 
 import ca.antonious.materialdaypicker.MaterialDayPicker;
 
@@ -36,7 +28,7 @@ public class AttendanceMain extends AppCompatActivity {
 
     FloatingActionButton fb_attendenceAddSubject;
 
-    CardView cv_ViewAtten,cv_attenEdit;
+    CardView cv_ViewAtten, cv_attenAdd;
 
     RelativeLayout rl_attenMain;
 
@@ -46,11 +38,11 @@ public class AttendanceMain extends AppCompatActivity {
     RecyclerView rv_attendance;
     static List<AttendanceMain_rvModel> subjectList =new ArrayList<>();
 
-    TextView et_subjName,et_subjProff;
+    EditText et_subjNameAdd, et_subjProffAdd;
 
-    MaterialDayPicker day_picker_edit,day_picker_main;
+    MaterialDayPicker day_picker_Add,day_picker_main;
 
-    Button btn_SaveEdit;
+    Button btn_SaveAdd;
     Button btn_atten_up,btn_atten_down;
 
     TimePicker tp_timeSelected;
@@ -62,6 +54,14 @@ public class AttendanceMain extends AppCompatActivity {
 
     AttendenceMain_rvAdapter adapter;
 
+    View.OnClickListener btnEdit_onclickListner;
+
+    public static int getAdapterClickedPosition=0;
+
+    public static boolean editBtnClicked = false;
+
+    public static int editedSubjectPresent = 0,editedSubjectAbsent = 0;
+
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,25 +69,25 @@ public class AttendanceMain extends AppCompatActivity {
 
         cv_ViewAtten = findViewById(R.id.cv_ViewAtten);
 
-        cv_attenEdit = findViewById(R.id.cv_attenEdit);
+        cv_attenAdd = findViewById(R.id.cv_attenAdd);
         rl_attenMain = findViewById(R.id.rl_attenMain);
 
         tv_atten_percen = findViewById(R.id.tv_atten_percen);
         tv_atten_name = findViewById(R.id.tv_atten_name);
         tv_atten_branch = findViewById(R.id.tv_atten_branch);
 
-        et_subjName = findViewById(R.id.et_subjName);
-        et_subjProff = findViewById(R.id.et_subjProff);
+        et_subjNameAdd = findViewById(R.id.et_subjNameAdd);
+        et_subjProffAdd = findViewById(R.id.et_subjProffAdd);
 
         rv_attendance = findViewById(R.id.rv_attendance);
         fb_attendenceAddSubject = findViewById(R.id.fb_attendenceAddSubject);
 
-        btn_SaveEdit = findViewById(R.id.btn_SaveEdit);
+        btn_SaveAdd = findViewById(R.id.btn_SaveAdd);
 
         btn_atten_up = findViewById(R.id.btn_atten_up);
         btn_atten_down = findViewById(R.id.btn_atten_down);
 
-        day_picker_edit = findViewById(R.id.day_picker_edit);
+        day_picker_Add = findViewById(R.id.day_picker_Add);
         day_picker_main = findViewById(R.id.day_picker_main);
 
         tv_atten_name.setText(BackendlessApplication.getUser().getName());
@@ -104,17 +104,24 @@ public class AttendanceMain extends AppCompatActivity {
                 Toast.makeText(AttendanceMain.this,"Floating Btn Clicked!",Toast.LENGTH_SHORT).show();
                 if(cv_ViewAtten.getVisibility() == View.VISIBLE){
                     cv_ViewAtten.setVisibility(View.GONE);
-                    cv_attenEdit.setVisibility(View.VISIBLE);
+                    cv_attenAdd.setVisibility(View.VISIBLE);
                     fb_attendenceAddSubject.setImageDrawable(getResources().getDrawable(R.drawable.back));
-                }else {
+
+                    et_subjNameAdd.setText("");
+                    et_subjProffAdd.setText("");
+                } else {
                     cv_ViewAtten.setVisibility(View.VISIBLE);
-                    cv_attenEdit.setVisibility(View.GONE);
+                    cv_attenAdd.setVisibility(View.GONE);
                     fb_attendenceAddSubject.setImageDrawable(getResources().getDrawable(R.drawable.add_icon));
                 }
+
+                adapter.setEt_subjNameAdd(et_subjNameAdd);
+                adapter.setEt_subjProffAdd(et_subjProffAdd);
+                adapter.setDay_picker_Add(day_picker_Add);
             }
         });
 
-        LinearLayoutManager linearLayout = new LinearLayoutManager(AttendanceMain.this);
+        final LinearLayoutManager linearLayout = new LinearLayoutManager(AttendanceMain.this);
         rv_attendance.setLayoutManager(linearLayout);
 
         //dayPicker_main.setSelectionMode(SingleSelectionMode.create());
@@ -122,7 +129,7 @@ public class AttendanceMain extends AppCompatActivity {
         day_picker_main.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                adapter = new AttendenceMain_rvAdapter(subjectList,tv_atten_percen);
+                adapter = new AttendenceMain_rvAdapter(subjectList,tv_atten_percen, fb_attendenceAddSubject);
                 rv_attendance.setAdapter(adapter);
                 adapter.setDays(day_picker_main.getSelectedDays());
                 adapter.getFilter().filter("");
@@ -133,31 +140,55 @@ public class AttendanceMain extends AppCompatActivity {
         day_picker_main.setDaySelectionChangedListener(new MaterialDayPicker.DaySelectionChangedListener() {
             @Override
             public void onDaySelectionChanged(List<MaterialDayPicker.Weekday> list) {
-                adapter = new AttendenceMain_rvAdapter(subjectList,tv_atten_percen);
+                adapter = new AttendenceMain_rvAdapter(subjectList,tv_atten_percen,fb_attendenceAddSubject);
                 rv_attendance.setAdapter(adapter);
                 adapter.setDays(list);
                 adapter.getFilter().filter("");
             }
         });
 
-        btn_SaveEdit.setOnClickListener(new View.OnClickListener() {
+        btn_SaveAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                String SubjName = et_subjName.getText().toString().trim();
-                String SubjProff = et_subjProff.getText().toString().trim();
+                String SubjName = et_subjNameAdd.getText().toString().trim();
+                String SubjProff = et_subjProffAdd.getText().toString().trim();
 
-                subjectList.add(new AttendanceMain_rvModel(SubjName,SubjProff,
-                       day_picker_edit.getSelectedDays(),0,0));
+                if(day_picker_Add.getSelectedDays().isEmpty()){
+                    Snackbar.make(rl_attenMain,"choose days",Snackbar.LENGTH_LONG).show();
+                }else if (et_subjNameAdd.getText().toString().trim().equals("") || et_subjProffAdd.getText().toString().trim().equals("")){
+                    Snackbar.make(rl_attenMain,"Fill all Fields",Snackbar.LENGTH_LONG).show();
+                }
+                else{
 
-                et_subjName.setText(null);
-                et_subjProff.setText(null);
+                    if (editBtnClicked){
+                        subjectList.add(new AttendanceMain_rvModel(SubjName,SubjProff,
+                                day_picker_Add.getSelectedDays(),editedSubjectPresent,editedSubjectAbsent));
+                        editBtnClicked = false;
+                    }else {
+                        subjectList.add(new AttendanceMain_rvModel(SubjName,SubjProff,
+                                day_picker_Add.getSelectedDays(),0,0));
+                    }
 
-                fb_attendenceAddSubject.performClick();
+                    et_subjNameAdd.setText("");
+                    et_subjProffAdd.setText("");
+
+                    fb_attendenceAddSubject.performClick();
 //                setCurrentDay();
+                }
+
                 adapter.notifyDataSetChanged();
             }
         });
+
+        btnEdit_onclickListner = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                fb_attendenceAddSubject.performClick();
+            }
+        };
+
+        adapter.setBtn_SaveAdd(btn_SaveAdd);
 
     }
 
@@ -166,7 +197,7 @@ public class AttendanceMain extends AppCompatActivity {
     }
 
 //    private void getDays(){
-//        selectedDays = day_picker_edit.getSelectedDays();
+//        selectedDays = day_picker_Add.getSelectedDays();
 //        Log.d("msg",selectedDays.toString()); //For testing purpose only
 //    }
 //
@@ -206,32 +237,32 @@ public class AttendanceMain extends AppCompatActivity {
 //        switch(dayOfTheWeek){
 //
 //            case "TUESDAY":
-//                day_picker_edit.setSelectedDays(MaterialDayPicker.Weekday.TUESDAY);
+//                day_picker_Add.setSelectedDays(MaterialDayPicker.Weekday.TUESDAY);
 //                day_picker_main.setSelectedDays(MaterialDayPicker.Weekday.TUESDAY);
 //                break;
 //            case "WEDNESDAY":
-//                day_picker_edit.setSelectedDays(MaterialDayPicker.Weekday.WEDNESDAY);
+//                day_picker_Add.setSelectedDays(MaterialDayPicker.Weekday.WEDNESDAY);
 //                day_picker_main.setSelectedDays(MaterialDayPicker.Weekday.WEDNESDAY);
 //                break;
 //            case "THURSDAY":
-//                day_picker_edit.setSelectedDays(MaterialDayPicker.Weekday.THURSDAY);
+//                day_picker_Add.setSelectedDays(MaterialDayPicker.Weekday.THURSDAY);
 //                day_picker_main.setSelectedDays(MaterialDayPicker.Weekday.THURSDAY);
 //                break;
 //            case "FRIDAY":
-//                day_picker_edit.setSelectedDays(MaterialDayPicker.Weekday.FRIDAY);
+//                day_picker_Add.setSelectedDays(MaterialDayPicker.Weekday.FRIDAY);
 //                day_picker_main.setSelectedDays(MaterialDayPicker.Weekday.FRIDAY);
 //                break;
 //            case "SATURDAY":
-//                day_picker_edit.setSelectedDays(MaterialDayPicker.Weekday.SATURDAY);
+//                day_picker_Add.setSelectedDays(MaterialDayPicker.Weekday.SATURDAY);
 //                day_picker_main.setSelectedDays(MaterialDayPicker.Weekday.SATURDAY);
 //                break;
 //            case "SUNDAY":
-//                day_picker_edit.setSelectedDays(MaterialDayPicker.Weekday.SUNDAY);
+//                day_picker_Add.setSelectedDays(MaterialDayPicker.Weekday.SUNDAY);
 //                day_picker_main.setSelectedDays(MaterialDayPicker.Weekday.SUNDAY);
 //                break;
 //
 //            default:
-//                day_picker_edit.setSelectedDays(MaterialDayPicker.Weekday.MONDAY);
+//                day_picker_Add.setSelectedDays(MaterialDayPicker.Weekday.MONDAY);
 //                day_picker_main.setSelectedDays(MaterialDayPicker.Weekday.MONDAY);
 //                break;
 //        }
@@ -242,5 +273,10 @@ public class AttendanceMain extends AppCompatActivity {
         super.onDestroy();
 
         BackendlessApplication.getAttendance_db().attendanceDAO().insertAll(subjectList);
+        if(subjectList != null){
+            if(subjectList.isEmpty()){
+                BackendlessApplication.getAttendance_db().attendanceDAO().delateAll();
+            }
+        }
     }
 }

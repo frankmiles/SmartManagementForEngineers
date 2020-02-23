@@ -6,6 +6,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.text.InputType;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
@@ -24,11 +27,12 @@ import com.backendless.async.callback.AsyncCallback;
 import com.backendless.async.callback.BackendlessCallback;
 import com.backendless.exceptions.BackendlessFault;
 import com.backendless.persistence.DataQueryBuilder;
-import com.freeoda.franktirkey.smartmanagementforengineers.Collage.CollageModel;
+import com.freeoda.franktirkey.smartmanagementforengineers.Collage.Collage;
 import com.freeoda.franktirkey.smartmanagementforengineers.LocalDBForBKs.User;
 import com.freeoda.franktirkey.smartmanagementforengineers.LocalDBForBKs.getLocalDB;
 
 import java.util.ArrayList;
+import java.util.EventListener;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -44,11 +48,11 @@ public class Register extends AppCompatActivity {
 
     TextView tv_Name,tv_email,tv_branch,tv_Sem,tv_RegNumber,tv_PassHint;
     EditText et_Name,et_email,et_RegNumber,et_pass;
-    Button btnRegister_Submit;
+    Button btnRegister_Submit,btn_passShow;
 
 
     String getSelectedCollageObjId;
-    List<CollageModel> collageFromBKs = new ArrayList<>();
+    List<Collage> collageFromBKs = new ArrayList<>();
     List<String> collageNameList = new ArrayList<>();
     int SelectedCollagePosition=0;
     ArrayAdapter<String> CollageDataAdapter;
@@ -56,6 +60,8 @@ public class Register extends AppCompatActivity {
     ArrayAdapter<String> SemDataAdapter;
 
     BackendlessUser registerBackendless = new BackendlessUser();
+
+    boolean showPass = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,7 +87,7 @@ public class Register extends AppCompatActivity {
         et_pass = findViewById(R.id.et_pass);
 
         btnRegister_Submit = findViewById(R.id.btnRegister_Submit);
-        btnRegister_Submit.setAlpha(0);
+        btn_passShow = findViewById(R.id.btn_passShow);
 
         btnDisable();
         tv_PassHint.setSelected(true);
@@ -201,6 +207,24 @@ public class Register extends AppCompatActivity {
             public void onFocusChange(View view, boolean b) {
 
                 validRegistration();
+            }
+        });
+
+        btn_passShow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(showPass)
+                {
+                    showPass = false;
+                    et_pass.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                    btn_passShow.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                }
+                else
+                {
+                    et_pass.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                    showPass = true;
+                    btn_passShow.setBackgroundColor(getResources().getColor(R.color.colorLightPrimary));
+                }
             }
         });
     }
@@ -336,13 +360,13 @@ public class Register extends AppCompatActivity {
 
     void CollageData(){
 
-        Backendless.Data.of(CollageModel.class).find(new AsyncCallback<List<CollageModel>>() {
+        Backendless.Data.of(Collage.class).find(new AsyncCallback<List<Collage>>() {
             @Override
-            public void handleResponse(List<CollageModel> response) {
+            public void handleResponse(List<Collage> response) {
                 Log.d("msg","Got collage data");
                 collageFromBKs = response;
 
-                for(int i = 0;i<response.size();i++){    //Fetching CollageModel
+                for(int i = 0;i<response.size();i++){    //Fetching Collage
                     collageNameList.add(response.get(i).getName());
                 }
                 CollageDataAdapter = new ArrayAdapter<String>(Register.this, R.layout.spinner_txt_values,collageNameList);
@@ -418,7 +442,7 @@ public class Register extends AppCompatActivity {
                     PorterDuff.Mode.SRC_ATOP);
         }
         else {
-            //CollageModel Reg Error
+            //Collage Reg Error
             Log.d("msg","Error in CollageRegNo: "+collage_RegNo);
             MainFlag = false;
             et_RegNumber.getBackground().setColorFilter(getResources().getColor(R.color.colorAccent),
