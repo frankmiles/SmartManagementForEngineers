@@ -17,7 +17,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppMaterialTheme"
+        android:theme="@style/AppTheme.NoActionBar"
         tools:targetApi="q">
         <activity android:name=".absTestingBKs.AbsTestingBks"/>
         <activity android:name=".subject.SubjectMain"/>
