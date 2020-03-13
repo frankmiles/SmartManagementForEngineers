@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:animateLayoutChanges="true"
-    tools:context=".Syllabus.SyllabusMain">
+    tools:context=".syllabus.SyllabusMain">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fb_Syllabus_main"

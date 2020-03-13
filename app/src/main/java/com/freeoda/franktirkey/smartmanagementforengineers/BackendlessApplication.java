@@ -1,18 +1,16 @@
 package com.freeoda.franktirkey.smartmanagementforengineers;
 
 import android.app.Application;
-import android.provider.ContactsContract;
 
 import androidx.room.Room;
 
 import com.backendless.Backendless;
 import com.backendless.BackendlessUser;
-import com.backendless.persistence.DataQueryBuilder;
-import com.freeoda.franktirkey.smartmanagementforengineers.Attendance.localDBAttendance.AttendanceAppDB;
-import com.freeoda.franktirkey.smartmanagementforengineers.LocalDBForBKs.AppDatabase;
-import com.freeoda.franktirkey.smartmanagementforengineers.LocalDBForBKs.User;
-import com.freeoda.franktirkey.smartmanagementforengineers.Subject.subjectRoomForRecentTab.SubjectAppDatabase;
-import com.freeoda.franktirkey.smartmanagementforengineers.Syllabus.syllabusRoomForRecentTab.SyllabusAppDatabase;
+import com.freeoda.franktirkey.smartmanagementforengineers.attendance.localDBAttendance.AttendanceAppDB;
+import com.freeoda.franktirkey.smartmanagementforengineers.localDBForBKs.AppDatabase;
+import com.freeoda.franktirkey.smartmanagementforengineers.localDBForBKs.User;
+import com.freeoda.franktirkey.smartmanagementforengineers.subject.subjectRoomForRecentTab.SubjectAppDatabase;
+import com.freeoda.franktirkey.smartmanagementforengineers.syllabus.syllabusRoomForRecentTab.SyllabusAppDatabase;
 
 import java.util.List;
 

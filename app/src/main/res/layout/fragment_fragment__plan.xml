@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".TabFragments.Plan.Fragment_Plan"
+    tools:context=".tabFragments.Plan.Fragment_Plan"
     android:padding="15dp">
 
     <androidx.recyclerview.widget.RecyclerView
@@ -24,7 +24,7 @@
 
         <fragment
             android:id="@+id/fragment_addMeu"
-            android:name="com.freeoda.franktirkey.smartmanagementforengineers.TabFragments.Plan.FragmentPlanAddMenu"
+            android:name="com.freeoda.franktirkey.smartmanagementforengineers.tabFragments.Plan.FragmentPlanAddMenu"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:layout="@layout/fragment_fragment_plan_add_menu" />

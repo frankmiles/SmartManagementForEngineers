@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TabFragments.Home.Fragment_Home"
+    tools:context=".tabFragments.Home.Fragment_Home"
     android:id="@+id/home_framelayout_main">
 
     <androidx.recyclerview.widget.RecyclerView
