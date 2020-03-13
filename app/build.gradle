@@ -7,8 +7,8 @@ android {
         applicationId "com.freeoda.franktirkey.smartmanagementforengineers"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "2.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -30,7 +30,7 @@ dependencies {
     //Google Meterial UI
     implementation 'com.google.android.material:material:1.0.0'
     //Server-Backendless
-    implementation 'com.backendless:backendless:5.3.1'
+    implementation 'com.backendless:backendless:5.7.0'
     //Socket.IO for Chating
     implementation('io.socket:socket.io-client:1.0.0') {
         //      excluding org.json which is provided by Android
@@ -46,7 +46,7 @@ dependencies {
     //facebook Shemer
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
     //implementing Date https://github.com/gantonious/MaterialDayPicker
-    implementation 'ca.antonious:materialdaypicker:0.7.1'
+    implementation 'ca.antonious:materialdaypicker:0.7.2'
     //implementating the stepView https://github.com/kofigyan/StateProgressBar
     implementation 'com.kofigyan.stateprogressbar:stateprogressbar:1.0.0'
     //implementating the youtube Api 
