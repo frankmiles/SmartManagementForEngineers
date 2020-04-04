@@ -31,26 +31,33 @@
             android:layout_marginStart="10dp"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tv_subj_rv_attendance"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Subject"
-                android:textSize="24sp"
-                android:maxWidth="200dp"
-                android:textColor="@color/colorPrimaryText"
-                android:textStyle="bold" />
+                android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/btn_rv_delete"
-                android:layout_width="wrap_content"
-                android:layout_height="18dp"
-                android:layout_gravity="end"
-                android:gravity="center"
-                android:layout_marginStart="5dp"
-                android:background="@android:color/holo_red_dark"
-                android:textColor="@color/colorPrimaryTextLight"
-                android:text="delete" />
+                <TextView
+                    android:id="@+id/tv_subj_rv_attendance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Subject"
+                    android:textSize="32sp"
+                    android:textColor="@color/colorPrimaryText"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/btn_rv_delete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_marginStart="5dp"
+                    android:background="@android:color/holo_red_dark"
+                    android:gravity="center"
+                    android:text="delete"
+                    android:textColor="@color/colorPrimaryTextLight"
+                    android:textStyle="bold"
+                    android:textSize="10sp" />
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/tv_teacher_rv_attendance"
@@ -117,27 +124,30 @@
                 <Button
                     android:id="@+id/btn_atten_up"
                     android:layout_width="wrap_content"
-                    android:layout_height="30dp"
+                    android:layout_height="wrap_content"
                     android:text="Present"
                     android:background="@color/atten_up"
+                    android:textSize="12sp"
                     android:textColor="@color/colorPrimaryTextLight" />
 
                 <Button
                     android:id="@+id/btn_atten_down"
                     android:layout_width="wrap_content"
-                    android:layout_height="30dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:background="#D32F2F"
                     android:text="Absent"
+                    android:textSize="12sp"
                     android:textColor="@color/colorPrimaryTextLight" />
 
                 <Button
                     android:id="@+id/btn_edit_attendance_subject"
                     android:layout_width="wrap_content"
-                    android:layout_height="30dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:background="#FF6F00"
                     android:text="Edit"
+                    android:textSize="12sp"
                     android:textColor="@color/colorPrimaryTextLight"
                     android:textStyle="bold" />
 

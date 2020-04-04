@@ -11,8 +11,18 @@
     <style name="AppTheme.NoActionBar" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimaryDark">@color/daySelected</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+
+    <style name="ButtonStlye123" >
+<!--        <item name="android:textSize">19dp</item>-->
+<!--        <item name="android:layout_margin">8dp</item>-->
+<!--        <item name="android:padding">8dp</item>-->
+        <item name="android:textColor">@color/colorPrimaryTextLight</item>
+
+        <item name="android:background">@color/colorAccent</item>
+    </style>
+
 
 </resources>
