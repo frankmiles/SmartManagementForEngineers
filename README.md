@@ -1,2 +1,2 @@
 # SmartManagementForEngineers
-This is the Successor of SMFE
+This AN APP to help other ENGINEERING STUDENTS TO MAKE THERE CARIER MEROE FRUITFULL!
