@@ -260,13 +260,13 @@
                 <Button
                     android:id="@+id/btn_passShow"
                     android:layout_width="wrap_content"
-                    android:layout_height="30dp"
+                    android:layout_height="50dp"
                     android:layout_gravity="center"
                     android:layout_marginStart="2dp"
-                    android:textColor="@color/colorPrimaryTextLight"
                     android:background="@color/colorLightPrimary"
-                    android:textSize="16sp"
-                    android:text="show"/>
+                    android:text="show"
+                    android:textColor="@color/colorPrimaryTextLight"
+                    android:textSize="16sp" />
 
             </LinearLayout>
 

@@ -35,7 +35,7 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-//        String m = "(CSE)COMPUTER SCIENCE AND ENGI"; ToDO this is the string Parser;
+//        String m = "(CSE)COMPUTER SCIENCE AND ENGI"; Todo this is the string Parser;
 //        String x = m.substring(1,3);
 //        System.out.println(x);
 
