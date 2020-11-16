@@ -33,7 +33,7 @@
         android:backgroundTintMode="src_atop"
         android:layout_marginEnd="10dp"
         android:textColor="@color/colorPrimaryTextLight"
-        android:text="pojo@gmail.com" />
+        android:text="" />
 
     <TextView
         android:id="@+id/tvUsername_feedback"
@@ -70,7 +70,7 @@
         android:layout_marginEnd="10dp"
         android:background="@color/colorPrimaryDark"
         android:textColor="@color/colorPrimaryTextLight"
-        android:text="1234" />
+        android:text="" />
 
     <TextView
         android:id="@+id/tvPass_feedback"

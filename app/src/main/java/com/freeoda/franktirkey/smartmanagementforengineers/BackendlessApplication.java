@@ -17,7 +17,7 @@ import java.util.List;
 public class BackendlessApplication extends Application {
 
     public static final String APPLICATION_ID = "A32C8534-709A-4E2C-829B-0614A16E5DF3";
-    public static final String API_KEY = "D5A68302-4647-45AC-82F2-33906138BFB0";
+    public static final String API_KEY = "1E3F4FC2-C645-4116-B67A-4DBC62A75D61";
     public static final String SERVER_URL = "https://api.backendless.com";
 
     static BackendlessUser backendlessUser;

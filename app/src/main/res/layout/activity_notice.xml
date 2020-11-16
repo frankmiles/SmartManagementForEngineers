@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".notice.Notice">
+
+    <TextView
+        android:id="@+id/tv_notice_Headline"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_notice_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+<!--    <androidx.cardview.widget.CardView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:cardBackgroundColor="@android:color/holo_blue_light"-->
+<!--        android:layout_marginHorizontal="12dp">-->
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="vertical">-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/tv_notice_title"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_margin="5dp"-->
+<!--                android:text="TItle"-->
+<!--                android:textAlignment="center"-->
+<!--                android:textColor="@android:color/white"-->
+<!--                android:textSize="25sp"-->
+<!--                android:textStyle="bold" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/tv_notice_body"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_margin="5dp"-->
+<!--                android:textSize="16sp"-->
+<!--                android:textColor="@android:color/white"-->
+<!--                android:text="This is the body of the notice" />-->
+
+<!--            <com.google.android.material.button.MaterialButton-->
+<!--                android:id="@+id/btn_notice_detail"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_margin="5dp"-->
+<!--                android:textSize="18sp"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:theme="@style/Theme.AppCompat"-->
+<!--                android:shadowColor="@color/background_color"-->
+<!--                android:textStyle="bold"-->
+<!--                android:text="Details"/>-->
+
+<!--        </LinearLayout>-->
+<!--    </androidx.cardview.widget.CardView>-->
+
+</LinearLayout>

@@ -119,12 +119,12 @@ public class Fragment_Recent extends Fragment {
         rvLastGroupChat.setLayoutManager(layoutManager_LastChatFroup);
 
         final List<Fragment_Recent_LastChatGroup_rvModelClass> list_LastChatGroup = new ArrayList<>();
-        list_LastChatGroup.add(new Fragment_Recent_LastChatGroup_rvModelClass("muni"));
-        list_LastChatGroup.add(new Fragment_Recent_LastChatGroup_rvModelClass("shila"));
-        list_LastChatGroup.add(new Fragment_Recent_LastChatGroup_rvModelClass("nitish"));
-        list_LastChatGroup.add(new Fragment_Recent_LastChatGroup_rvModelClass("ujjwal"));
-        list_LastChatGroup.add(new Fragment_Recent_LastChatGroup_rvModelClass("suraj"));
-        list_LastChatGroup.add(new Fragment_Recent_LastChatGroup_rvModelClass("pandit"));
+        list_LastChatGroup.add(new Fragment_Recent_LastChatGroup_rvModelClass("Megha"));
+        list_LastChatGroup.add(new Fragment_Recent_LastChatGroup_rvModelClass("Ankit"));
+        list_LastChatGroup.add(new Fragment_Recent_LastChatGroup_rvModelClass("Nitish"));
+        list_LastChatGroup.add(new Fragment_Recent_LastChatGroup_rvModelClass("Fraklin"));
+        list_LastChatGroup.add(new Fragment_Recent_LastChatGroup_rvModelClass("Priya"));
+        list_LastChatGroup.add(new Fragment_Recent_LastChatGroup_rvModelClass("Anuj"));
 
         Fragment_Recent_LastChatGroup_rvAdapter adapter_LastChatGroup =
                 new Fragment_Recent_LastChatGroup_rvAdapter(getContext(),list_LastChatGroup);

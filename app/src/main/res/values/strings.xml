@@ -28,10 +28,10 @@
         <item>CE</item>
         <item>ME</item>
     </string-array>
-<!--    <string-array name="Collage">-->
-<!--        <item>(GITA) GANDHI INSTITUTE FOR TECHNOLOGICAL ADVANCEMENT</item>-->
-<!--        <item>(GEC) GANDHI ENGINEERING COLLAGE</item>-->
-<!--    </string-array>-->
+    <!--    <string-array name="Collage">-->
+    <!--        <item>(GITA) GANDHI INSTITUTE FOR TECHNOLOGICAL ADVANCEMENT</item>-->
+    <!--        <item>(GEC) GANDHI ENGINEERING COLLAGE</item>-->
+    <!--    </string-array>-->
 
     <string name="para_test">
         The Lexington-Concord Sesquicentennial half dollar is a fifty-cent piece struck by the

@@ -23,6 +23,7 @@ import com.freeoda.franktirkey.smartmanagementforengineers.attendance.Attendance
 import com.freeoda.franktirkey.smartmanagementforengineers.chat.chatWorkers.ChatMainWorker;
 import com.freeoda.franktirkey.smartmanagementforengineers.collage.CollageMain;
 import com.freeoda.franktirkey.smartmanagementforengineers.R;
+import com.freeoda.franktirkey.smartmanagementforengineers.notice.Notice;
 import com.freeoda.franktirkey.smartmanagementforengineers.subject.SubjectMain;
 import com.freeoda.franktirkey.smartmanagementforengineers.toDos.ToDoMain;
 
@@ -60,7 +61,9 @@ public class Fragment_Home extends Fragment {
                 "Set Goals",
                 "Setting",
                 "Need Help Or Report?",
-                "About"};
+                "About",
+                "Notice"
+        };
 
         rvHome = view.findViewById(R.id.rvHome);
         home_framelayout_main = view.findViewById(R.id.home_framelayout_main);
@@ -96,6 +99,8 @@ public class Fragment_Home extends Fragment {
                         break;
                     case 9: startActivity(new Intent(context, AppAbout.class));
                         break;
+                    case 10: startActivity(new Intent(context, Notice.class));
+                    break;
                 }
             }
         });
