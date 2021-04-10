@@ -1,6 +1,8 @@
 package com.freeoda.franktirkey.smartmanagementforengineers.notice;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,7 +45,12 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.cViewHolde
         holder.btn_notice_detail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context,"button clicked on " + list.get(position).getVisit(),Toast.LENGTH_SHORT).show();
+                String url = list.get(position).getVisit().toString();
+                Toast.makeText(context,"Redirecting To Browser ",Toast.LENGTH_LONG).show();
+
+                Intent intent = new Intent(Intent. ACTION_VIEW);
+                intent. setData(Uri. parse(url));
+                context.startActivity(intent);
             }
         });
     }

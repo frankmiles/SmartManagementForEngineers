@@ -32,17 +32,18 @@ public class Notice extends AppCompatActivity {
         tv_notice_Headline.setText(noticeHeadLines);
 
         list = new ArrayList();
-        list.add(new NoticeModel("Test Title","Test Body","11-08-15","https://wwww.franktirkey.com"));
-        list.add(new NoticeModel("Test Title2","Test Body2","11-08-15 2","https://wwww.franktirkey.com/2"));
-        list.add(new NoticeModel("Test Title2","Test Body2","11-08-15 2","https://wwww.franktirkey.com/2"));
-        list.add(new NoticeModel("Test Title2","Test Body2","11-08-15 2","https://wwww.franktirkey.com/2"));
-        list.add(new NoticeModel("Test Title2","Test Body2","11-08-15 2","https://wwww.franktirkey.com/2"));
-        list.add(new NoticeModel("Test Title2","Test Body2","11-08-15 2","https://wwww.franktirkey.com/2"));
-        list.add(new NoticeModel("Test Title2","Test Body2","11-08-15 2","https://wwww.franktirkey.com/2"));
-        list.add(new NoticeModel("Test Title2","Test Body2","11-08-15 2","https://wwww.franktirkey.com/2"));
-        list.add(new NoticeModel("Test Title2","Test Body2","11-08-15 2","https://wwww.franktirkey.com/2"));
-        list.add(new NoticeModel("Test Title2","Test Body2","11-08-15 2","https://wwww.franktirkey.com/2"));
-        list.add(new NoticeModel("Test Title2","Test Body2","11-08-15 2","https://wwww.franktirkey.com/2"));
+
+//        list.add(new NoticeModel("Test Title","Test Body","11-08-15","https://wwww.franktirkey.com"));
+//        list.add(new NoticeModel("Test Title2","Test Body2","11-08-15 2","https://wwww.franktirkey.com/2"));
+//        list.add(new NoticeModel("Test Title2","Test Body2","11-08-15 2","https://wwww.franktirkey.com/2"));
+//        list.add(new NoticeModel("Test Title2","Test Body2","11-08-15 2","https://wwww.franktirkey.com/2"));
+//        list.add(new NoticeModel("Test Title2","Test Body2","11-08-15 2","https://wwww.franktirkey.com/2"));
+//        list.add(new NoticeModel("Test Title2","Test Body2","11-08-15 2","https://wwww.franktirkey.com/2"));
+//        list.add(new NoticeModel("Test Title2","Test Body2","11-08-15 2","https://wwww.franktirkey.com/2"));
+//        list.add(new NoticeModel("Test Title2","Test Body2","11-08-15 2","https://wwww.franktirkey.com/2"));
+//        list.add(new NoticeModel("Test Title2","Test Body2","11-08-15 2","https://wwww.franktirkey.com/2"));
+//        list.add(new NoticeModel("Test Title2","Test Body2","11-08-15 2","https://wwww.franktirkey.com/2"));
+//        list.add(new NoticeModel("Test Title2","Test Body2","11-08-15 2","https://wwww.franktirkey.com/2"));
 
         rv_notice_main.setLayoutManager(new LinearLayoutManager(Notice.this));
         noticeAdapter = new NoticeAdapter(Notice.this,list);

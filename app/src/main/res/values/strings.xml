@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">SMFE</string>
+    <string name="email_hint">Enter Your Registered Email ID</string>
+    <string name="password_hint">Enter Your Password</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string-array name="Sem">
         <item>1 Sem</item>
